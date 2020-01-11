@@ -1,0 +1,2 @@
+include ':app', ':jjkit-utils'
+rootProject.name='Sample'
