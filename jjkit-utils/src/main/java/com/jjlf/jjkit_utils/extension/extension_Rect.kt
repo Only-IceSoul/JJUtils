@@ -5,7 +5,7 @@ import android.graphics.Rect
 import android.graphics.RectF
 import androidx.annotation.FloatRange
 import androidx.core.graphics.transform
-import com.jjlf.jjkit_utils.JJPadding
+import com.jjlf.jjkit_layoututils.JJPadding
 
 fun Rect.scale(
     @FloatRange(from = 0.0, to = 1000.0) scaleX: Float,

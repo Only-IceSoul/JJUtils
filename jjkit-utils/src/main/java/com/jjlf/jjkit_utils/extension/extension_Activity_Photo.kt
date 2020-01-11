@@ -21,7 +21,6 @@ fun Activity.getIntentImageChooser(title: CharSequence? = null, fileProvider:Boo
                                    includeDocuments: Boolean = true,
                                    includeCamera: Boolean = true, sender: IntentSender? = null): Intent {
     val allIntents = ArrayList<Intent>()
-    val packageManager = packageManager
 
     // collect all camera intents if Camera permission is available
     if (includeCamera) {

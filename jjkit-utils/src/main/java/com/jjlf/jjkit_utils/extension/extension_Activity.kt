@@ -62,7 +62,7 @@ fun Activity.transparent(){
         this.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
     catch (e: Exception){
-        Log.e("JJKit","ERROR : ${e.stackTrace}")
+        Log.e("JJKit","ERROR : $e")
     }
 }
 
@@ -119,10 +119,11 @@ fun Activity.statusBarBackgroundColorRes(context: Activity, resBelowM: Int, resA
     }
 }
 
+@Suppress("DEPRECATION")
 fun Activity.getOverlayTypeCompact() : Int {
     return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else WindowManager.LayoutParams.TYPE_PHONE
 }
-
+@Suppress("DEPRECATION")
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun Activity.haveNetworkConnection(): Boolean {
     val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

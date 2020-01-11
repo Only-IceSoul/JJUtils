@@ -3,7 +3,7 @@ package com.jjlf.jjkit_utils.recylcerView
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.jjlf.jjkit_utils.JJMargin
+import com.jjlf.jjkit_layoututils.JJMargin
 
 
 class JJItemDecorationMargin(private val offSet: JJMargin) : RecyclerView.ItemDecoration() {

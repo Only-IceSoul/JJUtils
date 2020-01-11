@@ -4,7 +4,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.annotation.FloatRange
-import com.jjlf.jjkit_utils.JJPadding
+import com.jjlf.jjkit_layoututils.JJPadding
 import com.jjlf.jjkit_utils.extension.padding
 import com.jjlf.jjkit_utils.extension.scale
 import kotlin.math.min

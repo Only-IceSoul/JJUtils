@@ -8,6 +8,7 @@ import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresPermission
 
+@Suppress("DEPRECATION")
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 fun View.haveNetworkConnection(): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
