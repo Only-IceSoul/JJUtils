@@ -17,7 +17,7 @@ class JJViewPagerAdapter(private val activity: Activity) : PagerAdapter() {
     }
 
 
-    fun ssNumberOfPages(num: Int): JJViewPagerAdapter {
+    fun setNumberOfPages(num: Int): JJViewPagerAdapter {
         mNumberOfPages = num
         return this
     }

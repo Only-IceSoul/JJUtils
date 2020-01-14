@@ -22,6 +22,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     private var mIsAddedError = false
     private var mIsErrorEnabled = false
 
+    //if last is null calling fetch more
     override fun getItemViewType(position: Int): Int {
         val value = if(position == items.size - 1 && items.last() == null && mShowErrorView) 2
         else if(position == items.size - 1 && items.last() == null)  1 else 0

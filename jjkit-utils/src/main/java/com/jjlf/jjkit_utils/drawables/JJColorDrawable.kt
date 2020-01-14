@@ -51,7 +51,7 @@ class JJColorDrawable : Drawable() {
     }
 
     //effect where fill can be transparent with a stroke shadow
-    fun ssStrokeShadow(@FloatRange(from = 0.0 ,to = 7.0) radius: Float,color: Int, shadowPath: ((RectF,Path)-> Unit)?): JJColorDrawable {
+    fun setStrokeShadow(@FloatRange(from = 0.0 ,to = 7.0) radius: Float,color: Int, shadowPath: ((RectF,Path)-> Unit)?): JJColorDrawable {
         mStrokeShadowRadius = radius
         mPaintStrokeShadow.style = Paint.Style.STROKE
         mPaintStrokeShadow.strokeWidth = 0.5f
@@ -62,20 +62,20 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssScale(x: Float,y: Float): JJColorDrawable {
+    fun setScale(x: Float,y: Float): JJColorDrawable {
         mScaleX = x
         mScaleY = y
         return this
     }
 
-    fun ssShape(type:Int): JJColorDrawable {
+    fun setShape(type:Int): JJColorDrawable {
         mIsNewPath = false
         mIsPathClosure = false
         mShape = type
         return this
     }
      //normal stroke this is a new layer
-    fun ssStroke(width: Float, color: Int) : JJColorDrawable {
+    fun setStroke(width: Float, color: Int) : JJColorDrawable {
         mIsStroke = true
         mPaintStroke.strokeWidth = width
         mPaintStroke.color = color
@@ -84,13 +84,13 @@ class JJColorDrawable : Drawable() {
     }
 
     //color for stroke new layer
-    fun ssStrokeColor(color:Int) : JJColorDrawable {
+    fun setStrokeColor(color:Int) : JJColorDrawable {
         mPaintStroke.color = color
         return this
     }
 
-    //normal stroke layer plus shadow layer
-    fun ssStrokeAndShadowLayer(width: Float, color: Int,shadowRadius: Float,shadowOffsetX:Float,shadowOffsetY:Float,shadowColor:Int) : JJColorDrawable {
+    //new layer stroke plus shadow layer
+    fun setStrokeAndShadowLayer(width: Float, color: Int,shadowRadius: Float,shadowOffsetX:Float,shadowOffsetY:Float,shadowColor:Int) : JJColorDrawable {
         mIsStroke = true
         mPaintStroke.strokeWidth = width
         mPaintStroke.color = color
@@ -99,7 +99,7 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssRadius(radius: Float) : JJColorDrawable {
+    fun setRadius(radius: Float) : JJColorDrawable {
         mRadius = floatArrayOf(radius,radius,radius,radius,radius,radius,radius,radius)
         mIsNewPath = false
         mIsPathClosure = false
@@ -107,7 +107,7 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssRadius(radius: FloatArray) : JJColorDrawable {
+    fun setRadius(radius: FloatArray) : JJColorDrawable {
         mRadius = radius
         mIsNewPath = false
         mIsPathClosure = false
@@ -115,7 +115,7 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssRadius(topLeft: Float,topRight:Float,bottomRight:Float,bottomLeft:Float) : JJColorDrawable {
+    fun setRadius(topLeft: Float,topRight:Float,bottomRight:Float,bottomLeft:Float) : JJColorDrawable {
         mRadius = floatArrayOf(topLeft,topLeft,topRight,topRight,bottomRight,bottomRight,bottomLeft,bottomLeft)
         mIsNewPath = false
         mIsPathClosure = false
@@ -123,38 +123,38 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssFillColor(color: Int) : JJColorDrawable {
+    fun setFillColor(color: Int) : JJColorDrawable {
         mPaint.color = color
         return this
     }
 
-    fun ssIsFillEnabled(boolean: Boolean) : JJColorDrawable {
+    fun setIsFillEnabled(boolean: Boolean) : JJColorDrawable {
         mIsFill = boolean
         return this
     }
 
-    fun ssIsStrokeEnabled(boolean: Boolean) : JJColorDrawable {
+    fun setIsStrokeEnabled(boolean: Boolean) : JJColorDrawable {
         mIsStroke = boolean
         return this
     }
 
-    fun ssIsStrokeShadowEnabled(boolean: Boolean) : JJColorDrawable {
+    fun setIsStrokeShadowEnabled(boolean: Boolean) : JJColorDrawable {
         mIsStrokeShadow = boolean
         return this
     }
-    fun ssPadding(padding: JJPadding): JJColorDrawable {
+    fun setPadding(padding: JJPadding): JJColorDrawable {
         mPadding = padding
         return this
     }
 
-    fun ssOffset(x: Float,y: Float): JJColorDrawable {
+    fun setOffset(x: Float,y: Float): JJColorDrawable {
         mOffsetX = x
         mOffsetY = y
         return this
     }
 
 
-    fun ssPath(path:Path): JJColorDrawable {
+    fun setPath(path:Path): JJColorDrawable {
         mIsNewPath = true
         mIsPathClosure = false
         mPath = path
@@ -162,7 +162,7 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun ssPath(closure:(RectF, Path)->Unit): JJColorDrawable {
+    fun setPath(closure:(RectF, Path)->Unit): JJColorDrawable {
         mIsNewPath = true
         mIsPathClosure = true
         mSetupPath = closure

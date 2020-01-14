@@ -42,32 +42,32 @@ class JJOutlineProvider : ViewOutlineProvider() {
         const val CORNER_SMOOTH_XLARGE = 6
     }
 
-    fun ssScale(x: Float,y: Float):JJOutlineProvider{
+    fun setScale(x: Float,y: Float):JJOutlineProvider{
         mScaleX = x
         mScaleY = y
         return this
     }
 
-    fun ssShape(type: Int):JJOutlineProvider{
+    fun setShape(type: Int):JJOutlineProvider{
         mIsNewPath = false
         mIsPathClosure = false
         mShape = type
         return this
     }
 
-    fun ssOffset(x: Float,y: Float):JJOutlineProvider{
+    fun setOffset(x: Float,y: Float):JJOutlineProvider{
         mOffsetX = x
         mOffsetY = y
         return this
     }
 
 
-    fun ssAlpha(@FloatRange(from = 0.0, to = 1.0)alpha: Float): JJOutlineProvider{
+    fun setAlpha(@FloatRange(from = 0.0, to = 1.0)alpha: Float): JJOutlineProvider{
         mAlpha = if(alpha == 1f) 0.99f else alpha
         return this
     }
 
-    fun ssRadius(radius: Float): JJOutlineProvider{
+    fun setRadius(radius: Float): JJOutlineProvider{
         mRadius = floatArrayOf(radius,radius,radius,radius,radius,radius,radius,radius)
         mIsNewPath = false
         mIsPathClosure = false
@@ -75,7 +75,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
         return this
     }
 
-    fun ssRadius(radius: FloatArray) : JJOutlineProvider{
+    fun setRadius(radius: FloatArray) : JJOutlineProvider{
         mRadius = radius
         mIsNewPath = false
         mIsPathClosure = false
@@ -83,7 +83,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
         return this
     }
 
-    fun ssRadius(topLeft: Float,topRight:Float, bottomRight:Float,bottomLeft:Float) : JJOutlineProvider{
+    fun setRadius(topLeft: Float,topRight:Float, bottomRight:Float,bottomLeft:Float) : JJOutlineProvider{
         mRadius = floatArrayOf(topLeft,topLeft,topRight,topRight,bottomRight,bottomRight,bottomLeft,bottomLeft)
         mIsNewPath = false
         mIsPathClosure = false
@@ -91,7 +91,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
         return this
     }
 
-    fun ssConvexPath(path:Path):JJOutlineProvider{
+    fun setConvexPath(path:Path):JJOutlineProvider{
         mIsNewPath = true
         mIsPathClosure = false
         mShape = 0
@@ -99,7 +99,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
         return this
     }
 
-    fun ssConvexPath(closure:(RectF,Path)->Unit):JJOutlineProvider{
+    fun setConvexPath(closure:(RectF,Path)->Unit):JJOutlineProvider{
         mIsNewPath = true
         mIsPathClosure = true
         mSetupPath = closure
@@ -116,7 +116,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
     }
 
 
-    fun ssPadding(padding: JJPadding): JJOutlineProvider {
+    fun setPadding(padding: JJPadding): JJOutlineProvider {
         mPadding = padding
         return this
     }

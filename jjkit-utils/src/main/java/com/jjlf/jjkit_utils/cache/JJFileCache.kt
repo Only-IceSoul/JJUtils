@@ -38,32 +38,32 @@ class JJFileCache{
     private val mLocker = ReentrantLock()
 
     //meBiBytes 1 Mib = 1048576L bytes
-    fun ssLimitFreeSpaceDisk(meBiBytes:Long): JJFileCache {
+    fun setLimitFreeSpaceDisk(meBiBytes:Long): JJFileCache {
         mLimitFreeSpaceDisk = if(meBiBytes < 1) 1 else meBiBytes
         return this
     }
 
-    fun ssDirectory(file:File): JJFileCache {
+    fun setDirectory(file:File): JJFileCache {
         mDirectory = file
         return this
     }
 
-    fun ssQuality(@IntRange(from = 1, to = 100) int:Int) : JJFileCache {
+    fun setQuality(@IntRange(from = 1, to = 100) int:Int) : JJFileCache {
         mQuality = int
         return this
     }
 
-    fun ssBitmapConfig(config:Bitmap.Config): JJFileCache {
+    fun setBitmapConfig(config:Bitmap.Config): JJFileCache {
         mBitmapConfig = config
         return this
     }
 
-    fun ssBitmapCompressFormat(format : Bitmap.CompressFormat) : JJFileCache {
+    fun setBitmapCompressFormat(format : Bitmap.CompressFormat) : JJFileCache {
         mCompressFormat = format
         return this
     }
 
-    fun ssMinSizeSamplingOOM(reqWidth: Int,reqHeight: Int,priority : Boolean = false){
+    fun setMinSizeSamplingOOM(reqWidth: Int,reqHeight: Int,priority : Boolean = false){
         mMinHeight = if(reqHeight < 1) 1 else reqHeight
         mMinWidth = if(reqWidth < 1) 1 else reqWidth
         mPrioritySizeSampling = priority
