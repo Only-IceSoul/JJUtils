@@ -26,7 +26,7 @@ class JJFileCache{
         const val NOT_COMPLETE_DELETED_SOME_CHILD_ALIVE = 3
     }
 
-    private var mLimitFreeSpaceDisk =  1L * 1024   //1gib
+    private var mLimitFreeSpaceDisk =  200L  //Mib
     private var mDirectory : File? = null
     private var mQuality = 90
     private var mBitmapConfig =  Bitmap.Config.ARGB_8888
@@ -84,7 +84,7 @@ class JJFileCache{
                      return false
                  }
 
-                 if( (mDirectory!!.freeSpace / 1048576L)  < (mLimitFreeSpaceDisk)){
+                 if( (mDirectory!!.usableSpace / 1048576L)  < (mLimitFreeSpaceDisk)){
                      if(mDirectory?.deleteAsDirectory(true) == NOT_COMPLETE_DELETED_SOME_CHILD_ALIVE && !mHalfSpaceDone){
                          mHalfSpaceDone = true
                          if(addBitmap(key,bitmap)) {

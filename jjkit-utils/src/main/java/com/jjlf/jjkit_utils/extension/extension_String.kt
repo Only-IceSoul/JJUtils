@@ -60,3 +60,13 @@ fun String.removeDuplicateWhiteSpaces():String{
     return this.replace(Regex("\\s+"), " ")
 }
 
+
+
+fun String.fireBaseStorageUrlToId(storageName:String,alternative:String): String{
+    return this.replace(storageName, "")
+        .replace(alternative, "", true)
+        .replace(".jpg", "").replace("alt", "")
+        .replace(".com", "").replace("token", "")
+        .replace("media", "").replace("https://firebasestorage.googleapis", "")
+        .replace(Regex("[^a-zA-Z]"), "")
+}

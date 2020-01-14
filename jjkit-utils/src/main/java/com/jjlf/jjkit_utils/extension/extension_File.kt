@@ -1,6 +1,9 @@
 package com.jjlf.jjkit_utils.extension
 
+import android.os.Build
+import android.os.StatFs
 import android.util.Log
+import androidx.annotation.RequiresApi
 import java.io.File
 
 val File.NOT_DELETED_BUT_EMPTY: Int
@@ -49,7 +52,15 @@ fun File.deleteAsDirectory(deleteHalf: Boolean = false): Int{
         return DELETED
     }
     return if(success) DELETED else NOT_COMPLETE_DELETED_SOME_CHILD_ALIVE
+
 }
 
+@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+fun File.statFsAviableSpaceBytes():Long{
+    val stat = StatFs(path)
+    val blockSize = stat.blockSizeLong
+    val availableBlocks = stat.availableBlocksLong
+    return blockSize*availableBlocks
+}
 
 

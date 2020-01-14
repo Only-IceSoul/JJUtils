@@ -20,6 +20,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     private var mMemoryPercentLimit = 75
     private var mShowErrorView = false
     private var mIsAddedError = false
+    private var mIsErrorEnabled = false
 
     override fun getItemViewType(position: Int): Int {
         val value = if(position == items.size - 1 && items.last() == null && mShowErrorView) 2
@@ -236,12 +237,19 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
 
     }
 
+    fun isErrorEnabled(boolean: Boolean) : JJRecyclerAdapter<T>{
+        mIsErrorEnabled = boolean
+        return this
+    }
+
     fun addError(){
-        removeLastIfNull()
-        items.add(null)
-        mShowErrorView = true
-        mIsAddedError = true
-        notifyItemInserted(items.size - 1)
+        if(mIsErrorEnabled){
+            removeLastIfNull()
+            items.add(null)
+            mShowErrorView = true
+            mIsAddedError = true
+            notifyItemInserted(items.size - 1)
+        }
     }
 
     private fun isMemoryAvailable(): Boolean{

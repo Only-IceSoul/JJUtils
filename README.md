@@ -15,8 +15,12 @@ allprojects {
 2.- Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.Only-IceSoul:JJUtils:1.1'
+	        implementation 'com.github.Only-IceSoul:JJUtils:1.2'
 	}
 ```
 
+
+# LICENSE 
+
+**Apache 2.0**
 
