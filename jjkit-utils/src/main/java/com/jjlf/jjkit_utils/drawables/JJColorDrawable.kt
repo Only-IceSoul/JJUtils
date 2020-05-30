@@ -36,9 +36,9 @@ class JJColorDrawable : Drawable() {
     private var mRectStrokeShadow = RectF()
 
     companion object{
-        const val CIRCLE = 1
-        const val CORNER_SMOOTH_VERY_SAMLL = 2
-        const val CORNER_SMOOTH_SAMLL = 3
+        const val ROUND_CIRCLE = 1
+        const val CORNER_SMOOTH_VERY_SMALL = 2
+        const val CORNER_SMOOTH_SMALL = 3
         const val CORNER_SMOOTH_MEDIUM = 4
         const val CORNER_SMOOTH_LARGE = 5
         const val CORNER_SMOOTH_XLARGE = 6
@@ -247,16 +247,16 @@ class JJColorDrawable : Drawable() {
         invalidateSelf()
     }
 
-
+    private var mMatrix = Matrix()
     private fun setupRect(){
         mRect.padding(mPadding)
-        mRect.scale(mScaleX, mScaleY)
+        mRect.scale(mScaleX, mScaleY,mMatrix)
         mRect.offset(mOffsetX, mOffsetY)
     }
 
     private fun setupRadiusForShape(){
         when(mShape){
-            1 -> {
+            ROUND_CIRCLE -> {
                 val radius = min(mRect.height(),mRect.width()) / 2f
                 for (i in 0..7){
                     mRadius[i] = radius
@@ -294,7 +294,7 @@ class JJColorDrawable : Drawable() {
                     mRadius[i] = radius
                 }
             }
-            else -> Log.v("JJOutlineProvider","Custom Radius")
+            else -> Log.v("JJColorDrawable","Custom Radius")
         }
     }
 

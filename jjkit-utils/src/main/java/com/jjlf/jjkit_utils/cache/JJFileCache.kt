@@ -7,6 +7,7 @@ import android.util.Log
 import java.io.File
 import java.io.FileOutputStream
 import android.graphics.BitmapFactory
+import android.os.storage.StorageManager
 import androidx.annotation.IntRange
 import androidx.appcompat.app.AppCompatActivity
 import com.jjlf.jjkit_utils.extension.deleteAsDirectory
@@ -69,7 +70,7 @@ class JJFileCache{
         mPrioritySizeSampling = priority
     }
 
-     fun addBitmap(key:String, bitmap:Bitmap?) : Boolean{
+     fun addBitmap(context:Context,key:String, bitmap:Bitmap?) : Boolean{
          synchronized(mLocker){
              return try {
                  if(key.isEmpty() || bitmap == null) return false
@@ -84,10 +85,10 @@ class JJFileCache{
                      return false
                  }
 
-                 if( (mDirectory!!.usableSpace / 1048576L)  < (mLimitFreeSpaceDisk)){
+                 if( (getUsableSpace(context,mDirectory!!) / 1048576L)  < (mLimitFreeSpaceDisk)){
                      if(mDirectory?.deleteAsDirectory(true) == NOT_COMPLETE_DELETED_SOME_CHILD_ALIVE && !mHalfSpaceDone){
                          mHalfSpaceDone = true
-                         if(addBitmap(key,bitmap)) {
+                         if(addBitmap(context,key,bitmap)) {
                              mHalfSpaceDone = false
                              return true
                          }else {
@@ -107,13 +108,27 @@ class JJFileCache{
          }
     }
 
+    private fun getUsableSpace(context: Context,file:File): Long{
+        return  if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+            val sm = context.getSystemService(AppCompatActivity.STORAGE_SERVICE) as StorageManager
+            sm.getAllocatableBytes(sm.getUuidForPath(file))
+        }else {
+            file.usableSpace
+        }
+    }
+
 
     private fun writeData(file:File,bitmap:Bitmap) : Boolean{
         val out = FileOutputStream(file)
-        val done = bitmap.compress(mCompressFormat, mQuality, out)
-        out.flush()
-        out.close()
-       return done
+        return try {
+             bitmap.compress(mCompressFormat, mQuality, out)
+         }catch (e: Exception){
+             Log.e("JJFileCache","Error writing $e")
+             false
+         }finally {
+             out.flush()
+             out.close()
+         }
     }
 
     fun getBitmap(key: String):Bitmap?{

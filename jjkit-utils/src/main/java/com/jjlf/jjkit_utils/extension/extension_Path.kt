@@ -1,26 +1,32 @@
 package com.jjlf.jjkit_utils.extension
 
-import android.graphics.Matrix
-import android.graphics.Path
-import android.graphics.PathMeasure
-import android.graphics.RectF
+import android.graphics.*
 import androidx.annotation.FloatRange
 import java.lang.IllegalArgumentException
 
-fun Path.scale(  @FloatRange(from = 0.0, to = 1000.0) scaleX: Float,
-                 @FloatRange(from = 0.0, to = 1000.0) scaleY: Float){
-    val ma = Matrix()
-    val rect = RectF()
-    computeBounds(rect,true)
-    ma.postScale(scaleX,scaleY,rect.centerX(),rect.centerY())
-    if(scaleX >= 0f && scaleY >= 0f) transform(ma)
+
+fun Path.translation(dx:Float,dy:Float,matrix: Matrix){
+    matrix.reset()
+    matrix.postTranslate(dx,dy)
+    transform(matrix)
+}
+
+fun Path.rotation(degrees:Float,rect:RectF,matrix: Matrix){
+    matrix.reset()
+    matrix.postRotate(degrees,rect.centerX(),rect.centerY())
+    transform(matrix)
+}
+
+fun Path.scale(scaleX: Float,
+                scaleY: Float,rect:RectF,matrix:Matrix){
+    matrix.reset()
+    matrix.postScale(scaleX,scaleY,rect.centerX(),rect.centerY())
+    transform(matrix)
 }
 
 fun Path.flipMirror(vertical: Boolean,
-                    horizontal: Boolean){
-    val ma = Matrix()
-    val rect = RectF()
-    computeBounds(rect,true)
+                    horizontal: Boolean,rect: RectF,ma:Matrix){
+    ma.reset()
     when {
         vertical && horizontal -> ma.postScale(-1f, -1f, rect.centerX(), rect.centerY())
         vertical -> ma.postScale (1f,-1f, rect.centerX(), rect.centerY())
@@ -43,7 +49,6 @@ fun Path.lineToBounds(rect: RectF, @FloatRange(from = 0.0, to = 1.0) percentX: F
 
 
 
-//Percent relative to rect startX-Y and endX-Y
 fun Path.curve(startX:Float, startY:Float, cPercentX: Float,
                cPercentY: Float, endX: Float, endY:Float){
     val eX = (endX - startX)
@@ -88,7 +93,7 @@ fun Path.curveVertical(startX:Float, startY:Float, radius: Float, endY:Float){
 
 
 
-//Percent relative to rect startX-Y and endX-Y
+//Percent relative to rect startX-Y and endX-Y , distance percentage one point to other point.
 fun Path.rCurve(cPercentX: Float, cPercentY: Float, endX: Float, endY:Float){
     val pm =  PathMeasure(this,false)
     val point = floatArrayOf(0f,0f)
@@ -154,7 +159,7 @@ fun Path.rCurveVertical(radius: Float, endY:Float){
 
 
 
-//Percent relative to View bounds
+//Percent relative to View bounds end percent
 fun Path.rLineToBounds(rect: RectF, @FloatRange(from = 0.0, to = 1.0) ePercentX: Float, @FloatRange(from = 0.0, to = 1.0) ePercentY:Float){
     val pm =  PathMeasure(this,false)
     val point = floatArrayOf(0f,0f)

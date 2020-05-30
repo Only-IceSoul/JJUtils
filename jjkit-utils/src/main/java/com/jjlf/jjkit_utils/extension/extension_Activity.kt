@@ -36,9 +36,8 @@ fun Activity.removeViewFromWindow(view: View){
     wm.removeView(view)
 }
 
-
+//@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @SuppressLint("DiscouragedPrivateApi")
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 fun Activity.transparent(){
     try {
         val getActivityOptions = Activity::class.java.getDeclaredMethod("getActivityOptions")
@@ -144,4 +143,8 @@ fun Activity.haveNetworkConnection(): Boolean {
 
 }
 
+
+fun Activity.SoftInputModeResize(){
+    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+}
 

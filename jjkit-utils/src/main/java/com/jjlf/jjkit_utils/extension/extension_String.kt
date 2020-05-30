@@ -60,6 +60,9 @@ fun String.removeDuplicateWhiteSpaces():String{
     return this.replace(Regex("\\s+"), " ")
 }
 
+fun String.sizeBytesInMap() : Long {
+    return toByteArray(Charsets.UTF_16).size + 90L
+}
 
 
 fun String.fireBaseStorageUrlToId(storageName:String,alternative:String): String{

@@ -16,6 +16,14 @@ import java.lang.Exception
 import kotlin.math.max
 import kotlin.math.min
 
+fun Bitmap.sizeBytesInMap() : Long {
+    if(android.os.Build.VERSION.SDK_INT >= 19){
+        return byteCount + 200L
+    }
+    return (rowBytes * height) + 200L
+}
+
+
 @Suppress("DEPRECATION")
 fun Bitmap.getBytesPerPixel(): Int = when (config) {
         Bitmap.Config.ARGB_8888 -> 4
@@ -283,6 +291,7 @@ fun Bitmap.toBitmapThumbnail() : Bitmap?{
         null
     }
 }
+
 
 
 fun Bitmap.RGB565toARGB888() : Bitmap {

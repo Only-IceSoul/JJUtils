@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 
-class JJViewPagerAdapter(private val activity: Activity) : PagerAdapter() {
+class JJViewPagerAdapter() : PagerAdapter() {
 
     private var mViews: Array<out View>? = null
     private var mNumberOfPages = 0
@@ -28,7 +28,7 @@ class JJViewPagerAdapter(private val activity: Activity) : PagerAdapter() {
             return mViews!![position]
         }
         Log.e("JJViewPagerAdapter", "Arrays of views is null or empty")
-        return View(activity)
+        return View(container.context)
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
