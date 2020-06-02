@@ -29,7 +29,7 @@ import com.jjlf.jjkit_layoututils.JJPadding
 import com.jjlf.jjkit_layoututils.JJScreen
 import com.jjlf.jjkit_utils.R
 
-open class JJImageViewShadowClick : AppCompatImageView {
+open class ImageViewShadowClick : AppCompatImageView {
 
     private var mIdentifier = 0
     private var mState = 0
@@ -41,7 +41,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     private var mClickWithShadow = false
     private var mClickShadowListener : ((View)->Unit)? = null
 
-    fun ssOnClickShadowListener(listener: ((View)->Unit)) : JJImageViewShadowClick{
+    fun ssOnClickShadowListener(listener: ((View)->Unit)) : ImageViewShadowClick{
         mClickShadowListener = listener
         mClickWithShadow = true
         return this
@@ -113,310 +113,310 @@ open class JJImageViewShadowClick : AppCompatImageView {
 
 
         val a = context.obtainStyledAttributes(attrs,
-            R.styleable.JJImageViewShadowClick, 0, 0)
+            R.styleable.ImageViewShadowClick, 0, 0)
 
 
-        mIgnoreCl = a.getBoolean(R.styleable.JJImageViewShadowClick_layout_ignoreCl,false)
+        mIgnoreCl = a.getBoolean(R.styleable.ImageViewShadowClick_layout_ignoreCl,false)
 
-        mConfigurationChanged = a.getBoolean(R.styleable.JJImageViewShadowClick_support_configuration_changed,false)
-        mSupportLandScape = a.getBoolean(R.styleable.JJImageViewShadowClick_support_landscape,false)
+        mConfigurationChanged = a.getBoolean(R.styleable.ImageViewShadowClick_support_configuration_changed,false)
+        mSupportLandScape = a.getBoolean(R.styleable.ImageViewShadowClick_support_landscape,false)
 
         //region attrs portrait
 
-        val aFillParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clFillParent,false)
-        val aFillParentHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_clFillParentHorizontally,false)
-        val aFillParentVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_clFillParentVertically,false)
+        val aFillParent = a.getBoolean(R.styleable.ImageViewShadowClick_clFillParent,false)
+        val aFillParentHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_clFillParentHorizontally,false)
+        val aFillParentVertical = a.getBoolean(R.styleable.ImageViewShadowClick_clFillParentVertically,false)
 
-        val aCenterInParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParent,false)
-        val aCenterInParentHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentHorizontally,false)
-        val aCenterInParentVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentVertically,false)
-        val aCenterInParentTopVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentTopVertically,false)
-        val aCenterInParentBottomVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentBottomVertically,false)
-        val aCenterInParentStartHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentStartHorizontally,false)
-        val aCenterInParentEndHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_clCenterInParentEndHorizontally,false)
+        val aCenterInParent = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParent,false)
+        val aCenterInParentHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentHorizontally,false)
+        val aCenterInParentVertical = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentVertically,false)
+        val aCenterInParentTopVertical = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentTopVertically,false)
+        val aCenterInParentBottomVertical = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentBottomVertically,false)
+        val aCenterInParentStartHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentStartHorizontally,false)
+        val aCenterInParentEndHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_clCenterInParentEndHorizontally,false)
 
-        val aCenterInTopVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterInTopVerticallyOf,
+        val aCenterInTopVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_clCenterInTopVerticallyOf,
             View.NO_ID)
-        val aCenterInBottomVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterInBottomVerticallyOf,
+        val aCenterInBottomVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_clCenterInBottomVerticallyOf,
             View.NO_ID)
-        val aCenterInStartHorizontalOf= a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterInStartHorizontallyOf,
+        val aCenterInStartHorizontalOf= a.getResourceId(R.styleable.ImageViewShadowClick_clCenterInStartHorizontallyOf,
             View.NO_ID)
-        val aCenterInEndHorizontalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterInEndHorizontallyOf,
-            View.NO_ID)
-
-        val aCenterVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterVerticallyOf, View.NO_ID)
-        val aCenterHorizontalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clCenterHorizontallyOf,
+        val aCenterInEndHorizontalOf = a.getResourceId(R.styleable.ImageViewShadowClick_clCenterInEndHorizontallyOf,
             View.NO_ID)
 
-        val aMarginEnd = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginEnd,0f)
-        val aMarginStart = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginStart,0f)
-        val aMarginTop = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginTop,0f)
-        val aMarginBottom = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginBottom,0f)
-        val aMarginEndPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginEndPercentScreenHeight,0f)
-        val aMarginStartPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginStartPercentScreenHeight,0f)
-        val aMarginTopPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginTopPercentScreenHeight,0f)
-        val aMarginBottomPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginBottomPercentScreenHeight,0f)
-        val aMarginEndPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginEndPercentScreenWidth,0f)
-        val aMarginStartPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginStartPercentScreenWidth,0f)
-        val aMarginTopPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginTopPercentScreenWidth,0f)
-        val aMarginBottomPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginBottomPercentScreenWidth,0f)
+        val aCenterVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_clCenterVerticallyOf, View.NO_ID)
+        val aCenterHorizontalOf = a.getResourceId(R.styleable.ImageViewShadowClick_clCenterHorizontallyOf,
+            View.NO_ID)
 
-        val aMargin = a.getDimension(R.styleable.JJImageViewShadowClick_clMargin,0f)
-        val aMarginPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginPerScHeight,0f)
-        val aMarginPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginPerScWidth,0f)
-        val aMarginResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginResponsive, NO_ID)
-        val aMarginResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginResPerScHeight,
-            NO_ID
-        )
-        val aMarginResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginResPerScWidth,
-            NO_ID
-        )
+        val aMarginEnd = a.getDimension(R.styleable.ImageViewShadowClick_clMarginEnd,0f)
+        val aMarginStart = a.getDimension(R.styleable.ImageViewShadowClick_clMarginStart,0f)
+        val aMarginTop = a.getDimension(R.styleable.ImageViewShadowClick_clMarginTop,0f)
+        val aMarginBottom = a.getDimension(R.styleable.ImageViewShadowClick_clMarginBottom,0f)
+        val aMarginEndPercent = a.getFloat(R.styleable.ImageViewShadowClick_clMarginEndPercentScreenHeight,0f)
+        val aMarginStartPercent = a.getFloat(R.styleable.ImageViewShadowClick_clMarginStartPercentScreenHeight,0f)
+        val aMarginTopPercent = a.getFloat(R.styleable.ImageViewShadowClick_clMarginTopPercentScreenHeight,0f)
+        val aMarginBottomPercent = a.getFloat(R.styleable.ImageViewShadowClick_clMarginBottomPercentScreenHeight,0f)
+        val aMarginEndPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginEndPercentScreenWidth,0f)
+        val aMarginStartPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginStartPercentScreenWidth,0f)
+        val aMarginTopPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginTopPercentScreenWidth,0f)
+        val aMarginBottomPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginBottomPercentScreenWidth,0f)
 
-        val aMarginEndResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginEndResponsive,
+        val aMargin = a.getDimension(R.styleable.ImageViewShadowClick_clMargin,0f)
+        val aMarginPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_clMarginPerScHeight,0f)
+        val aMarginPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginPerScWidth,0f)
+        val aMarginResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginResponsive, NO_ID)
+        val aMarginResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginResPerScHeight,
             NO_ID
         )
-        val aMarginStartResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginStartResponsive,
-            NO_ID
-        )
-        val aMarginTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginTopResponsive,
-            NO_ID
-        )
-        val aMarginBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginBottomResponsive,
-            NO_ID
-        )
-        val aMarginEndResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginEndResPerScHeight,
-            NO_ID
-        )
-        val aMarginStartResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginStartResPerScHeight,
-            NO_ID
-        )
-        val aMarginTopResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginTopResPerScHeight,
-            NO_ID
-        )
-        val aMarginBottomResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginBottomResPerScHeight,
-            NO_ID
-        )
-        val aMarginEndResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginEndResPerScWidth,
-            NO_ID
-        )
-        val aMarginStartResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginStartResPerScWidth,
-            NO_ID
-        )
-        val aMarginTopResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginTopResPerScWidth,
-            NO_ID
-        )
-        val aMarginBottomResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginBottomResPerScWidth,
+        val aMarginResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginResPerScWidth,
             NO_ID
         )
 
-        val aMarginVertical = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginVertical,0f)
-        val aMarginVerticalPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginVerticalPerScHeight,0f)
-        val aMarginVerticalPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginVerticalPerScWidth,0f)
-        val aMarginVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginVerticalResponsive,
+        val aMarginEndResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginEndResponsive,
             NO_ID
         )
-        val aMarginVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginVerticalResPerScHeight,
+        val aMarginStartResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginStartResponsive,
             NO_ID
         )
-        val aMarginVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginVerticalResPerScWidth,
+        val aMarginTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginTopResponsive,
+            NO_ID
+        )
+        val aMarginBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginBottomResponsive,
+            NO_ID
+        )
+        val aMarginEndResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginEndResPerScHeight,
+            NO_ID
+        )
+        val aMarginStartResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginStartResPerScHeight,
+            NO_ID
+        )
+        val aMarginTopResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginTopResPerScHeight,
+            NO_ID
+        )
+        val aMarginBottomResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginBottomResPerScHeight,
+            NO_ID
+        )
+        val aMarginEndResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginEndResPerScWidth,
+            NO_ID
+        )
+        val aMarginStartResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginStartResPerScWidth,
+            NO_ID
+        )
+        val aMarginTopResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginTopResPerScWidth,
+            NO_ID
+        )
+        val aMarginBottomResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginBottomResPerScWidth,
             NO_ID
         )
 
-        val aMarginHorizontal = a.getDimension(R.styleable.JJImageViewShadowClick_clMarginHorizontal,0f)
-        val aMarginHorizontalPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginHorizontalPerScHeight,0f)
-        val aMarginHorizontalPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clMarginHorizontalPerScWidth,0f)
-        val aMarginHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginHorizontalResponsive,
+        val aMarginVertical = a.getDimension(R.styleable.ImageViewShadowClick_clMarginVertical,0f)
+        val aMarginVerticalPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_clMarginVerticalPerScHeight,0f)
+        val aMarginVerticalPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginVerticalPerScWidth,0f)
+        val aMarginVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginVerticalResponsive,
             NO_ID
         )
-        val aMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginHorizontalResPerScHeight,
+        val aMarginVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginVerticalResPerScHeight,
             NO_ID
         )
-        val aMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clMarginHorizontalResPerScWidth,
+        val aMarginVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginVerticalResPerScWidth,
+            NO_ID
+        )
+
+        val aMarginHorizontal = a.getDimension(R.styleable.ImageViewShadowClick_clMarginHorizontal,0f)
+        val aMarginHorizontalPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_clMarginHorizontalPerScHeight,0f)
+        val aMarginHorizontalPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_clMarginHorizontalPerScWidth,0f)
+        val aMarginHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginHorizontalResponsive,
+            NO_ID
+        )
+        val aMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginHorizontalResPerScHeight,
+            NO_ID
+        )
+        val aMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clMarginHorizontalResPerScWidth,
             NO_ID
         )
 
 
-        val aVerticalBias = a.getFloat(R.styleable.JJImageViewShadowClick_clVerticalBias,0.5f)
-        val aHorizontalBias = a.getFloat(R.styleable.JJImageViewShadowClick_clHorizontalBias,0.5f)
+        val aVerticalBias = a.getFloat(R.styleable.ImageViewShadowClick_clVerticalBias,0.5f)
+        val aHorizontalBias = a.getFloat(R.styleable.ImageViewShadowClick_clHorizontalBias,0.5f)
 
-        val aStartToStartParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clStartToStartParent,false)
-        val aStartToEndParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clStartToEndParent,false)
-        val aEndToEndParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clEndToEndParent,false)
-        val aEndToStartParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clEndToStartParent,false)
-        val aTopToTopParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clTopToTopParent,false)
-        val aTopToBottomParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clTopToBottomParent,false)
-        val aBottomToBottomParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clBottomToBottomParent,false)
-        val aBottomToTopParent = a.getBoolean(R.styleable.JJImageViewShadowClick_clBottomToTopParent,false)
+        val aStartToStartParent = a.getBoolean(R.styleable.ImageViewShadowClick_clStartToStartParent,false)
+        val aStartToEndParent = a.getBoolean(R.styleable.ImageViewShadowClick_clStartToEndParent,false)
+        val aEndToEndParent = a.getBoolean(R.styleable.ImageViewShadowClick_clEndToEndParent,false)
+        val aEndToStartParent = a.getBoolean(R.styleable.ImageViewShadowClick_clEndToStartParent,false)
+        val aTopToTopParent = a.getBoolean(R.styleable.ImageViewShadowClick_clTopToTopParent,false)
+        val aTopToBottomParent = a.getBoolean(R.styleable.ImageViewShadowClick_clTopToBottomParent,false)
+        val aBottomToBottomParent = a.getBoolean(R.styleable.ImageViewShadowClick_clBottomToBottomParent,false)
+        val aBottomToTopParent = a.getBoolean(R.styleable.ImageViewShadowClick_clBottomToTopParent,false)
 
-        val aStartToStartOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clStartToStartOf, View.NO_ID)
-        val aStartToEndOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clStartToEndOf, View.NO_ID)
-        val aEndToEndOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clEndToEndOf, View.NO_ID)
-        val aEndToStartOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clEndToStartOf, View.NO_ID)
-        val aTopToTopOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clTopToTopOf, View.NO_ID)
-        val aTopToBottomOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clTopToBottomOf, View.NO_ID)
-        val aBottomToBottomOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clBottomToBottomOf, View.NO_ID)
-        val aBottomToTopOf = a.getResourceId(R.styleable.JJImageViewShadowClick_clBottomToTopOf, View.NO_ID)
+        val aStartToStartOf = a.getResourceId(R.styleable.ImageViewShadowClick_clStartToStartOf, View.NO_ID)
+        val aStartToEndOf = a.getResourceId(R.styleable.ImageViewShadowClick_clStartToEndOf, View.NO_ID)
+        val aEndToEndOf = a.getResourceId(R.styleable.ImageViewShadowClick_clEndToEndOf, View.NO_ID)
+        val aEndToStartOf = a.getResourceId(R.styleable.ImageViewShadowClick_clEndToStartOf, View.NO_ID)
+        val aTopToTopOf = a.getResourceId(R.styleable.ImageViewShadowClick_clTopToTopOf, View.NO_ID)
+        val aTopToBottomOf = a.getResourceId(R.styleable.ImageViewShadowClick_clTopToBottomOf, View.NO_ID)
+        val aBottomToBottomOf = a.getResourceId(R.styleable.ImageViewShadowClick_clBottomToBottomOf, View.NO_ID)
+        val aBottomToTopOf = a.getResourceId(R.styleable.ImageViewShadowClick_clBottomToTopOf, View.NO_ID)
 
-        val aHeightPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clHeightPercent,0f)
-        val aWidthPercent = a.getFloat(R.styleable.JJImageViewShadowClick_clWidthPercent,0f)
-        val aHeightPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clHeightPercentScreenWidth,0f)
-        val aWidthPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_clWidthPercentScreenWidth,0f)
-        val aHeightPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_clHeightPercentScreenHeight,0f)
-        val aWidthPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_clWidthPercentScreenHeight,0f)
+        val aHeightPercent = a.getFloat(R.styleable.ImageViewShadowClick_clHeightPercent,0f)
+        val aWidthPercent = a.getFloat(R.styleable.ImageViewShadowClick_clWidthPercent,0f)
+        val aHeightPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_clHeightPercentScreenWidth,0f)
+        val aWidthPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_clWidthPercentScreenWidth,0f)
+        val aHeightPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_clHeightPercentScreenHeight,0f)
+        val aWidthPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_clWidthPercentScreenHeight,0f)
 
-        val aHeightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clHeightResponsive, View.NO_ID)
-        val aWidthResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_clWidthResponsive, View.NO_ID)
+        val aHeightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clHeightResponsive, View.NO_ID)
+        val aWidthResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_clWidthResponsive, View.NO_ID)
 
-        val aHeightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clHeightResponsivePercentScreenHeight,
+        val aHeightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clHeightResponsivePercentScreenHeight,
             View.NO_ID)
-        val aWidthResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clWidthResponsivePercentScreenWidth,
+        val aWidthResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clWidthResponsivePercentScreenWidth,
             View.NO_ID)
-        val aHeightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_clHeightResponsivePercentScreenWidth,
+        val aHeightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_clHeightResponsivePercentScreenWidth,
             View.NO_ID)
-        val aWidthResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_clWidthResponsivePercentScreenHeight,
-            View.NO_ID)
-
-        val lHeightPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpHeightPercentScreenWidth,0f)
-        val lWidthPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpWidthPercentScreenWidth,0f)
-        val lHeightPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpHeightPercentScreenHeight,0f)
-        val lWidthPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpWidthPercentScreenHeight,0f)
-
-        val lHeightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpHeightResponsive, View.NO_ID)
-        val lWidthResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpWidthResponsive, View.NO_ID)
-        val lHeightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpHeightResponsivePercentScreenHeight,
-            View.NO_ID)
-        val lWidthResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpWidthResponsivePercentScreenWidth,
-            View.NO_ID)
-        val lHeightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpHeightResponsivePercentScreenWidth,
-            View.NO_ID)
-        val lWidthResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpWidthResponsivePercentScreenHeight,
+        val aWidthResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_clWidthResponsivePercentScreenHeight,
             View.NO_ID)
 
-        val lMarginTopPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginTopPerScHeight,0f)
-        val lMarginLeftPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginLeftPerScHeight,0f)
-        val lMarginRightPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginRightPerScHeight,0f)
-        val lMarginBottomPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginBottomPerScHeight,0f)
+        val lHeightPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpHeightPercentScreenWidth,0f)
+        val lWidthPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpWidthPercentScreenWidth,0f)
+        val lHeightPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpHeightPercentScreenHeight,0f)
+        val lWidthPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpWidthPercentScreenHeight,0f)
 
-        val lMarginTopPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginTopPerScWidth,0f)
-        val lMarginLeftPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginLeftPerScWidth,0f)
-        val lMarginRightPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginRightPerScWidth,0f)
-        val lMarginBottomPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginBottomPerScWidth,0f)
-
-        val lMarginTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginTopResponsive,
+        val lHeightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpHeightResponsive, View.NO_ID)
+        val lWidthResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpWidthResponsive, View.NO_ID)
+        val lHeightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpHeightResponsivePercentScreenHeight,
             View.NO_ID)
-        val lMarginLeftResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginLeftResponsive,
+        val lWidthResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpWidthResponsivePercentScreenWidth,
             View.NO_ID)
-        val lMarginRightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginRightResponsive,
+        val lHeightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpHeightResponsivePercentScreenWidth,
             View.NO_ID)
-        val lMarginBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginBottomResponsive,
+        val lWidthResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpWidthResponsivePercentScreenHeight,
             View.NO_ID)
 
-        val lMarginTopResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginTopResPerScWidth,
+        val lMarginTopPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginTopPerScHeight,0f)
+        val lMarginLeftPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginLeftPerScHeight,0f)
+        val lMarginRightPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginRightPerScHeight,0f)
+        val lMarginBottomPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginBottomPerScHeight,0f)
+
+        val lMarginTopPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginTopPerScWidth,0f)
+        val lMarginLeftPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginLeftPerScWidth,0f)
+        val lMarginRightPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginRightPerScWidth,0f)
+        val lMarginBottomPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginBottomPerScWidth,0f)
+
+        val lMarginTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginTopResponsive,
             View.NO_ID)
-        val lMarginLeftResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginLeftResPerScWidth,
+        val lMarginLeftResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginLeftResponsive,
             View.NO_ID)
-        val lMarginRightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginRightResPerScWidth,
+        val lMarginRightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginRightResponsive,
             View.NO_ID)
-        val lMarginBottomResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginBottomResPerScWidth,
+        val lMarginBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginBottomResponsive,
             View.NO_ID)
 
-        val lMarginTopResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginTopResPerScHeight,
+        val lMarginTopResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginTopResPerScWidth,
             View.NO_ID)
-        val lMarginLeftResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginLeftResPerScHeight,
+        val lMarginLeftResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginLeftResPerScWidth,
             View.NO_ID)
-        val lMarginRightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginRightResPerScHeight,
+        val lMarginRightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginRightResPerScWidth,
             View.NO_ID)
-        val lMarginBottomResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginBottomResPerScHeight,
-            View.NO_ID)
-
-        val lMarginPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginPercentScHeight,0f)
-        val lMarginPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginPercentScWidth,0f)
-        val lMarginResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginResponsive, View.NO_ID)
-        val lMarginResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginResPerScHeight,
-            View.NO_ID)
-        val lMarginResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginResPerScWidth,
+        val lMarginBottomResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginBottomResPerScWidth,
             View.NO_ID)
 
-        val lMarginVerticalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginVerticalPerScHeight,0f)
-        val lMarginVerticalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginVerticalPerScWidth,0f)
-        val lMarginVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginVerticalResponsive,
+        val lMarginTopResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginTopResPerScHeight,
             View.NO_ID)
-        val lMarginVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginVerticalResPerScWidth,
+        val lMarginLeftResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginLeftResPerScHeight,
             View.NO_ID)
-        val lMarginVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginVerticalResPerScHeight,
+        val lMarginRightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginRightResPerScHeight,
             View.NO_ID)
-
-        val lMarginHorizontalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginHorizontalPerScHeight,0f)
-        val lMarginHorizontalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpMarginHorizontalPerScWidth,0f)
-        val lMarginHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginHorizontalResponsive,
-            View.NO_ID)
-        val lMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginHorizontalResPerScWidth,
-            View.NO_ID)
-        val lMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpMarginHorizontalResPerScHeight,
+        val lMarginBottomResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginBottomResPerScHeight,
             View.NO_ID)
 
-
-        val lPaddingTopPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingTopPerScHeight,0f)
-        val lPaddingLeftPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingLeftPerScHeight,0f)
-        val lPaddingRightPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingRightPerScHeight,0f)
-        val lPaddingBottomPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingBottomPerScHeight,0f)
-
-        val lPaddingTopPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingTopPerScWidth,0f)
-        val lPaddingLeftPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingLeftPerScWidth,0f)
-        val lPaddingRightPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingRightPerScWidth,0f)
-        val lPaddingBottomPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingBottomPerScWidth,0f)
-
-        val lPaddingTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingTopResponsive,
+        val lMarginPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginPercentScHeight,0f)
+        val lMarginPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginPercentScWidth,0f)
+        val lMarginResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginResponsive, View.NO_ID)
+        val lMarginResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginResPerScHeight,
             View.NO_ID)
-        val lPaddingLeftResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingLeftResponsive,
-            View.NO_ID)
-        val lPaddingRightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingRightResponsive,
-            View.NO_ID)
-        val lPaddingBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingBottomResponsive,
+        val lMarginResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginResPerScWidth,
             View.NO_ID)
 
-        val lPaddingTopResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingTopResPerScWidth,
+        val lMarginVerticalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginVerticalPerScHeight,0f)
+        val lMarginVerticalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginVerticalPerScWidth,0f)
+        val lMarginVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginVerticalResponsive,
             View.NO_ID)
-        val lPaddingLeftResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingLeftResPerScWidth,
+        val lMarginVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginVerticalResPerScWidth,
             View.NO_ID)
-        val lPaddingRightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingRightResPerScWidth,
-            View.NO_ID)
-        val lPaddingBottomResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingBottomResPerScWidth,
-            View.NO_ID)
-
-        val lPaddingTopResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingTopResPerScHeight,
-            View.NO_ID)
-        val lPaddingLeftResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingLeftResPerScHeight,
-            View.NO_ID)
-        val lPaddingRightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingRightResPerScHeight,
-            View.NO_ID)
-        val lPaddingBottomResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingBottomResPerScHeight,
+        val lMarginVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginVerticalResPerScHeight,
             View.NO_ID)
 
-        val lPaddingPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingPercentScHeight,0f)
-        val lPaddingPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingPercentScWidth,0f)
-        val lPaddingResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingResponsive, View.NO_ID)
-        val lPaddingResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingResPerScHeight,
+        val lMarginHorizontalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginHorizontalPerScHeight,0f)
+        val lMarginHorizontalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpMarginHorizontalPerScWidth,0f)
+        val lMarginHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginHorizontalResponsive,
             View.NO_ID)
-        val lPaddingResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingResPerScWidth,
+        val lMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginHorizontalResPerScWidth,
             View.NO_ID)
-
-        val lPaddingVerticalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingVerticalPerScHeight,0f)
-        val lPaddingVerticalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingVerticalPerScWidth,0f)
-        val lPaddingVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingVerticalResponsive,
-            View.NO_ID)
-        val lPaddingVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingVerticalResPerScWidth,
-            View.NO_ID)
-        val lPaddingVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingVerticalResPerScHeight,
+        val lMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpMarginHorizontalResPerScHeight,
             View.NO_ID)
 
-        val lPaddingHorizontalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingHorizontalPerScHeight,0f)
-        val lPaddingHorizontalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lpPaddingHorizontalPerScWidth,0f)
-        val lPaddingHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingHorizontalResponsive,
+
+        val lPaddingTopPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingTopPerScHeight,0f)
+        val lPaddingLeftPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingLeftPerScHeight,0f)
+        val lPaddingRightPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingRightPerScHeight,0f)
+        val lPaddingBottomPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingBottomPerScHeight,0f)
+
+        val lPaddingTopPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingTopPerScWidth,0f)
+        val lPaddingLeftPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingLeftPerScWidth,0f)
+        val lPaddingRightPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingRightPerScWidth,0f)
+        val lPaddingBottomPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingBottomPerScWidth,0f)
+
+        val lPaddingTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingTopResponsive,
             View.NO_ID)
-        val lPaddingHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingHorizontalResPerScWidth,
+        val lPaddingLeftResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingLeftResponsive,
             View.NO_ID)
-        val lPaddingHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lpPaddingHorizontalResPerScHeight,
+        val lPaddingRightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingRightResponsive,
+            View.NO_ID)
+        val lPaddingBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingBottomResponsive,
+            View.NO_ID)
+
+        val lPaddingTopResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingTopResPerScWidth,
+            View.NO_ID)
+        val lPaddingLeftResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingLeftResPerScWidth,
+            View.NO_ID)
+        val lPaddingRightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingRightResPerScWidth,
+            View.NO_ID)
+        val lPaddingBottomResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingBottomResPerScWidth,
+            View.NO_ID)
+
+        val lPaddingTopResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingTopResPerScHeight,
+            View.NO_ID)
+        val lPaddingLeftResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingLeftResPerScHeight,
+            View.NO_ID)
+        val lPaddingRightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingRightResPerScHeight,
+            View.NO_ID)
+        val lPaddingBottomResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingBottomResPerScHeight,
+            View.NO_ID)
+
+        val lPaddingPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingPercentScHeight,0f)
+        val lPaddingPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingPercentScWidth,0f)
+        val lPaddingResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingResponsive, View.NO_ID)
+        val lPaddingResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingResPerScHeight,
+            View.NO_ID)
+        val lPaddingResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingResPerScWidth,
+            View.NO_ID)
+
+        val lPaddingVerticalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingVerticalPerScHeight,0f)
+        val lPaddingVerticalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingVerticalPerScWidth,0f)
+        val lPaddingVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingVerticalResponsive,
+            View.NO_ID)
+        val lPaddingVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingVerticalResPerScWidth,
+            View.NO_ID)
+        val lPaddingVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingVerticalResPerScHeight,
+            View.NO_ID)
+
+        val lPaddingHorizontalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingHorizontalPerScHeight,0f)
+        val lPaddingHorizontalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lpPaddingHorizontalPerScWidth,0f)
+        val lPaddingHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingHorizontalResponsive,
+            View.NO_ID)
+        val lPaddingHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingHorizontalResPerScWidth,
+            View.NO_ID)
+        val lPaddingHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lpPaddingHorizontalResPerScHeight,
             View.NO_ID)
 
 
@@ -424,324 +424,324 @@ open class JJImageViewShadowClick : AppCompatImageView {
 
         //region attrs landscape
 
-        val alsFillParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllFillParent,false)
-        val alsFillParentHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_cllFillParentHorizontally,false)
-        val alsFillParentVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_cllFillParentVertically,false)
+        val alsFillParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllFillParent,false)
+        val alsFillParentHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_cllFillParentHorizontally,false)
+        val alsFillParentVertical = a.getBoolean(R.styleable.ImageViewShadowClick_cllFillParentVertically,false)
 
-        val alsCenterInParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParent,false)
-        val alsCenterInParentHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentHorizontally,false)
-        val alsCenterInParentVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentVertically,false)
-        val alsCenterInParentTopVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentTopVertically,false)
-        val alsCenterInParentBottomVertical = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentBottomVertically,false)
-        val alsCenterInParentStartHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentStartHorizontally,false)
-        val alsCenterInParentEndHorizontal = a.getBoolean(R.styleable.JJImageViewShadowClick_cllCenterInParentEndHorizontally,false)
+        val alsCenterInParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParent,false)
+        val alsCenterInParentHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentHorizontally,false)
+        val alsCenterInParentVertical = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentVertically,false)
+        val alsCenterInParentTopVertical = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentTopVertically,false)
+        val alsCenterInParentBottomVertical = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentBottomVertically,false)
+        val alsCenterInParentStartHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentStartHorizontally,false)
+        val alsCenterInParentEndHorizontal = a.getBoolean(R.styleable.ImageViewShadowClick_cllCenterInParentEndHorizontally,false)
 
-        val alsCenterInTopVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterInTopVerticallyOf,
+        val alsCenterInTopVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterInTopVerticallyOf,
             View.NO_ID)
-        val alsCenterInBottomVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterInBottomVerticallyOf,
+        val alsCenterInBottomVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterInBottomVerticallyOf,
             View.NO_ID)
-        val alsCenterInStartHorizontalOf= a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterInStartHorizontallyOf,
+        val alsCenterInStartHorizontalOf= a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterInStartHorizontallyOf,
             View.NO_ID)
-        val alsCenterInEndHorizontalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterInEndHorizontallyOf,
-            View.NO_ID)
-
-        val alsCenterVerticalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterVerticallyOf,
-            View.NO_ID)
-        val alsCenterHorizontalOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllCenterHorizontallyOf,
+        val alsCenterInEndHorizontalOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterInEndHorizontallyOf,
             View.NO_ID)
 
-        val alsMarginEnd = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginEnd,0f)
-        val alsMarginStart = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginStart,0f)
-        val alsMarginTop = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginTop,0f)
-        val alsMarginBottom = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginBottom,0f)
-        val alsMarginEndPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginEndPercentScreenHeight,0f)
-        val alsMarginStartPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginStartPercentScreenHeight,0f)
-        val alsMarginTopPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginTopPercentScreenHeight,0f)
-        val alsMarginBottomPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginBottomPercentScreenHeight,0f)
-        val alsMarginEndPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginEndPercentScreenWidth,0f)
-        val alsMarginStartPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginStartPercentScreenWidth,0f)
-        val alsMarginTopPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginTopPercentScreenWidth,0f)
-        val alsMarginBottomPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginBottomPercentScreenWidth,0f)
+        val alsCenterVerticalOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterVerticallyOf,
+            View.NO_ID)
+        val alsCenterHorizontalOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllCenterHorizontallyOf,
+            View.NO_ID)
 
-        val alsMargin = a.getDimension(R.styleable.JJImageViewShadowClick_cllMargin,0f)
-        val alsMarginPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginPerScHeight,0f)
-        val alsMarginPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginPerScWidth,0f)
-        val alsMarginResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginResponsive,
-            NO_ID
-        )
-        val alsMarginResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginResPerScHeight,
-            NO_ID
-        )
-        val alsMarginResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginResPerScWidth,
-            NO_ID
-        )
+        val alsMarginEnd = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginEnd,0f)
+        val alsMarginStart = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginStart,0f)
+        val alsMarginTop = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginTop,0f)
+        val alsMarginBottom = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginBottom,0f)
+        val alsMarginEndPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginEndPercentScreenHeight,0f)
+        val alsMarginStartPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginStartPercentScreenHeight,0f)
+        val alsMarginTopPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginTopPercentScreenHeight,0f)
+        val alsMarginBottomPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginBottomPercentScreenHeight,0f)
+        val alsMarginEndPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginEndPercentScreenWidth,0f)
+        val alsMarginStartPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginStartPercentScreenWidth,0f)
+        val alsMarginTopPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginTopPercentScreenWidth,0f)
+        val alsMarginBottomPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginBottomPercentScreenWidth,0f)
 
-        val alsMarginEndResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginEndResponsive,
+        val alsMargin = a.getDimension(R.styleable.ImageViewShadowClick_cllMargin,0f)
+        val alsMarginPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginPerScHeight,0f)
+        val alsMarginPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginPerScWidth,0f)
+        val alsMarginResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginResponsive,
             NO_ID
         )
-        val alsMarginStartResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginStartResponsive,
+        val alsMarginResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginResPerScHeight,
             NO_ID
         )
-        val alsMarginTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginTopResponsive,
-            NO_ID
-        )
-        val alsMarginBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginBottomResponsive,
-            NO_ID
-        )
-        val alsMarginEndResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginEndResPerScHeight,
-            NO_ID
-        )
-        val alsMarginStartResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginStartResPerScHeight,
-            NO_ID
-        )
-        val alsMarginTopResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginTopResPerScHeight,
-            NO_ID
-        )
-        val alsMarginBottomResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginBottomResPerScHeight,
-            NO_ID
-        )
-        val alsMarginEndResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginEndResPerScWidth,
-            NO_ID
-        )
-        val alsMarginStartResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginStartResPerScWidth,
-            NO_ID
-        )
-        val alsMarginTopResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginTopResPerScWidth,
-            NO_ID
-        )
-        val alsMarginBottomResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginBottomResPerScWidth,
+        val alsMarginResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginResPerScWidth,
             NO_ID
         )
 
-        val alsMarginVertical = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginVertical,0f)
-        val alsMarginVerticalPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginVerticalPerScHeight,0f)
-        val alsMarginVerticalPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginVerticalPerScWidth,0f)
-        val alsMarginVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginVerticalResponsive,
+        val alsMarginEndResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginEndResponsive,
             NO_ID
         )
-        val alsMarginVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginVerticalResPerScHeight,
+        val alsMarginStartResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginStartResponsive,
             NO_ID
         )
-        val alsMarginVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginVerticalResPerScWidth,
+        val alsMarginTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginTopResponsive,
+            NO_ID
+        )
+        val alsMarginBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginBottomResponsive,
+            NO_ID
+        )
+        val alsMarginEndResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginEndResPerScHeight,
+            NO_ID
+        )
+        val alsMarginStartResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginStartResPerScHeight,
+            NO_ID
+        )
+        val alsMarginTopResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginTopResPerScHeight,
+            NO_ID
+        )
+        val alsMarginBottomResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginBottomResPerScHeight,
+            NO_ID
+        )
+        val alsMarginEndResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginEndResPerScWidth,
+            NO_ID
+        )
+        val alsMarginStartResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginStartResPerScWidth,
+            NO_ID
+        )
+        val alsMarginTopResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginTopResPerScWidth,
+            NO_ID
+        )
+        val alsMarginBottomResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginBottomResPerScWidth,
             NO_ID
         )
 
-        val alsMarginHorizontal = a.getDimension(R.styleable.JJImageViewShadowClick_cllMarginHorizontal,0f)
-        val alsMarginHorizontalPercentHeight = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginHorizontalPerScHeight,0f)
-        val alsMarginHorizontalPercentWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllMarginHorizontalPerScWidth,0f)
-        val alsMarginHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginHorizontalResponsive,
+        val alsMarginVertical = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginVertical,0f)
+        val alsMarginVerticalPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginVerticalPerScHeight,0f)
+        val alsMarginVerticalPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginVerticalPerScWidth,0f)
+        val alsMarginVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginVerticalResponsive,
             NO_ID
         )
-        val alsMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginHorizontalResPerScHeight,
+        val alsMarginVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginVerticalResPerScHeight,
             NO_ID
         )
-        val alsMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllMarginHorizontalResPerScWidth,
+        val alsMarginVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginVerticalResPerScWidth,
+            NO_ID
+        )
+
+        val alsMarginHorizontal = a.getDimension(R.styleable.ImageViewShadowClick_cllMarginHorizontal,0f)
+        val alsMarginHorizontalPercentHeight = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginHorizontalPerScHeight,0f)
+        val alsMarginHorizontalPercentWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllMarginHorizontalPerScWidth,0f)
+        val alsMarginHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginHorizontalResponsive,
+            NO_ID
+        )
+        val alsMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginHorizontalResPerScHeight,
+            NO_ID
+        )
+        val alsMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllMarginHorizontalResPerScWidth,
             NO_ID
         )
 
 
-        val alsVerticalBias = a.getFloat(R.styleable.JJImageViewShadowClick_cllVerticalBias,0.5f)
-        val alsHorizontalBias = a.getFloat(R.styleable.JJImageViewShadowClick_cllHorizontalBias,0.5f)
+        val alsVerticalBias = a.getFloat(R.styleable.ImageViewShadowClick_cllVerticalBias,0.5f)
+        val alsHorizontalBias = a.getFloat(R.styleable.ImageViewShadowClick_cllHorizontalBias,0.5f)
 
-        val alsStartToStartParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllStartToStartParent,false)
-        val alsStartToEndParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllStartToEndParent,false)
-        val alsEndToEndParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllEndToEndParent,false)
-        val alsEndToStartParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllEndToStartParent,false)
-        val alsTopToTopParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllTopToTopParent,false)
-        val alsTopToBottomParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllTopToBottomParent,false)
-        val alsBottomToBottomParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllBottomToBottomParent,false)
-        val alsBottomToTopParent = a.getBoolean(R.styleable.JJImageViewShadowClick_cllBottomToTopParent,false)
+        val alsStartToStartParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllStartToStartParent,false)
+        val alsStartToEndParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllStartToEndParent,false)
+        val alsEndToEndParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllEndToEndParent,false)
+        val alsEndToStartParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllEndToStartParent,false)
+        val alsTopToTopParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllTopToTopParent,false)
+        val alsTopToBottomParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllTopToBottomParent,false)
+        val alsBottomToBottomParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllBottomToBottomParent,false)
+        val alsBottomToTopParent = a.getBoolean(R.styleable.ImageViewShadowClick_cllBottomToTopParent,false)
 
-        val alsStartToStartOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllStartToStartOf, View.NO_ID)
-        val alsStartToEndOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllStartToEndOf, View.NO_ID)
-        val alsEndToEndOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllEndToEndOf, View.NO_ID)
-        val alsEndToStartOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllEndToStartOf, View.NO_ID)
-        val alsTopToTopOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllTopToTopOf, View.NO_ID)
-        val alsTopToBottomOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllTopToBottomOf, View.NO_ID)
-        val alsBottomToBottomOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllBottomToBottomOf, View.NO_ID)
-        val alsBottomToTopOf = a.getResourceId(R.styleable.JJImageViewShadowClick_cllBottomToTopOf, View.NO_ID)
+        val alsStartToStartOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllStartToStartOf, View.NO_ID)
+        val alsStartToEndOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllStartToEndOf, View.NO_ID)
+        val alsEndToEndOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllEndToEndOf, View.NO_ID)
+        val alsEndToStartOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllEndToStartOf, View.NO_ID)
+        val alsTopToTopOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllTopToTopOf, View.NO_ID)
+        val alsTopToBottomOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllTopToBottomOf, View.NO_ID)
+        val alsBottomToBottomOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllBottomToBottomOf, View.NO_ID)
+        val alsBottomToTopOf = a.getResourceId(R.styleable.ImageViewShadowClick_cllBottomToTopOf, View.NO_ID)
 
-        val alsHeightPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllHeightPercent,0f)
-        val alsWidthPercent = a.getFloat(R.styleable.JJImageViewShadowClick_cllWidthPercent,0f)
-        val alsHeightPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllHeightPercentScreenWidth,0f)
-        val alsWidthPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_cllWidthPercentScreenWidth,0f)
-        val alsHeightPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_cllHeightPercentScreenHeight,0f)
-        val alsWidthPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_cllWidthPercentScreenHeight,0f)
+        val alsHeightPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllHeightPercent,0f)
+        val alsWidthPercent = a.getFloat(R.styleable.ImageViewShadowClick_cllWidthPercent,0f)
+        val alsHeightPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllHeightPercentScreenWidth,0f)
+        val alsWidthPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_cllWidthPercentScreenWidth,0f)
+        val alsHeightPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_cllHeightPercentScreenHeight,0f)
+        val alsWidthPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_cllWidthPercentScreenHeight,0f)
 
-        val alsHeightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllHeightResponsive, View.NO_ID)
-        val alsWidthResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_cllWidthResponsive, View.NO_ID)
+        val alsHeightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllHeightResponsive, View.NO_ID)
+        val alsWidthResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_cllWidthResponsive, View.NO_ID)
 
-        val alsHeightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllHeightResponsivePercentScreenHeight,
+        val alsHeightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllHeightResponsivePercentScreenHeight,
             View.NO_ID)
-        val alsWidthResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllWidthResponsivePercentScreenWidth,
+        val alsWidthResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllWidthResponsivePercentScreenWidth,
             View.NO_ID)
-        val alsHeightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_cllHeightResponsivePercentScreenWidth,
+        val alsHeightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_cllHeightResponsivePercentScreenWidth,
             View.NO_ID)
-        val alsWidthResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_cllWidthResponsivePercentScreenHeight,
-            View.NO_ID)
-
-
-        val attrHeightLs = a.getLayoutDimension(R.styleable.JJImageViewShadowClick_layout_height_landscape,0)
-        val attrWidthLs = a.getLayoutDimension(R.styleable.JJImageViewShadowClick_layout_width_landscape,0)
-
-        val llsPadding = a.getDimension(R.styleable.JJImageViewShadowClick_lplPadding,-100f)
-        val llsPaddingVertical = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingVertical,-100f)
-        val llsPaddingHorizontal = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingHorizontal,-100f)
-        val llsPaddingStart = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingStart,-100f)
-        val llsPaddingEnd = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingEnd,-100f)
-        val llsPaddingBottom = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingBottom,-100f)
-        val llsPaddingTop = a.getDimension(R.styleable.JJImageViewShadowClick_lplPaddingTop,-100f)
-
-        val llsMargin = a.getDimension(R.styleable.JJImageViewShadowClick_lplMargin,-100f)
-        val llsMarginVertical = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginVertical,-100f)
-        val llsMarginHorizontal = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginHorizontal,-100f)
-        val llsMarginStart = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginStart,-100f)
-        val llsMarginEnd = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginEnd,-100f)
-        val llsMarginBottom = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginBottom,-100f)
-        val llsMarginTop = a.getDimension(R.styleable.JJImageViewShadowClick_lplMarginTop,-100f)
-
-        val llsHeightPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplHeightPercentScreenWidth,0f)
-        val llsWidthPercentScreenWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplWidthPercentScreenWidth,0f)
-        val llsHeightPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplHeightPercentScreenHeight,0f)
-        val llsWidthPercentScreenHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplWidthPercentScreenHeight,0f)
-
-        val llsHeightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplHeightResponsive, View.NO_ID)
-        val llsWidthResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplWidthResponsive, View.NO_ID)
-        val llsHeightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplHeightResponsivePercentScreenHeight,
-            View.NO_ID)
-        val llsWidthResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplWidthResponsivePercentScreenWidth,
-            View.NO_ID)
-        val llsHeightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplHeightResponsivePercentScreenWidth,
-            View.NO_ID)
-        val llsWidthResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplWidthResponsivePercentScreenHeight,
-            View.NO_ID)
-
-        val llsMarginTopPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginTopPerScHeight,0f)
-        val llsMarginLeftPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginLeftPerScHeight,0f)
-        val llsMarginRightPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginRightPerScHeight,0f)
-        val llsMarginBottomPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginBottomPerScHeight,0f)
-
-        val llsMarginTopPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginTopPerScWidth,0f)
-        val llsMarginLeftPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginLeftPerScWidth,0f)
-        val llsMarginRightPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginRightPerScWidth,0f)
-        val llsMarginBottomPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginBottomPerScWidth,0f)
-
-        val llsMarginTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginTopResponsive,
-            View.NO_ID)
-        val llsMarginLeftResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginLeftResponsive,
-            View.NO_ID)
-        val llsMarginRightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginRightResponsive,
-            View.NO_ID)
-        val llsMarginBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginBottomResponsive,
-            View.NO_ID)
-
-        val llsMarginTopResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginTopResPerScWidth,
-            View.NO_ID)
-        val llsMarginLeftResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginLeftResPerScWidth,
-            View.NO_ID)
-        val llsMarginRightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginRightResPerScWidth,
-            View.NO_ID)
-        val llsMarginBottomResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginBottomResPerScWidth,
-            View.NO_ID)
-
-        val llsMarginTopResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginTopResPerScHeight,
-            View.NO_ID)
-        val llsMarginLeftResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginLeftResPerScHeight,
-            View.NO_ID)
-        val llsMarginRightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginRightResPerScHeight,
-            View.NO_ID)
-        val llsMarginBottomResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginBottomResPerScHeight,
-            View.NO_ID)
-
-        val llsMarginPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginPercentScHeight,0f)
-        val llsMarginPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginPercentScWidth,0f)
-        val llsMarginResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginResponsive, View.NO_ID)
-        val llsMarginResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginResPerScHeight,
-            View.NO_ID)
-        val llsMarginResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginResPerScWidth,
-            View.NO_ID)
-
-        val llsMarginVerticalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginVerticalPerScHeight,0f)
-        val llsMarginVerticalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginVerticalPerScWidth,0f)
-        val llsMarginVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginVerticalResponsive,
-            View.NO_ID)
-        val llsMarginVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginVerticalResPerScWidth,
-            View.NO_ID)
-        val llsMarginVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginVerticalResPerScHeight,
-            View.NO_ID)
-
-        val llsMarginHorizontalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginHorizontalPerScHeight,0f)
-        val llsMarginHorizontalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplMarginHorizontalPerScWidth,0f)
-        val llsMarginHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginHorizontalResponsive,
-            View.NO_ID)
-        val llsMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginHorizontalResPerScWidth,
-            View.NO_ID)
-        val llsMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplMarginHorizontalResPerScHeight,
+        val alsWidthResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_cllWidthResponsivePercentScreenHeight,
             View.NO_ID)
 
 
-        val llsPaddingTopPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingTopPerScHeight,0f)
-        val llsPaddingLeftPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingLeftPerScHeight,0f)
-        val llsPaddingRightPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingRightPerScHeight,0f)
-        val llsPaddingBottomPercentScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingBottomPerScHeight,0f)
+        val attrHeightLs = a.getLayoutDimension(R.styleable.ImageViewShadowClick_layout_height_landscape,0)
+        val attrWidthLs = a.getLayoutDimension(R.styleable.ImageViewShadowClick_layout_width_landscape,0)
 
-        val llsPaddingTopPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingTopPerScWidth,0f)
-        val llsPaddingLeftPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingLeftPerScWidth,0f)
-        val llsPaddingRightPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingRightPerScWidth,0f)
-        val llsPaddingBottomPercentScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingBottomPerScWidth,0f)
+        val llsPadding = a.getDimension(R.styleable.ImageViewShadowClick_lplPadding,-100f)
+        val llsPaddingVertical = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingVertical,-100f)
+        val llsPaddingHorizontal = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingHorizontal,-100f)
+        val llsPaddingStart = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingStart,-100f)
+        val llsPaddingEnd = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingEnd,-100f)
+        val llsPaddingBottom = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingBottom,-100f)
+        val llsPaddingTop = a.getDimension(R.styleable.ImageViewShadowClick_lplPaddingTop,-100f)
 
-        val llsPaddingTopResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingTopResponsive,
-            View.NO_ID)
-        val llsPaddingLeftResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingLeftResponsive,
-            View.NO_ID)
-        val llsPaddingRightResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingRightResponsive,
-            View.NO_ID)
-        val llsPaddingBottomResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingBottomResponsive,
-            View.NO_ID)
+        val llsMargin = a.getDimension(R.styleable.ImageViewShadowClick_lplMargin,-100f)
+        val llsMarginVertical = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginVertical,-100f)
+        val llsMarginHorizontal = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginHorizontal,-100f)
+        val llsMarginStart = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginStart,-100f)
+        val llsMarginEnd = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginEnd,-100f)
+        val llsMarginBottom = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginBottom,-100f)
+        val llsMarginTop = a.getDimension(R.styleable.ImageViewShadowClick_lplMarginTop,-100f)
 
-        val llsPaddingTopResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingTopResPerScWidth,
-            View.NO_ID)
-        val llsPaddingLeftResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingLeftResPerScWidth,
-            View.NO_ID)
-        val llsPaddingRightResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingRightResPerScWidth,
-            View.NO_ID)
-        val llsPaddingBottomResponsivePercentScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingBottomResPerScWidth,
-            View.NO_ID)
+        val llsHeightPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplHeightPercentScreenWidth,0f)
+        val llsWidthPercentScreenWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplWidthPercentScreenWidth,0f)
+        val llsHeightPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplHeightPercentScreenHeight,0f)
+        val llsWidthPercentScreenHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplWidthPercentScreenHeight,0f)
 
-        val llsPaddingTopResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingTopResPerScHeight,
+        val llsHeightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplHeightResponsive, View.NO_ID)
+        val llsWidthResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplWidthResponsive, View.NO_ID)
+        val llsHeightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplHeightResponsivePercentScreenHeight,
             View.NO_ID)
-        val llsPaddingLeftResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingLeftResPerScHeight,
+        val llsWidthResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplWidthResponsivePercentScreenWidth,
             View.NO_ID)
-        val llsPaddingRightResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingRightResPerScHeight,
+        val llsHeightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplHeightResponsivePercentScreenWidth,
             View.NO_ID)
-        val llsPaddingBottomResponsivePercentScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingBottomResPerScHeight,
+        val llsWidthResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplWidthResponsivePercentScreenHeight,
             View.NO_ID)
 
-        val llsPaddingPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingPercentScHeight,0f)
-        val llsPaddingPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingPercentScWidth,0f)
-        val llsPaddingResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingResponsive,
+        val llsMarginTopPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginTopPerScHeight,0f)
+        val llsMarginLeftPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginLeftPerScHeight,0f)
+        val llsMarginRightPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginRightPerScHeight,0f)
+        val llsMarginBottomPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginBottomPerScHeight,0f)
+
+        val llsMarginTopPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginTopPerScWidth,0f)
+        val llsMarginLeftPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginLeftPerScWidth,0f)
+        val llsMarginRightPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginRightPerScWidth,0f)
+        val llsMarginBottomPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginBottomPerScWidth,0f)
+
+        val llsMarginTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginTopResponsive,
             View.NO_ID)
-        val llsPaddingResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingResPerScHeight,
+        val llsMarginLeftResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginLeftResponsive,
             View.NO_ID)
-        val llsPaddingResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingResPerScWidth,
+        val llsMarginRightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginRightResponsive,
+            View.NO_ID)
+        val llsMarginBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginBottomResponsive,
             View.NO_ID)
 
-        val llsPaddingVerticalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingVerticalPerScHeight,0f)
-        val llsPaddingVerticalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingVerticalPerScWidth,0f)
-        val llsPaddingVerticalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingVerticalResponsive,
+        val llsMarginTopResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginTopResPerScWidth,
             View.NO_ID)
-        val llsPaddingVerticalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingVerticalResPerScWidth,
+        val llsMarginLeftResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginLeftResPerScWidth,
             View.NO_ID)
-        val llsPaddingVerticalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingVerticalResPerScHeight,
+        val llsMarginRightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginRightResPerScWidth,
+            View.NO_ID)
+        val llsMarginBottomResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginBottomResPerScWidth,
             View.NO_ID)
 
-        val llsPaddingHorizontalPerScHeight = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingHorizontalPerScHeight,0f)
-        val llsPaddingHorizontalPerScWidth = a.getFloat(R.styleable.JJImageViewShadowClick_lplPaddingHorizontalPerScWidth,0f)
-        val llsPaddingHorizontalResponsive = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingHorizontalResponsive,
+        val llsMarginTopResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginTopResPerScHeight,
             View.NO_ID)
-        val llsPaddingHorizontalResPerScWidth = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingHorizontalResPerScWidth,
+        val llsMarginLeftResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginLeftResPerScHeight,
             View.NO_ID)
-        val llsPaddingHorizontalResPerScHeight = a.getResourceId(R.styleable.JJImageViewShadowClick_lplPaddingHorizontalResPerScHeight,
+        val llsMarginRightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginRightResPerScHeight,
+            View.NO_ID)
+        val llsMarginBottomResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginBottomResPerScHeight,
+            View.NO_ID)
+
+        val llsMarginPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginPercentScHeight,0f)
+        val llsMarginPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginPercentScWidth,0f)
+        val llsMarginResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginResponsive, View.NO_ID)
+        val llsMarginResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginResPerScHeight,
+            View.NO_ID)
+        val llsMarginResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginResPerScWidth,
+            View.NO_ID)
+
+        val llsMarginVerticalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginVerticalPerScHeight,0f)
+        val llsMarginVerticalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginVerticalPerScWidth,0f)
+        val llsMarginVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginVerticalResponsive,
+            View.NO_ID)
+        val llsMarginVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginVerticalResPerScWidth,
+            View.NO_ID)
+        val llsMarginVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginVerticalResPerScHeight,
+            View.NO_ID)
+
+        val llsMarginHorizontalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginHorizontalPerScHeight,0f)
+        val llsMarginHorizontalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplMarginHorizontalPerScWidth,0f)
+        val llsMarginHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginHorizontalResponsive,
+            View.NO_ID)
+        val llsMarginHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginHorizontalResPerScWidth,
+            View.NO_ID)
+        val llsMarginHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplMarginHorizontalResPerScHeight,
+            View.NO_ID)
+
+
+        val llsPaddingTopPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingTopPerScHeight,0f)
+        val llsPaddingLeftPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingLeftPerScHeight,0f)
+        val llsPaddingRightPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingRightPerScHeight,0f)
+        val llsPaddingBottomPercentScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingBottomPerScHeight,0f)
+
+        val llsPaddingTopPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingTopPerScWidth,0f)
+        val llsPaddingLeftPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingLeftPerScWidth,0f)
+        val llsPaddingRightPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingRightPerScWidth,0f)
+        val llsPaddingBottomPercentScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingBottomPerScWidth,0f)
+
+        val llsPaddingTopResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingTopResponsive,
+            View.NO_ID)
+        val llsPaddingLeftResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingLeftResponsive,
+            View.NO_ID)
+        val llsPaddingRightResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingRightResponsive,
+            View.NO_ID)
+        val llsPaddingBottomResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingBottomResponsive,
+            View.NO_ID)
+
+        val llsPaddingTopResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingTopResPerScWidth,
+            View.NO_ID)
+        val llsPaddingLeftResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingLeftResPerScWidth,
+            View.NO_ID)
+        val llsPaddingRightResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingRightResPerScWidth,
+            View.NO_ID)
+        val llsPaddingBottomResponsivePercentScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingBottomResPerScWidth,
+            View.NO_ID)
+
+        val llsPaddingTopResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingTopResPerScHeight,
+            View.NO_ID)
+        val llsPaddingLeftResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingLeftResPerScHeight,
+            View.NO_ID)
+        val llsPaddingRightResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingRightResPerScHeight,
+            View.NO_ID)
+        val llsPaddingBottomResponsivePercentScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingBottomResPerScHeight,
+            View.NO_ID)
+
+        val llsPaddingPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingPercentScHeight,0f)
+        val llsPaddingPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingPercentScWidth,0f)
+        val llsPaddingResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingResponsive,
+            View.NO_ID)
+        val llsPaddingResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingResPerScHeight,
+            View.NO_ID)
+        val llsPaddingResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingResPerScWidth,
+            View.NO_ID)
+
+        val llsPaddingVerticalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingVerticalPerScHeight,0f)
+        val llsPaddingVerticalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingVerticalPerScWidth,0f)
+        val llsPaddingVerticalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingVerticalResponsive,
+            View.NO_ID)
+        val llsPaddingVerticalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingVerticalResPerScWidth,
+            View.NO_ID)
+        val llsPaddingVerticalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingVerticalResPerScHeight,
+            View.NO_ID)
+
+        val llsPaddingHorizontalPerScHeight = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingHorizontalPerScHeight,0f)
+        val llsPaddingHorizontalPerScWidth = a.getFloat(R.styleable.ImageViewShadowClick_lplPaddingHorizontalPerScWidth,0f)
+        val llsPaddingHorizontalResponsive = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingHorizontalResponsive,
+            View.NO_ID)
+        val llsPaddingHorizontalResPerScWidth = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingHorizontalResPerScWidth,
+            View.NO_ID)
+        val llsPaddingHorizontalResPerScHeight = a.getResourceId(R.styleable.ImageViewShadowClick_lplPaddingHorizontalResPerScHeight,
             View.NO_ID)
 
         //endregion
@@ -3312,18 +3312,18 @@ open class JJImageViewShadowClick : AppCompatImageView {
 
     //region method set get
 
-    fun ssSupportLandScape(support:Boolean) : JJImageViewShadowClick {
+    fun ssSupportLandScape(support:Boolean) : ImageViewShadowClick {
         mSupportLandScape = support
         return this
     }
 
-    fun ssSupportConfigurationChanged(support:Boolean) : JJImageViewShadowClick {
+    fun ssSupportConfigurationChanged(support:Boolean) : ImageViewShadowClick {
         mConfigurationChanged = support
         return this
     }
 
 
-    fun ssClipChildrenToPath(path: Path): JJImageViewShadowClick {
+    fun ssClipChildrenToPath(path: Path): ImageViewShadowClick {
         mPathClipChildren = path
         mIsPathClosureClipChildren = false
         mIsClipInPathChildren = true
@@ -3332,7 +3332,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun ssClipAllToPath(path: Path): JJImageViewShadowClick {
+    fun ssClipAllToPath(path: Path): ImageViewShadowClick {
         mPathClipAll = path
         mIsPathClosureClipAll = false
         mIsClipInPathAll = true
@@ -3342,7 +3342,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun ssClipOutChildrenToPath(path: Path): JJImageViewShadowClick {
+    fun ssClipOutChildrenToPath(path: Path): ImageViewShadowClick {
         mPathClipChildren = path
         mIsPathClosureClipChildren = false
         mIsClipOutPathChildren = true
@@ -3352,7 +3352,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun ssClipOutAllToPath(path: Path): JJImageViewShadowClick {
+    fun ssClipOutAllToPath(path: Path): ImageViewShadowClick {
         mPathClipAll = path
         mIsPathClosureClipAll = false
         mIsClipOutPathAll = true
@@ -3361,7 +3361,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun ssClipChildrenToPath(closure:(RectF, Path)->Unit): JJImageViewShadowClick {
+    fun ssClipChildrenToPath(closure:(RectF, Path)->Unit): ImageViewShadowClick {
         mIsClipInPathChildren = true
         mIsPathClosureClipChildren = true
         mIsClipOutPathChildren = false
@@ -3370,7 +3370,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun ssClipAllToPath(closure:(RectF, Path, JJPadding)->Unit): JJImageViewShadowClick {
+    fun ssClipAllToPath(closure:(RectF, Path, JJPadding)->Unit): ImageViewShadowClick {
         mIsClipInPathAll = true
         mIsPathClosureClipAll = true
         mIsClipOutPathAll = false
@@ -3379,7 +3379,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun ssClipOutChildrenToPath(closure:(RectF, Path)->Unit): JJImageViewShadowClick {
+    fun ssClipOutChildrenToPath(closure:(RectF, Path)->Unit): ImageViewShadowClick {
         mIsClipInPathChildren = false
         mIsPathClosureClipChildren = true
         mIsClipOutPathChildren = true
@@ -3388,7 +3388,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun ssClipOutAllToPath(closure:(RectF, Path, JJPadding)->Unit): JJImageViewShadowClick {
+    fun ssClipOutAllToPath(closure:(RectF, Path, JJPadding)->Unit): ImageViewShadowClick {
         mIsClipInPathAll = false
         mIsPathClosureClipAll = true
         mIsClipOutPathAll = true
@@ -3397,7 +3397,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun disposeClipPathChildren(): JJImageViewShadowClick {
+    fun disposeClipPathChildren(): ImageViewShadowClick {
         mIsClipOutPathChildren = false
         mIsPathClosureClipChildren = false
         mIsClipChildrenEnabled = false
@@ -3405,7 +3405,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         mClosurePathClipChildren = null
         return  this
     }
-    fun disposeClipPathAll(): JJImageViewShadowClick {
+    fun disposeClipPathAll(): ImageViewShadowClick {
         mIsClipOutPathAll = false
         mIsPathClosureClipAll = false
         mIsClipAllEnabled = false
@@ -3417,7 +3417,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
 
 
 
-    fun ssIdentifier(value: Int): JJImageViewShadowClick {
+    fun ssIdentifier(value: Int): ImageViewShadowClick {
         mIdentifier = value
         return this
     }
@@ -3427,7 +3427,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun ssState(state: Int): JJImageViewShadowClick {
+    fun ssState(state: Int): ImageViewShadowClick {
         mState = state
         return this
     }
@@ -3437,7 +3437,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun ssAttribute(string:String): JJImageViewShadowClick {
+    fun ssAttribute(string:String): ImageViewShadowClick {
         mAttribute = string
         return this
     }
@@ -3445,96 +3445,96 @@ open class JJImageViewShadowClick : AppCompatImageView {
     fun ggAttribute(): String {
         return mAttribute
     }
-    fun ssIsFocusable(boolean: Boolean): JJImageViewShadowClick {
+    fun ssIsFocusable(boolean: Boolean): ImageViewShadowClick {
         isFocusable = boolean
         return this
     }
 
-    fun ssIsFocusableInTouchMode(boolean: Boolean): JJImageViewShadowClick {
+    fun ssIsFocusableInTouchMode(boolean: Boolean): ImageViewShadowClick {
         isFocusableInTouchMode = boolean
         return this
     }
 
-    fun ssImageDrawable(drawable: Drawable?): JJImageViewShadowClick {
+    fun ssImageDrawable(drawable: Drawable?): ImageViewShadowClick {
         setImageDrawable(drawable)
         return this
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun ssOutlineProvider(provider: ViewOutlineProvider): JJImageViewShadowClick {
+    fun ssOutlineProvider(provider: ViewOutlineProvider): ImageViewShadowClick {
         outlineProvider = provider
         return this
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun ssClipToOutline(boolean: Boolean): JJImageViewShadowClick {
+    fun ssClipToOutline(boolean: Boolean): ImageViewShadowClick {
         clipToOutline = boolean
         return this
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    fun ssClipBounds(rect: Rect): JJImageViewShadowClick {
+    fun ssClipBounds(rect: Rect): ImageViewShadowClick {
         clipBounds = rect
         return this
     }
 
-    fun ssImageBitmap(bitmap: Bitmap?): JJImageViewShadowClick {
+    fun ssImageBitmap(bitmap: Bitmap?): ImageViewShadowClick {
         if(bitmap != null) setImageBitmap(bitmap)
         return this
     }
 
-    fun ssImageResource(resDrawable: Int): JJImageViewShadowClick {
+    fun ssImageResource(resDrawable: Int): ImageViewShadowClick {
         setImageResource(resDrawable)
         return this
     }
 
-    fun ssOnClickListener(listener: View.OnClickListener): JJImageViewShadowClick {
+    fun ssOnClickListener(listener: View.OnClickListener): ImageViewShadowClick {
         setOnClickListener(listener)
         return this
     }
 
 
-    fun ssScaleType(scaleType: ScaleType): JJImageViewShadowClick {
+    fun ssScaleType(scaleType: ScaleType): ImageViewShadowClick {
         setScaleType(scaleType)
         return this
     }
 
-    fun ssBackgroundColor(color: Int): JJImageViewShadowClick {
+    fun ssBackgroundColor(color: Int): ImageViewShadowClick {
         setBackgroundColor(color)
         return this
     }
 
-    fun ssBackground(drawable: Drawable?): JJImageViewShadowClick {
+    fun ssBackground(drawable: Drawable?): ImageViewShadowClick {
         background = drawable
         return this
     }
 
-    fun ssPadding(padding: JJPadding): JJImageViewShadowClick {
+    fun ssPadding(padding: JJPadding): ImageViewShadowClick {
         mlpPadding = padding
         setPaddingRelative(padding.left,padding.top,padding.right,padding.bottom)
         return this
     }
-    fun ssLayerType(type: Int, paint: Paint? = null) : JJImageViewShadowClick {
+    fun ssLayerType(type: Int, paint: Paint? = null) : ImageViewShadowClick {
         setLayerType(type, paint)
         return this
     }
 
-    fun ssLayerSoftware(): JJImageViewShadowClick {
+    fun ssLayerSoftware(): ImageViewShadowClick {
         setLayerType(View.LAYER_TYPE_SOFTWARE,null)
         return this
     }
 
-    fun ssVisibility(type: Int): JJImageViewShadowClick {
+    fun ssVisibility(type: Int): ImageViewShadowClick {
         visibility = type
         return this
     }
 
-    fun ssMinimumHeight(h:Int): JJImageViewShadowClick {
+    fun ssMinimumHeight(h:Int): ImageViewShadowClick {
         minimumHeight = h
         return this
     }
 
-    fun ssMinimumWidth(w:Int): JJImageViewShadowClick {
+    fun ssMinimumWidth(w:Int): ImageViewShadowClick {
         minimumWidth = w
         return this
     }
@@ -3553,129 +3553,129 @@ open class JJImageViewShadowClick : AppCompatImageView {
     protected val mConstraintSetLandScape = ConstraintSet()
 
 
-    fun cllFloatCustomAttribute(attrName: String, value: Float): JJImageViewShadowClick {
+    fun cllFloatCustomAttribute(attrName: String, value: Float): ImageViewShadowClick {
         mConstraintSet.setFloatValue(id,attrName,value)
         return this
     }
 
-    fun cllIntCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun cllIntCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mConstraintSet.setIntValue(id,attrName,value)
         return this
     }
 
-    fun cllColorCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun cllColorCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mConstraintSet.setColorValue(id,attrName,value)
         return this
     }
 
-    fun cllStringCustomAttribute(attrName: String, value: String): JJImageViewShadowClick {
+    fun cllStringCustomAttribute(attrName: String, value: String): ImageViewShadowClick {
         mConstraintSet.setStringValue(id,attrName,value)
         return this
     }
 
-    fun cllRotation(float: Float): JJImageViewShadowClick {
+    fun cllRotation(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotation(id,float)
         return this
     }
 
-    fun cllRotationX(float: Float): JJImageViewShadowClick {
+    fun cllRotationX(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotationX(id,float)
         return this
     }
 
-    fun cllRotationY(float: Float): JJImageViewShadowClick {
+    fun cllRotationY(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotationY(id,float)
         return this
     }
 
-    fun cllTranslation(x: Float,y: Float): JJImageViewShadowClick {
+    fun cllTranslation(x: Float,y: Float): ImageViewShadowClick {
         mConstraintSet.setTranslation(id,x,y)
         return this
     }
-    fun cllTranslationX(x: Float): JJImageViewShadowClick {
+    fun cllTranslationX(x: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationX(id,x)
         return this
     }
 
-    fun cllTranslationY(y: Float): JJImageViewShadowClick {
+    fun cllTranslationY(y: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationY(id,y)
         return this
     }
 
-    fun cllTranslationZ(z: Float): JJImageViewShadowClick {
+    fun cllTranslationZ(z: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationZ(id,z)
         return this
     }
 
-    fun cllTransformPivot(x: Float, y: Float): JJImageViewShadowClick {
+    fun cllTransformPivot(x: Float, y: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivot(id,x,y)
         return this
     }
 
-    fun cllTransformPivotX(x: Float): JJImageViewShadowClick {
+    fun cllTransformPivotX(x: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivotX(id,x)
         return this
     }
 
-    fun cllTransformPivotY(y: Float): JJImageViewShadowClick {
+    fun cllTransformPivotY(y: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivotY(id,y)
         return this
     }
 
-    fun cllScaleX(x: Float): JJImageViewShadowClick {
+    fun cllScaleX(x: Float): ImageViewShadowClick {
         mConstraintSet.setScaleX(id,x)
         return this
     }
 
-    fun cllScaleY(y: Float): JJImageViewShadowClick {
+    fun cllScaleY(y: Float): ImageViewShadowClick {
         mConstraintSet.setScaleY(id,y)
         return this
     }
 
-    fun cllDimensionRatio(ratio: String): JJImageViewShadowClick {
+    fun cllDimensionRatio(ratio: String): ImageViewShadowClick {
         mConstraintSet.setDimensionRatio(id,ratio)
         return this
     }
 
-    fun cllAlpha(alpha: Float): JJImageViewShadowClick {
+    fun cllAlpha(alpha: Float): ImageViewShadowClick {
         mConstraintSet.setAlpha(id,alpha)
         return this
     }
 
 
-    fun cllApply(): JJImageViewShadowClick {
+    fun cllApply(): ImageViewShadowClick {
         mConstraintSetLandScape.applyTo(parent as ConstraintLayout)
         return this
     }
 
-    fun cllVisibilityMode(visibility: Int): JJImageViewShadowClick {
+    fun cllVisibilityMode(visibility: Int): ImageViewShadowClick {
         mConstraintSetLandScape.setVisibilityMode(id, visibility)
         return this
     }
 
-    fun cllVerticalBias(float: Float): JJImageViewShadowClick {
+    fun cllVerticalBias(float: Float): ImageViewShadowClick {
         mConstraintSetLandScape.setVerticalBias(id,float)
         return this
     }
-    fun cllHorizontalBias(float: Float): JJImageViewShadowClick {
+    fun cllHorizontalBias(float: Float): ImageViewShadowClick {
         mConstraintSetLandScape.setHorizontalBias(id,float)
         return this
     }
 
-    fun cllCenterHorizontallyOf(viewId: Int, marginStart: Int = 0, marginEnd: Int = 0): JJImageViewShadowClick {
+    fun cllCenterHorizontallyOf(viewId: Int, marginStart: Int = 0, marginEnd: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.START, marginStart)
         mConstraintSetLandScape.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.END, marginEnd)
         mConstraintSetLandScape.setHorizontalBias(id,0.5f)
         return this
     }
-    fun cllCenterVerticallyOf(viewId: Int,marginTop: Int = 0, marginBottom: Int = 0): JJImageViewShadowClick {
+    fun cllCenterVerticallyOf(viewId: Int,marginTop: Int = 0, marginBottom: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, marginTop)
         mConstraintSetLandScape.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, marginBottom)
         mConstraintSetLandScape.setVerticalBias(id,0.5f)
         return this
     }
 
-    fun cllMargins(margins: JJMargin) : JJImageViewShadowClick {
+    fun cllMargins(margins: JJMargin) : ImageViewShadowClick {
         mConstraintSetLandScape.setMargin(id, ConstraintSet.TOP,margins.top)
         mConstraintSetLandScape.setMargin(id, ConstraintSet.BOTTOM,margins.bottom)
         mConstraintSetLandScape.setMargin(id, ConstraintSet.END,margins.right)
@@ -3684,110 +3684,110 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun cllTopToTop(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllTopToTop(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun cllTopToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllTopToTopParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
         return this
     }
 
 
-    fun cllTopToBottom(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllTopToBottom(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun cllTopToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllTopToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun cllBottomToTop(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllBottomToTop(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun cllBottomToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllBottomToTopParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun cllBottomToBottom(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllBottomToBottom(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun cllBottomToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllBottomToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun cllStartToStart(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllStartToStart(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.START, margin)
         return this
     }
 
-    fun cllStartToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllStartToStartParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
         return this
     }
 
-    fun cllStartToEnd(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllStartToEnd(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.END, margin)
         return this
     }
 
-    fun cllStartToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllStartToEndParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
         return this
     }
 
-    fun cllEndToEnd(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllEndToEnd(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.END, margin)
         return this
     }
 
-    fun cllEndToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllEndToEndParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
         return this
     }
 
 
-    fun cllEndToStart(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun cllEndToStart(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.START, margin)
         return this
     }
 
-    fun cllEndToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun cllEndToStartParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSetLandScape.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
         return this
     }
 
 
-    fun cllWidth(width: Int): JJImageViewShadowClick {
+    fun cllWidth(width: Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainWidth(id, width)
         return this
     }
 
-    fun cllHeight(height: Int): JJImageViewShadowClick {
+    fun cllHeight(height: Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainHeight(id, height)
         return this
     }
 
-    fun cllPercentWidth(width: Float): JJImageViewShadowClick {
+    fun cllPercentWidth(width: Float): ImageViewShadowClick {
         mConstraintSetLandScape.constrainPercentWidth(id, width)
         return this
     }
 
-    fun cllPercentHeight(height: Float): JJImageViewShadowClick {
+    fun cllPercentHeight(height: Float): ImageViewShadowClick {
         mConstraintSetLandScape.constrainPercentHeight(id, height)
         return this
     }
 
-    fun cllCenterInParent(): JJImageViewShadowClick {
+    fun cllCenterInParent(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -3797,7 +3797,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun cllCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): JJImageViewShadowClick {
+    fun cllCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin.left)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin.right)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -3807,28 +3807,28 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun cllCenterInParentVertically(): JJImageViewShadowClick {
+    fun cllCenterInParentVertically(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSetLandScape.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInParentHorizontally(): JJImageViewShadowClick {
+    fun cllCenterInParentHorizontally(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSetLandScape.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun cllCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         mConstraintSetLandScape.setVerticalBias(id, bias)
         return this
     }
 
-    fun cllCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): JJImageViewShadowClick {
+    fun cllCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endtMargin)
         mConstraintSetLandScape.setHorizontalBias(id, bias)
@@ -3836,7 +3836,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun cllCenterInParentTopVertically(): JJImageViewShadowClick {
+    fun cllCenterInParentTopVertically(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.setVerticalBias(id, 0.5f)
@@ -3844,28 +3844,28 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun cllCenterInParentBottomVertically(): JJImageViewShadowClick {
+    fun cllCenterInParentBottomVertically(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSetLandScape.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInParentStartHorizontally(): JJImageViewShadowClick {
+    fun cllCenterInParentStartHorizontally(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSetLandScape.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInParentEndHorizontally(): JJImageViewShadowClick {
+    fun cllCenterInParentEndHorizontally(): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSetLandScape.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInTopVertically(topId: Int): JJImageViewShadowClick {
+    fun cllCenterInTopVertically(topId: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, topId, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, topId, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.setVerticalBias(id, 0.5f)
@@ -3873,39 +3873,39 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun cllCenterInBottomVertically(bottomId: Int): JJImageViewShadowClick {
+    fun cllCenterInBottomVertically(bottomId: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, bottomId, ConstraintSet.BOTTOM, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, bottomId, ConstraintSet.BOTTOM, 0)
         mConstraintSetLandScape.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInStartHorizontally(startId: Int): JJImageViewShadowClick {
+    fun cllCenterInStartHorizontally(startId: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, startId, ConstraintSet.START, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, startId, ConstraintSet.START, 0)
         mConstraintSetLandScape.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterInEndHorizontally(endId: Int): JJImageViewShadowClick {
+    fun cllCenterInEndHorizontally(endId: Int): ImageViewShadowClick {
         mConstraintSetLandScape.connect(id, ConstraintSet.START, endId, ConstraintSet.END, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, endId, ConstraintSet.END, 0)
         mConstraintSetLandScape.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun cllCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun cllCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): ImageViewShadowClick {
         mConstraintSetLandScape.centerVertically(id, topId, topSide, topMargin, bottomId, bottomSide, bottomMargin, bias)
         return this
     }
 
-    fun cllCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun cllCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): ImageViewShadowClick {
         mConstraintSetLandScape.centerHorizontally(id, startId, startSide, startMargin, endId, endSide, endMargin, bias)
         return this
     }
 
 
-    fun cllFillParent(): JJImageViewShadowClick {
+    fun cllFillParent(): ImageViewShadowClick {
         mConstraintSetLandScape.constrainWidth(id,0)
         mConstraintSetLandScape.constrainHeight(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -3915,7 +3915,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun cllFillParent(margin: JJMargin): JJImageViewShadowClick {
+    fun cllFillParent(margin: JJMargin): ImageViewShadowClick {
         mConstraintSetLandScape.constrainWidth(id,0)
         mConstraintSetLandScape.constrainHeight(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -3925,42 +3925,42 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun cllFillParentHorizontally(): JJImageViewShadowClick {
+    fun cllFillParentHorizontally(): ImageViewShadowClick {
         mConstraintSetLandScape.constrainWidth(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         return this
     }
 
-    fun cllFillParentVertically(): JJImageViewShadowClick {
+    fun cllFillParentVertically(): ImageViewShadowClick {
         mConstraintSetLandScape.constrainHeight(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         return this
     }
 
-    fun cllFillParentHorizontally(startMargin: Int, endMargin: Int): JJImageViewShadowClick {
+    fun cllFillParentHorizontally(startMargin: Int, endMargin: Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainWidth(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mConstraintSetLandScape.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endMargin)
         return this
     }
 
-    fun cllFillParentVertically(topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun cllFillParentVertically(topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainHeight(id,0)
         mConstraintSetLandScape.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mConstraintSetLandScape.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         return this
     }
 
-    fun cllVisibility(visibility: Int): JJImageViewShadowClick {
+    fun cllVisibility(visibility: Int): ImageViewShadowClick {
         mConstraintSetLandScape.setVisibility(id, visibility)
         return this
     }
 
 
 
-    fun cllElevation(elevation: Float): JJImageViewShadowClick {
+    fun cllElevation(elevation: Float): ImageViewShadowClick {
 
         mConstraintSetLandScape.setElevation(id, elevation)
 
@@ -3971,22 +3971,22 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return mConstraintSetLandScape
     }
 
-    fun cllMinWidth(w:Int): JJImageViewShadowClick {
+    fun cllMinWidth(w:Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainMinWidth(id,w)
         return this
     }
 
-    fun cllMinHeight(h:Int): JJImageViewShadowClick {
+    fun cllMinHeight(h:Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainMinHeight(id,h)
         return this
     }
 
-    fun cllMaxWidth(w:Int): JJImageViewShadowClick {
+    fun cllMaxWidth(w:Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainMaxWidth(id,w)
         return this
     }
 
-    fun cllMaxHeight(h:Int): JJImageViewShadowClick {
+    fun cllMaxHeight(h:Int): ImageViewShadowClick {
         mConstraintSetLandScape.constrainMaxHeight(id,h)
         return this
     }
@@ -4008,19 +4008,19 @@ open class JJImageViewShadowClick : AppCompatImageView {
         }
     }
 
-    fun colWidth(width: Int): JJImageViewShadowClick {
+    fun colWidth(width: Int): ImageViewShadowClick {
         setupCol()
         mCol!!.width = width
         return this
     }
 
-    fun colHeight(height: Int): JJImageViewShadowClick {
+    fun colHeight(height: Int): ImageViewShadowClick {
         setupCol()
         mCol!!.height = height
         return this
     }
 
-    fun colGravity(gravity: Int): JJImageViewShadowClick {
+    fun colGravity(gravity: Int): ImageViewShadowClick {
         setupCol()
         mCol!!.gravity = gravity
         return this
@@ -4042,31 +4042,31 @@ open class JJImageViewShadowClick : AppCompatImageView {
         }
     }
 
-    fun ablWidth(width: Int): JJImageViewShadowClick {
+    fun ablWidth(width: Int): ImageViewShadowClick {
         setupAblp()
         ablp!!.width = width
         return this
     }
 
-    fun ablHeight(height: Int): JJImageViewShadowClick {
+    fun ablHeight(height: Int): ImageViewShadowClick {
         setupAblp()
         ablp!!.height = height
         return this
     }
 
-    fun ablScrollFlags(flags: Int) : JJImageViewShadowClick {
+    fun ablScrollFlags(flags: Int) : ImageViewShadowClick {
         setupAblp()
         ablp!!.scrollFlags = flags
         return this
     }
 
-    fun ablScrollInterpolator(interpolator: Interpolator) : JJImageViewShadowClick {
+    fun ablScrollInterpolator(interpolator: Interpolator) : ImageViewShadowClick {
         setupAblp()
         ablp!!.scrollInterpolator = interpolator
         return this
     }
 
-    fun ablMargins(margins: JJMargin): JJImageViewShadowClick {
+    fun ablMargins(margins: JJMargin): ImageViewShadowClick {
         setupAblp()
         ablp!!.updateMarginsRelative(margins.left,margins.top,margins.right,margins.bottom)
         return this
@@ -4085,161 +4085,161 @@ open class JJImageViewShadowClick : AppCompatImageView {
         }
     }
 
-    fun rlWidth(width: Int): JJImageViewShadowClick {
+    fun rlWidth(width: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.width = width
         return this
     }
 
-    fun rlHeight(height: Int): JJImageViewShadowClick {
+    fun rlHeight(height: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.height = height
         return this
     }
 
-    fun rlAbove(viewId: Int): JJImageViewShadowClick {
+    fun rlAbove(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ABOVE,viewId)
         return this
     }
 
-    fun rlBelow(viewId: Int): JJImageViewShadowClick {
+    fun rlBelow(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.BELOW,viewId)
         return this
     }
 
-    fun rlAlignParentBottom(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentBottom(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,data)
         return this
     }
 
-    fun rlAlignParentTop(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentTop(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_TOP,data)
         return this
     }
 
-    fun rlAlignParentStart(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentStart(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_START,data)
         return this
     }
 
-    fun rlAlignParentEnd(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentEnd(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_END,data)
         return this
     }
 
-    fun rlAlignParentLeft(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentLeft(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_LEFT,data)
         return this
     }
 
-    fun rlAlignParentRight(value : Boolean = true): JJImageViewShadowClick {
+    fun rlAlignParentRight(value : Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,data)
         return this
     }
 
-    fun rlAlignEnd(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignEnd(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_END,viewId)
         return this
     }
 
-    fun rlAlignStart(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignStart(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_START,viewId)
         return this
     }
 
-    fun rlAlignTop(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignTop(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_TOP,viewId)
         return this
     }
 
-    fun rlAlignBottom(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignBottom(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_BOTTOM,viewId)
         return this
     }
 
 
-    fun rlAlignLeft(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignLeft(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_LEFT,viewId)
         return this
     }
 
-    fun rlAlignRight(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignRight(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_RIGHT,viewId)
         return this
     }
 
-    fun rlRightToLeft(viewId: Int): JJImageViewShadowClick {
+    fun rlRightToLeft(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.LEFT_OF,viewId)
         return this
     }
 
-    fun rlLeftToRight(viewId: Int): JJImageViewShadowClick {
+    fun rlLeftToRight(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.RIGHT_OF,viewId)
         return this
     }
 
-    fun rlStartToEnd(viewId: Int): JJImageViewShadowClick {
+    fun rlStartToEnd(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.END_OF,viewId)
         return this
     }
 
-    fun rlEndToStart(viewId: Int): JJImageViewShadowClick {
+    fun rlEndToStart(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.START_OF,viewId)
         return this
     }
 
-    fun rlCenterInParent(value:Boolean = true): JJImageViewShadowClick {
+    fun rlCenterInParent(value:Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.CENTER_IN_PARENT,data)
         return this
     }
 
-    fun rlCenterInParentVertically(value:Boolean = true): JJImageViewShadowClick {
+    fun rlCenterInParentVertically(value:Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.CENTER_VERTICAL,data)
         return this
     }
 
-    fun rlCenterInParentHorizontally(value:Boolean = true): JJImageViewShadowClick {
+    fun rlCenterInParentHorizontally(value:Boolean = true): ImageViewShadowClick {
         setupRlp()
         val data = if(value) 1 else 0
         mRlp!!.addRule(RelativeLayout.CENTER_HORIZONTAL,data)
         return this
     }
 
-    fun rlAlignBaseline(viewId: Int): JJImageViewShadowClick {
+    fun rlAlignBaseline(viewId: Int): ImageViewShadowClick {
         setupRlp()
         mRlp!!.addRule(RelativeLayout.ALIGN_BASELINE,viewId)
         return this
     }
 
-    fun rlMargins(margins: JJMargin): JJImageViewShadowClick {
+    fun rlMargins(margins: JJMargin): ImageViewShadowClick {
         setupRlp()
         mRlp!!.setMargins(margins.left,margins.top,margins.right,margins.bottom)
         return this
@@ -4252,34 +4252,34 @@ open class JJImageViewShadowClick : AppCompatImageView {
     private var mMotionConstraintSet: ConstraintSet? = null
 
 
-    fun mlVisibilityMode(visibility: Int): JJImageViewShadowClick {
+    fun mlVisibilityMode(visibility: Int): ImageViewShadowClick {
         mMotionConstraintSet?.setVisibilityMode(id, visibility)
         return this
     }
 
-    fun mlVerticalBias(float: Float): JJImageViewShadowClick {
+    fun mlVerticalBias(float: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setVerticalBias(id,float)
         return this
     }
-    fun mlHorizontalBias(float: Float): JJImageViewShadowClick {
+    fun mlHorizontalBias(float: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setHorizontalBias(id,float)
         return this
     }
 
-    fun mlCenterHorizontallyOf(viewId: Int, marginStart: Int = 0, marginEnd: Int = 0): JJImageViewShadowClick {
+    fun mlCenterHorizontallyOf(viewId: Int, marginStart: Int = 0, marginEnd: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.START, marginStart)
         mMotionConstraintSet?.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.END, marginEnd)
         mMotionConstraintSet?.setHorizontalBias(viewId,0.5f)
         return this
     }
-    fun mlCenterVerticallyOf(viewId: Int,marginTop: Int = 0, marginBottom: Int = 0): JJImageViewShadowClick {
+    fun mlCenterVerticallyOf(viewId: Int,marginTop: Int = 0, marginBottom: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, marginTop)
         mMotionConstraintSet?.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, marginBottom)
         mMotionConstraintSet?.setVerticalBias(viewId,0.5f)
         return this
     }
 
-    fun mlMargins(margins: JJMargin) : JJImageViewShadowClick {
+    fun mlMargins(margins: JJMargin) : ImageViewShadowClick {
         mMotionConstraintSet?.setMargin(id, ConstraintSet.TOP,margins.top)
         mMotionConstraintSet?.setMargin(id, ConstraintSet.BOTTOM,margins.bottom)
         mMotionConstraintSet?.setMargin(id, ConstraintSet.END,margins.right)
@@ -4288,211 +4288,211 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun mlFloatCustomAttribute(attrName: String, value: Float): JJImageViewShadowClick {
+    fun mlFloatCustomAttribute(attrName: String, value: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setFloatValue(id,attrName,value)
         return this
     }
 
-    fun mlIntCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun mlIntCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mMotionConstraintSet?.setIntValue(id,attrName,value)
         return this
     }
 
-    fun mlColorCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun mlColorCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mMotionConstraintSet?.setColorValue(id,attrName,value)
         return this
     }
 
-    fun mlStringCustomAttribute(attrName: String, value: String): JJImageViewShadowClick {
+    fun mlStringCustomAttribute(attrName: String, value: String): ImageViewShadowClick {
         mMotionConstraintSet?.setStringValue(id,attrName,value)
         return this
     }
 
-    fun mlRotation(float: Float): JJImageViewShadowClick {
+    fun mlRotation(float: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setRotation(id,float)
         return this
     }
 
-    fun mlRotationX(float: Float): JJImageViewShadowClick {
+    fun mlRotationX(float: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setRotationX(id,float)
         return this
     }
 
-    fun mlRotationY(float: Float): JJImageViewShadowClick {
+    fun mlRotationY(float: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setRotationY(id,float)
         return this
     }
 
-    fun mlTranslation(x: Float,y: Float): JJImageViewShadowClick {
+    fun mlTranslation(x: Float,y: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTranslation(id,x,y)
         return this
     }
-    fun mlTranslationX(x: Float): JJImageViewShadowClick {
+    fun mlTranslationX(x: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTranslationX(id,x)
         return this
     }
 
-    fun mlTranslationY(y: Float): JJImageViewShadowClick {
+    fun mlTranslationY(y: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTranslationY(id,y)
         return this
     }
 
-    fun mlTranslationZ(z: Float): JJImageViewShadowClick {
+    fun mlTranslationZ(z: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTranslationZ(id,z)
         return this
     }
 
-    fun mlTransformPivot(x: Float, y: Float): JJImageViewShadowClick {
+    fun mlTransformPivot(x: Float, y: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTransformPivot(id,x,y)
         return this
     }
 
-    fun mlTransformPivotX(x: Float): JJImageViewShadowClick {
+    fun mlTransformPivotX(x: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTransformPivotX(id,x)
         return this
     }
 
-    fun mlTransformPivotY(y: Float): JJImageViewShadowClick {
+    fun mlTransformPivotY(y: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setTransformPivotY(id,y)
         return this
     }
 
-    fun mlScaleX(x: Float): JJImageViewShadowClick {
+    fun mlScaleX(x: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setScaleX(id,x)
         return this
     }
 
-    fun mlScaleY(y: Float): JJImageViewShadowClick {
+    fun mlScaleY(y: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setScaleY(id,y)
         return this
     }
 
-    fun mlDimensionRatio(ratio: String): JJImageViewShadowClick {
+    fun mlDimensionRatio(ratio: String): ImageViewShadowClick {
         mMotionConstraintSet?.setDimensionRatio(id,ratio)
         return this
     }
 
-    fun mlAlpha(alpha: Float): JJImageViewShadowClick {
+    fun mlAlpha(alpha: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setAlpha(id,alpha)
         return this
     }
 
 
 
-    fun mlTopToTop(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlTopToTop(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun mlTopToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlTopToTopParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
         return this
     }
 
 
-    fun mlTopToBottomOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlTopToBottomOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun mlTopToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlTopToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun mlBottomToTopOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlBottomToTopOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.TOP, margin)
 
         return this
     }
 
-    fun mlBottomToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlBottomToTopParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
 
         return this
     }
 
-    fun mlBottomToBottomOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlBottomToBottomOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, margin)
 
         return this
     }
 
-    fun mlBottomToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlBottomToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
 
         return this
     }
 
-    fun mlStartToStartOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlStartToStartOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.START, margin)
 
         return this
     }
 
-    fun mlStartToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlStartToStartParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
 
         return this
     }
 
-    fun mlStartToEndOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlStartToEndOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.END, margin)
 
         return this
     }
 
-    fun mlStartToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlStartToEndParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
 
         return this
     }
 
-    fun mlEndToEndOf(viewId: Int, margin: Int= 0): JJImageViewShadowClick {
+    fun mlEndToEndOf(viewId: Int, margin: Int= 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.END, margin)
 
         return this
     }
 
-    fun mlEndToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlEndToEndParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
 
         return this
     }
 
 
-    fun mlEndToStartOf(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun mlEndToStartOf(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.START, margin)
         return this
     }
 
-    fun mlEndToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun mlEndToStartParent(margin: Int = 0): ImageViewShadowClick {
         mMotionConstraintSet?.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
         return this
     }
 
 
-    fun mlWidth(width: Int): JJImageViewShadowClick {
+    fun mlWidth(width: Int): ImageViewShadowClick {
         mMotionConstraintSet?.constrainWidth(id, width)
         return this
     }
 
-    fun mlHeight(height: Int): JJImageViewShadowClick {
+    fun mlHeight(height: Int): ImageViewShadowClick {
         mMotionConstraintSet?.constrainHeight(id, height)
         return this
     }
 
-    fun mlPercentWidth(width: Float): JJImageViewShadowClick {
+    fun mlPercentWidth(width: Float): ImageViewShadowClick {
         mMotionConstraintSet?.constrainPercentWidth(id, width)
         return this
     }
 
-    fun mlPercentHeight(height: Float): JJImageViewShadowClick {
+    fun mlPercentHeight(height: Float): ImageViewShadowClick {
         mMotionConstraintSet?.constrainPercentHeight(id, height)
         return this
     }
 
-    fun mlCenterInParent(): JJImageViewShadowClick {
+    fun mlCenterInParent(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -4503,7 +4503,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun mlCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): JJImageViewShadowClick {
+    fun mlCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin.left)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin.right)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -4513,7 +4513,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun mlCenterInParentVertically(): JJImageViewShadowClick {
+    fun mlCenterInParentVertically(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mMotionConstraintSet?.setVerticalBias(id, 0.5f)
@@ -4521,21 +4521,21 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun mlCenterInParentHorizontally(): JJImageViewShadowClick {
+    fun mlCenterInParentHorizontally(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mMotionConstraintSet?.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun mlCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         mMotionConstraintSet?.setVerticalBias(id, bias)
         return this
     }
 
-    fun mlCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): JJImageViewShadowClick {
+    fun mlCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endtMargin)
         mMotionConstraintSet?.setHorizontalBias(id, bias)
@@ -4543,7 +4543,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun mlCenterInParentTopVertically(): JJImageViewShadowClick {
+    fun mlCenterInParentTopVertically(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.setVerticalBias(id, 0.5f)
@@ -4551,28 +4551,28 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun mlCenterInParentBottomVertically(): JJImageViewShadowClick {
+    fun mlCenterInParentBottomVertically(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mMotionConstraintSet?.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInParentStartHorizontally(): JJImageViewShadowClick {
+    fun mlCenterInParentStartHorizontally(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mMotionConstraintSet?.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInParentEndHorizontally(): JJImageViewShadowClick {
+    fun mlCenterInParentEndHorizontally(): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mMotionConstraintSet?.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInTopVerticallyOf(viewId: Int): JJImageViewShadowClick {
+    fun mlCenterInTopVerticallyOf(viewId: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, viewId, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.setVerticalBias(id, 0.5f)
@@ -4580,39 +4580,39 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun mlCenterInBottomVerticallyOf(viewId: Int): JJImageViewShadowClick {
+    fun mlCenterInBottomVerticallyOf(viewId: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, viewId, ConstraintSet.BOTTOM, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, 0)
         mMotionConstraintSet?.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInStartHorizontallyOf(viewId: Int): JJImageViewShadowClick {
+    fun mlCenterInStartHorizontallyOf(viewId: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, viewId, ConstraintSet.START, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, viewId, ConstraintSet.START, 0)
         mMotionConstraintSet?.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterInEndHorizontallyOf(viewId: Int): JJImageViewShadowClick {
+    fun mlCenterInEndHorizontallyOf(viewId: Int): ImageViewShadowClick {
         mMotionConstraintSet?.connect(id, ConstraintSet.START, viewId, ConstraintSet.END, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, viewId, ConstraintSet.END, 0)
         mMotionConstraintSet?.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun mlCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun mlCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): ImageViewShadowClick {
         mMotionConstraintSet?.centerVertically(id, topId, topSide, topMargin, bottomId, bottomSide, bottomMargin, bias)
         return this
     }
 
-    fun mlCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun mlCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): ImageViewShadowClick {
         mMotionConstraintSet?.centerHorizontally(id, startId, startSide, startMargin, endId, endSide, endMargin, bias)
         return this
     }
 
 
-    fun mlFillParent(): JJImageViewShadowClick {
+    fun mlFillParent(): ImageViewShadowClick {
         mMotionConstraintSet?.constrainWidth(id,0)
         mMotionConstraintSet?.constrainHeight(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -4622,7 +4622,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun mlFillParent(margin: JJMargin): JJImageViewShadowClick {
+    fun mlFillParent(margin: JJMargin): ImageViewShadowClick {
         mMotionConstraintSet?.constrainWidth(id,0)
         mMotionConstraintSet?.constrainHeight(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -4632,55 +4632,55 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun mlFillParentHorizontally(): JJImageViewShadowClick {
+    fun mlFillParentHorizontally(): ImageViewShadowClick {
         mMotionConstraintSet?.constrainWidth(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         return this
     }
 
-    fun mlFillParentVertically(): JJImageViewShadowClick {
+    fun mlFillParentVertically(): ImageViewShadowClick {
         mMotionConstraintSet?.constrainHeight(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         return this
     }
 
-    fun mlFillParentHorizontally(startMargin: Int, endMargin: Int): JJImageViewShadowClick {
+    fun mlFillParentHorizontally(startMargin: Int, endMargin: Int): ImageViewShadowClick {
         mMotionConstraintSet?.constrainWidth(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mMotionConstraintSet?.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endMargin)
         return this
     }
 
-    fun mlFillParentVertically(topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun mlFillParentVertically(topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mMotionConstraintSet?.constrainHeight(id,0)
         mMotionConstraintSet?.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mMotionConstraintSet?.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         return this
     }
 
-    fun mlVisibility(visibility: Int): JJImageViewShadowClick {
+    fun mlVisibility(visibility: Int): ImageViewShadowClick {
         mMotionConstraintSet?.setVisibility(id, visibility)
         return this
     }
 
-    fun mlElevation(elevation: Float): JJImageViewShadowClick {
+    fun mlElevation(elevation: Float): ImageViewShadowClick {
         mMotionConstraintSet?.setElevation(id, elevation)
         return this
     }
 
-    fun mlApply(): JJImageViewShadowClick {
+    fun mlApply(): ImageViewShadowClick {
         mMotionConstraintSet?.applyTo(parent as ConstraintLayout)
         return this
     }
 
-    fun mlSetConstraint(cs : ConstraintSet?): JJImageViewShadowClick {
+    fun mlSetConstraint(cs : ConstraintSet?): ImageViewShadowClick {
         mMotionConstraintSet = cs
         return this
     }
 
-    fun mlDisposeConstraint(): JJImageViewShadowClick {
+    fun mlDisposeConstraint(): ImageViewShadowClick {
         mMotionConstraintSet = null
         return this
     }
@@ -4691,91 +4691,91 @@ open class JJImageViewShadowClick : AppCompatImageView {
     protected val mConstraintSet = ConstraintSet()
 
 
-    fun clFloatCustomAttribute(attrName: String, value: Float): JJImageViewShadowClick {
+    fun clFloatCustomAttribute(attrName: String, value: Float): ImageViewShadowClick {
         mConstraintSet.setFloatValue(id,attrName,value)
         return this
     }
 
-    fun clIntCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun clIntCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mConstraintSet.setIntValue(id,attrName,value)
         return this
     }
 
-    fun clColorCustomAttribute(attrName: String, value: Int): JJImageViewShadowClick {
+    fun clColorCustomAttribute(attrName: String, value: Int): ImageViewShadowClick {
         mConstraintSet.setColorValue(id,attrName,value)
         return this
     }
 
-    fun clStringCustomAttribute(attrName: String, value: String): JJImageViewShadowClick {
+    fun clStringCustomAttribute(attrName: String, value: String): ImageViewShadowClick {
         mConstraintSet.setStringValue(id,attrName,value)
         return this
     }
 
-    fun clRotation(float: Float): JJImageViewShadowClick {
+    fun clRotation(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotation(id,float)
         return this
     }
 
-    fun clRotationX(float: Float): JJImageViewShadowClick {
+    fun clRotationX(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotationX(id,float)
         return this
     }
 
-    fun clRotationY(float: Float): JJImageViewShadowClick {
+    fun clRotationY(float: Float): ImageViewShadowClick {
         mConstraintSet.setRotationY(id,float)
         return this
     }
 
-    fun clTranslation(x: Float,y: Float): JJImageViewShadowClick {
+    fun clTranslation(x: Float,y: Float): ImageViewShadowClick {
         mConstraintSet.setTranslation(id,x,y)
         return this
     }
-    fun clTranslationX(x: Float): JJImageViewShadowClick {
+    fun clTranslationX(x: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationX(id,x)
         return this
     }
 
-    fun clTranslationY(y: Float): JJImageViewShadowClick {
+    fun clTranslationY(y: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationY(id,y)
         return this
     }
 
-    fun clTranslationZ(z: Float): JJImageViewShadowClick {
+    fun clTranslationZ(z: Float): ImageViewShadowClick {
         mConstraintSet.setTranslationZ(id,z)
         return this
     }
 
-    fun clTransformPivot(x: Float, y: Float): JJImageViewShadowClick {
+    fun clTransformPivot(x: Float, y: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivot(id,x,y)
         return this
     }
 
-    fun clTransformPivotX(x: Float): JJImageViewShadowClick {
+    fun clTransformPivotX(x: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivotX(id,x)
         return this
     }
 
-    fun clTransformPivotY(y: Float): JJImageViewShadowClick {
+    fun clTransformPivotY(y: Float): ImageViewShadowClick {
         mConstraintSet.setTransformPivotY(id,y)
         return this
     }
 
-    fun clScaleX(x: Float): JJImageViewShadowClick {
+    fun clScaleX(x: Float): ImageViewShadowClick {
         mConstraintSet.setScaleX(id,x)
         return this
     }
 
-    fun clScaleY(y: Float): JJImageViewShadowClick {
+    fun clScaleY(y: Float): ImageViewShadowClick {
         mConstraintSet.setScaleY(id,y)
         return this
     }
 
-    fun clDimensionRatio(ratio: String): JJImageViewShadowClick {
+    fun clDimensionRatio(ratio: String): ImageViewShadowClick {
         mConstraintSet.setDimensionRatio(id,ratio)
         return this
     }
 
-    fun clAlpha(alpha: Float): JJImageViewShadowClick {
+    fun clAlpha(alpha: Float): ImageViewShadowClick {
         mConstraintSet.setAlpha(id,alpha)
         return this
     }
@@ -4785,61 +4785,61 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return mConstraintSet
     }
 
-    fun clMinWidth(w:Int): JJImageViewShadowClick {
+    fun clMinWidth(w:Int): ImageViewShadowClick {
         mConstraintSet.constrainMinWidth(id,w)
         return this
     }
 
-    fun clMinHeight(h:Int): JJImageViewShadowClick {
+    fun clMinHeight(h:Int): ImageViewShadowClick {
         mConstraintSet.constrainMinHeight(id,h)
         return this
     }
 
-    fun clMaxWidth(w:Int): JJImageViewShadowClick {
+    fun clMaxWidth(w:Int): ImageViewShadowClick {
         mConstraintSet.constrainMaxWidth(id,w)
         return this
     }
 
-    fun clMaxHeight(h:Int): JJImageViewShadowClick {
+    fun clMaxHeight(h:Int): ImageViewShadowClick {
         mConstraintSet.constrainMaxHeight(id,h)
         return this
     }
 
 
-    fun clVisibilityMode(mode: Int): JJImageViewShadowClick {
+    fun clVisibilityMode(mode: Int): ImageViewShadowClick {
         mConstraintSet.setVisibilityMode(id,mode)
         return this
     }
 
 
-    fun clApply(): JJImageViewShadowClick {
+    fun clApply(): ImageViewShadowClick {
         mConstraintSet.applyTo(parent as ConstraintLayout)
         return this
     }
 
-    fun clVerticalBias(float: Float): JJImageViewShadowClick {
+    fun clVerticalBias(float: Float): ImageViewShadowClick {
         mConstraintSet.setVerticalBias(id,float)
         return this
     }
-    fun clHorizontalBias(float: Float): JJImageViewShadowClick {
+    fun clHorizontalBias(float: Float): ImageViewShadowClick {
         mConstraintSet.setHorizontalBias(id,float)
         return this
     }
 
-    fun clCenterHorizontallyOf(viewId: Int): JJImageViewShadowClick {
+    fun clCenterHorizontallyOf(viewId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, viewId, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, viewId, ConstraintSet.END, 0)
         mConstraintSet.setHorizontalBias(id,0.5f)
         return this
     }
-    fun clCenterVerticallyOf(viewId: Int): JJImageViewShadowClick {
+    fun clCenterVerticallyOf(viewId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, 0)
         mConstraintSet.setVerticalBias(id,0.5f)
         return this
     }
 
-    fun clMargins(margins: JJMargin) : JJImageViewShadowClick {
+    fun clMargins(margins: JJMargin) : ImageViewShadowClick {
         mConstraintSet.setMargin(id, ConstraintSet.TOP,margins.top)
         mConstraintSet.setMargin(id, ConstraintSet.BOTTOM,margins.bottom)
         mConstraintSet.setMargin(id, ConstraintSet.END,margins.right)
@@ -4848,110 +4848,110 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun clTopToTop(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clTopToTop(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun clTopToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clTopToTopParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
         return this
     }
 
 
-    fun clTopToBottom(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clTopToBottom(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.TOP, viewId, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun clTopToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clTopToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun clBottomToTop(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clBottomToTop(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun clBottomToTopParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clBottomToTopParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin)
         return this
     }
 
-    fun clBottomToBottom(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clBottomToBottom(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.BOTTOM, viewId, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun clBottomToBottomParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clBottomToBottomParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, margin)
         return this
     }
 
-    fun clStartToStart(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clStartToStart(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.START, margin)
         return this
     }
 
-    fun clStartToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clStartToStartParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
         return this
     }
 
-    fun clStartToEnd(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clStartToEnd(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.START, viewId, ConstraintSet.END, margin)
         return this
     }
 
-    fun clStartToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clStartToEndParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
         return this
     }
 
-    fun clEndToEnd(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clEndToEnd(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.END, margin)
         return this
     }
 
-    fun clEndToEndParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clEndToEndParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin)
         return this
     }
 
 
-    fun clEndToStart(viewId: Int, margin: Int = 0): JJImageViewShadowClick {
+    fun clEndToStart(viewId: Int, margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.END, viewId, ConstraintSet.START, margin)
         return this
     }
 
-    fun clEndToStartParent(margin: Int = 0): JJImageViewShadowClick {
+    fun clEndToStartParent(margin: Int = 0): ImageViewShadowClick {
         mConstraintSet.connect(this.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, margin)
         return this
     }
 
 
-    fun clWidth(width: Int): JJImageViewShadowClick {
+    fun clWidth(width: Int): ImageViewShadowClick {
         mConstraintSet.constrainWidth(id, width)
         return this
     }
 
-    fun clHeight(height: Int): JJImageViewShadowClick {
+    fun clHeight(height: Int): ImageViewShadowClick {
         mConstraintSet.constrainHeight(id, height)
         return this
     }
 
-    fun clPercentWidth(width: Float): JJImageViewShadowClick {
+    fun clPercentWidth(width: Float): ImageViewShadowClick {
         mConstraintSet.constrainPercentWidth(id, width)
         return this
     }
 
-    fun clPercentHeight(height: Float): JJImageViewShadowClick {
+    fun clPercentHeight(height: Float): ImageViewShadowClick {
         mConstraintSet.constrainPercentHeight(id, height)
         return this
     }
 
-    fun clCenterInParent(): JJImageViewShadowClick {
+    fun clCenterInParent(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -4961,7 +4961,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun clCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): JJImageViewShadowClick {
+    fun clCenterInParent(verticalBias: Float, horizontalBias: Float, margin: JJMargin): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, margin.left)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, margin.right)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -4971,28 +4971,28 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun clCenterInParentVertically(): JJImageViewShadowClick {
+    fun clCenterInParentVertically(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSet.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInParentHorizontally(): JJImageViewShadowClick {
+    fun clCenterInParentHorizontally(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSet.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun clCenterInParentVertically(bias: Float, topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         mConstraintSet.setVerticalBias(id, bias)
         return this
     }
 
-    fun clCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): JJImageViewShadowClick {
+    fun clCenterInParentHorizontally(bias: Float, startMargin: Int, endtMargin: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endtMargin)
         mConstraintSet.setHorizontalBias(id, bias)
@@ -5000,7 +5000,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun clCenterInParentTopVertically(): JJImageViewShadowClick {
+    fun clCenterInParentTopVertically(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSet.setVerticalBias(id, 0.5f)
@@ -5008,28 +5008,28 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun clCenterInParentBottomVertically(): JJImageViewShadowClick {
+    fun clCenterInParentBottomVertically(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         mConstraintSet.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInParentStartHorizontally(): JJImageViewShadowClick {
+    fun clCenterInParentStartHorizontally(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSet.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInParentEndHorizontally(): JJImageViewShadowClick {
+    fun clCenterInParentEndHorizontally(): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         mConstraintSet.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInTopVertically(topId: Int): JJImageViewShadowClick {
+    fun clCenterInTopVertically(topId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, topId, ConstraintSet.TOP, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, topId, ConstraintSet.TOP, 0)
         mConstraintSet.setVerticalBias(id, 0.5f)
@@ -5037,39 +5037,39 @@ open class JJImageViewShadowClick : AppCompatImageView {
     }
 
 
-    fun clCenterInBottomVertically(bottomId: Int): JJImageViewShadowClick {
+    fun clCenterInBottomVertically(bottomId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.TOP, bottomId, ConstraintSet.BOTTOM, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, bottomId, ConstraintSet.BOTTOM, 0)
         mConstraintSet.setVerticalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInStartHorizontally(startId: Int): JJImageViewShadowClick {
+    fun clCenterInStartHorizontally(startId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, startId, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, startId, ConstraintSet.START, 0)
         mConstraintSet.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterInEndHorizontally(endId: Int): JJImageViewShadowClick {
+    fun clCenterInEndHorizontally(endId: Int): ImageViewShadowClick {
         mConstraintSet.connect(id, ConstraintSet.START, endId, ConstraintSet.END, 0)
         mConstraintSet.connect(id, ConstraintSet.END, endId, ConstraintSet.END, 0)
         mConstraintSet.setHorizontalBias(id, 0.5f)
         return this
     }
 
-    fun clCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun clCenterVertically(topId: Int, topSide: Int, topMargin: Int, bottomId: Int, bottomSide: Int, bottomMargin: Int, bias: Float): ImageViewShadowClick {
         mConstraintSet.centerVertically(id, topId, topSide, topMargin, bottomId, bottomSide, bottomMargin, bias)
         return this
     }
 
-    fun clCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): JJImageViewShadowClick {
+    fun clCenterHorizontally(startId: Int, startSide: Int, startMargin: Int, endId: Int, endSide: Int, endMargin: Int, bias: Float): ImageViewShadowClick {
         mConstraintSet.centerHorizontally(id, startId, startSide, startMargin, endId, endSide, endMargin, bias)
         return this
     }
 
 
-    fun clFillParent(): JJImageViewShadowClick {
+    fun clFillParent(): ImageViewShadowClick {
         mConstraintSet.constrainWidth(id,0)
         mConstraintSet.constrainHeight(id,0)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
@@ -5079,7 +5079,7 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun clFillParent(margin: JJMargin): JJImageViewShadowClick {
+    fun clFillParent(margin: JJMargin): ImageViewShadowClick {
         mConstraintSet.constrainWidth(id,0)
         mConstraintSet.constrainHeight(id,0)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, margin.top)
@@ -5089,40 +5089,40 @@ open class JJImageViewShadowClick : AppCompatImageView {
         return this
     }
 
-    fun clFillParentHorizontally(): JJImageViewShadowClick {
+    fun clFillParentHorizontally(): ImageViewShadowClick {
         mConstraintSet.constrainWidth(id,0)
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
         return this
     }
 
-    fun clFillParentVertically(): JJImageViewShadowClick {
+    fun clFillParentVertically(): ImageViewShadowClick {
         mConstraintSet.constrainHeight(id,0)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
         return this
     }
 
-    fun clFillParentHorizontally(startMargin: Int, endMargin: Int): JJImageViewShadowClick {
+    fun clFillParentHorizontally(startMargin: Int, endMargin: Int): ImageViewShadowClick {
         mConstraintSet.constrainWidth(id,0)
         mConstraintSet.connect(id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, startMargin)
         mConstraintSet.connect(id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, endMargin)
         return this
     }
 
-    fun clFillParentVertically(topMargin: Int, bottomMargin: Int): JJImageViewShadowClick {
+    fun clFillParentVertically(topMargin: Int, bottomMargin: Int): ImageViewShadowClick {
         mConstraintSet.constrainHeight(id,0)
         mConstraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, topMargin)
         mConstraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, bottomMargin)
         return this
     }
 
-    fun clVisibility(visibility: Int): JJImageViewShadowClick {
+    fun clVisibility(visibility: Int): ImageViewShadowClick {
         mConstraintSet.setVisibility(id, visibility)
         return this
     }
 
-    fun clElevation(elevation: Float): JJImageViewShadowClick {
+    fun clElevation(elevation: Float): ImageViewShadowClick {
         mConstraintSet.setElevation(id, elevation)
 
         return this
@@ -5142,31 +5142,31 @@ open class JJImageViewShadowClick : AppCompatImageView {
         }
     }
 
-    fun llWidth(width: Int): JJImageViewShadowClick {
+    fun llWidth(width: Int): ImageViewShadowClick {
         setupLlp()
         mLlp!!.width = width
         return this
     }
 
-    fun llHeight(height: Int): JJImageViewShadowClick {
+    fun llHeight(height: Int): ImageViewShadowClick {
         setupLlp()
         mLlp!!.height = height
         return this
     }
 
-    fun llWeight(weigth: Float): JJImageViewShadowClick {
+    fun llWeight(weigth: Float): ImageViewShadowClick {
         setupLlp()
         mLlp!!.weight = weigth
         return this
     }
 
-    fun llGravity(gravity: Int): JJImageViewShadowClick {
+    fun llGravity(gravity: Int): ImageViewShadowClick {
         setupLlp()
         mLlp!!.gravity = gravity
         return this
     }
 
-    fun llMargins(margins: JJMargin): JJImageViewShadowClick {
+    fun llMargins(margins: JJMargin): ImageViewShadowClick {
         setupLlp()
         mLlp!!.setMargins(margins.left,margins.top,margins.right,margins.bottom)
         return this
@@ -5185,13 +5185,13 @@ open class JJImageViewShadowClick : AppCompatImageView {
         }
     }
 
-    fun svWidth(width: Int): JJImageViewShadowClick {
+    fun svWidth(width: Int): ImageViewShadowClick {
         setupSvp()
         mSvp!!.width = width
         return this
     }
 
-    fun svHeight(height: Int): JJImageViewShadowClick {
+    fun svHeight(height: Int): ImageViewShadowClick {
         setupSvp()
         mSvp!!.height = height
         return this

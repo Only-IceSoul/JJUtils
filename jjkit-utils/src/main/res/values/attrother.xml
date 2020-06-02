@@ -450,7 +450,7 @@
 
 
     </declare-styleable>
-    <declare-styleable name="JJImageViewShadowClick">
+    <declare-styleable name="ImageViewShadowClick">
 
 
         <attr name="layout_ignoreCl"/>
