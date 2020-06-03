@@ -29,15 +29,15 @@ fun Activity.requestPermissionReadWrite(context: Activity, requestCode:Int){
         Manifest.permission.READ_EXTERNAL_STORAGE), requestCode)
 }
 
-fun Activity.checkPermission(permission: String):Boolean{
+fun Activity.isPermissionGranted(permission: String):Boolean{
     return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 }
 
-fun Activity.intentSettingsLocation(){
+fun Activity.startActivitySettingsLocation(){
     startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
 }
 
-fun Activity.intentSettingsApp(){
+fun Activity.startActivitySettingsApp(){
     val packageUri = Uri.fromParts("package", packageName, null)
     val applicationDetailsSettingsIntent = Intent()
     applicationDetailsSettingsIntent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
@@ -62,4 +62,10 @@ fun Activity.isOverlayPermissionGranted():Boolean {
         result = Settings.canDrawOverlays(this)
     }
     return result
+}
+
+fun Activity.shouldShowPermissionRationale(permission:String): Boolean{
+    var v = true
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) v = this.shouldShowRequestPermissionRationale(permission)
+    return v
 }

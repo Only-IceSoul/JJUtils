@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.PixelFormat
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -15,14 +16,17 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 
 
@@ -87,34 +91,34 @@ fun Activity.statusBarWhite(context: Activity) {
     context.window.decorView.systemUiVisibility = 0
 }
 
-fun Activity.statusBarBackgroundColor(context: Activity, bgColor: Int) {
+fun Activity.statusBarBackgroundColor(bgColor: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        context.window.statusBarColor = bgColor
+        window.statusBarColor = bgColor
     }
 }
-fun Activity.statusBarBackgroundColorRes(context: Activity, colorRes: Int) {
+fun Activity.statusBarBackgroundColorRes(colorRes: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val bgColor = ContextCompat.getColor(context,colorRes)
-        context.window.statusBarColor = bgColor
+        val bgColor = ContextCompat.getColor(this,colorRes)
+        window.statusBarColor = bgColor
     }
 }
 
-fun Activity.statusBarBackgroundColor(context: Activity, belowM: Int,aboveM: Int) {
+fun Activity.statusBarBackgroundColor(belowM: Int,aboveM: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        context.window.statusBarColor = aboveM
+        window.statusBarColor = aboveM
     }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-        context.window.statusBarColor = belowM
+        window.statusBarColor = belowM
     }
 }
 
 
-fun Activity.statusBarBackgroundColorRes(context: Activity, resBelowM: Int, resAboveM: Int) {
+fun Activity.statusBarBackgroundColorRes(resBelowM: Int, resAboveM: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val aboveM = ContextCompat.getColor(context,resAboveM)
-        context.window.statusBarColor = aboveM
+        val aboveM = ContextCompat.getColor(this,resAboveM)
+        window.statusBarColor = aboveM
     }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-        val belowM = ContextCompat.getColor(context,resBelowM)
-        context.window.statusBarColor = belowM
+        val belowM = ContextCompat.getColor(this,resBelowM)
+        window.statusBarColor = belowM
     }
 }
 
@@ -148,3 +152,64 @@ fun Activity.SoftInputModeResize(){
     window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 }
 
+
+
+fun Activity.addViewToWindowFullScreen(v: View){
+    val wm = getSystemService(AppCompatActivity.WINDOW_SERVICE) as WindowManager
+    val params = WindowManager.LayoutParams()
+    params.type =  WindowManager.LayoutParams.TYPE_APPLICATION_PANEL
+    params.flags = WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+    params.format = PixelFormat.TRANSLUCENT
+    params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+    wm.addView(v, params)
+}
+
+fun Activity.toastShort(msg:String){
+    Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.toastLong(msg:String){
+    Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
+}
+
+fun Activity.toastShort(res:Int){
+    Toast.makeText(this,res, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.toastLong(res:Int){
+    Toast.makeText(this,res, Toast.LENGTH_LONG).show()
+}
+
+fun Activity.alert(msg:String){
+    MaterialAlertDialogBuilder(this)
+        .setMessage(msg)
+        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }.create()
+        .show()
+}
+
+fun Activity.alert(res:Int){
+    MaterialAlertDialogBuilder(this)
+        .setMessage(resources.getString(res))
+        .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }.create()
+        .show()
+}
+
+fun Activity.alert(msg:String,onClick:()->Unit){
+    MaterialAlertDialogBuilder(this)
+        .setMessage(msg)
+        .setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+            onClick.invoke()
+        }.create()
+        .show()
+}
+
+fun Activity.alert(res:Int,onClick: () -> Unit){
+    MaterialAlertDialogBuilder(this)
+        .setMessage(resources.getString(res))
+        .setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+            onClick.invoke()
+        }.create()
+        .show()
+}
