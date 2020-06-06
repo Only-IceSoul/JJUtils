@@ -16,17 +16,20 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     private var mProgressViewCreator : ((Context)-> View)? = null
     private var mErrorViewCreator : ((Context)-> View)? = null
     private var mBindCallback: ((T?,View,Int)->Unit)? = null
+    private var mBindProgressCallback: (()->Unit)? = null
+    private var mBindErrorCallback: (()->Unit)? = null
 
     private var mMemoryPercentLimit = 75
     private var mShowErrorView = false
     private var mIsAddedError = false
     private var mIsErrorEnabled = false
+    private var mIsFetchMoreEnabled = false
 
-    //if last is null calling fetch more
+    //if last is null calling fetch more if enabled, default false
     override fun getItemViewType(position: Int): Int {
         val value = if(position == items.size - 1 && items.last() == null && mShowErrorView) 2
         else if(position == items.size - 1 && items.last() == null)  1 else 0
-        if(value == 1) mFetchMoreCallback?.invoke()
+        if(value == 1 && mIsFetchMoreEnabled) mFetchMoreCallback?.invoke()
         return value
     }
 
@@ -60,15 +63,29 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
             val c = items[position]
             mBindCallback?.invoke(c,holder.view,position)
         }
+        if(holder is ViewLoad){
+            mBindProgressCallback?.invoke()
+        }
+        if (holder is ViewError){
+            mBindErrorCallback?.invoke()
+        }
     }
 
+    fun setIsFetchMoreEnabled(boolean: Boolean): JJRecyclerAdapter<T>{
+        mIsFetchMoreEnabled = boolean
+        return this
+    }
+
+    fun getIsFetchMoreEnabled():Boolean{
+        return mIsFetchMoreEnabled
+    }
 
     fun setToken(num:Int) : JJRecyclerAdapter<T> {
          mToken = num
         return this
     }
 
-    fun getToker():Int{
+    fun getToken():Int{
         return mToken
     }
 
@@ -81,6 +98,14 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         return this
     }
 
+    fun setOnBindProgressCallback(bind: ()->Unit): JJRecyclerAdapter<T> {
+        mBindProgressCallback =  bind
+        return this
+    }
+    fun setOnBindErrorCallback(bind: ()->Unit): JJRecyclerAdapter<T> {
+        mBindErrorCallback =  bind
+        return this
+    }
     fun setErrorViewCreator(creator:(Context)->View): JJRecyclerAdapter<T> {
         mErrorViewCreator = creator
         return this
@@ -149,14 +174,12 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     }
 
     //u need override equals for a better search
-    private var mThreadRemove : Thread? = null
     fun findUpdateRemovedAsync(context: Activity, obj: T, token: Int = 0){
         if(isMemoryAvailable() && mToken == token) {
-            mThreadRemove = Thread {
+            val tr = Thread {
                 try {
                     var foundIndex = -1
                     items.forEachIndexed { index, t ->
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         if (t != null) {
                             if (t == obj) {
                                 foundIndex = index
@@ -165,9 +188,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                         }
                     }
                     if (foundIndex >= 0) {
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         items.removeAt(foundIndex)
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         context.runOnUiThread {
                             notifyItemRemoved(foundIndex)
                         }
@@ -175,25 +196,23 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                 } catch (e: InterruptedException) {
                     Log.e("JJKit", "JJRecyclerAdapter:findUpdateRemovedAsync $e")
                 } finally {
-                    mThreadRemove?.interrupt()
+                    Thread.currentThread().interrupt()
                 }
             }
-            mThreadRemove?.priority = 4
-            mThreadRemove?.start()
+            tr.priority = 4
+            tr.start()
         }else{
             if(!mIsAddedError) addError()
         }
     }
 
     //u need override equals for a better search or wrong item can be eliminated sample: id == id
-    private var mThreadModified : Thread? = null
     fun findUpdateModifiedAsync(context: Activity, obj: T, token: Int = 0){
         if(isMemoryAvailable() && mToken == token){
-             mThreadModified = Thread{
+           val  tr = Thread{
                 try {
                     var foundIndex = -1
                     items.forEachIndexed { index, t ->
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         if (t != null) {
                             if (t == obj) {
                                 foundIndex = index
@@ -202,9 +221,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                         }
                     }
                     if (foundIndex >= 0) {
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         items[foundIndex] = obj
-                        if(mThreadRemove?.isInterrupted == true) return@Thread
                         context.runOnUiThread {
                             notifyItemChanged(foundIndex)
                         }
@@ -212,11 +229,11 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                 }catch (e:InterruptedException){
                     Log.e("JJKit","JJRecyclerAdapter:findUpdateModifiedAsync $e")
                 }finally {
-                    mThreadModified?.interrupt()
+                    Thread.currentThread().interrupt()
                 }
             }
-            mThreadModified?.priority = 4
-            mThreadModified?.start()
+            tr.priority = 4
+            tr.start()
         }else{
             if(!mIsAddedError) addError()
         }
@@ -227,15 +244,12 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
             val position = items.size - 1
             if(items[position] == null){
                 items.removeAt(position)
+                mShowErrorView = false
+                mIsAddedError = false
                 notifyItemRemoved(position)
+
             }
         }
-    }
-
-    fun interruptAllThreads(){
-          mThreadModified?.interrupt()
-        mThreadRemove?.interrupt()
-
     }
 
     fun isErrorEnabled(boolean: Boolean) : JJRecyclerAdapter<T>{
@@ -243,6 +257,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         return this
     }
 
+    //error when out memory, but can be used for fetch error
     fun addError(){
         if(mIsErrorEnabled){
             removeLastIfNull()
