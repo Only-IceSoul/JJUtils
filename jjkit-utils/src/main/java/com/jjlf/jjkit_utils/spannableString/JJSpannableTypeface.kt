@@ -5,7 +5,7 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.text.style.MetricAffectingSpan
 
-class JJTypefaceSpannable(private val typeface: Typeface) : MetricAffectingSpan() {
+class JJSpannableTypeface(private val typeface: Typeface) : MetricAffectingSpan() {
 
     override fun updateDrawState(ds: TextPaint) {
         applyCustomTypeFace(ds, typeface)

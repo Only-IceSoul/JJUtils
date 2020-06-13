@@ -9,8 +9,8 @@ class JJInputFilterWordCharacter : InputFilter {
         if (cs == "") { // for backspace
             return null
         }
-        return if (cs.toString().matches("[\\w]".toRegex())) {
-            null
-        } else ""
+        return if (cs.toString().matches("[^\\w]".toRegex())) {
+            ""
+        } else null
     }
 }

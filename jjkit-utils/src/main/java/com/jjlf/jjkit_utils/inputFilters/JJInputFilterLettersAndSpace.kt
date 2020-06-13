@@ -9,8 +9,8 @@ class JJInputFilterLettersAndSpace : InputFilter {
         if (cs == "") { // for backspace
             return null
         }
-        return if (cs.toString().matches("[a-zA-Z ]".toRegex())) {
-            null
-        } else ""
+        return if (cs.toString().matches("[^a-zA-Z ]".toRegex())) {
+            ""
+        } else null
     }
 }

@@ -20,6 +20,7 @@ fun TextView.isEllipsized():Boolean{
 
 
 //call when height and width has value (Activity.onAttachedToWindow or TextView.post)
+//check is text is overflow
 fun TextView.isContentClippedHeight(): Int {
     val layout = this.layout ?: return -1
     val h = this.height - (this.paddingBottom + this.paddingTop)

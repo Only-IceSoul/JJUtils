@@ -20,15 +20,15 @@ object JJUtil {
         var count = 1
         var newStr = ""
         for(i in str.indices) {
-            if(count%2 == 0){
-                newStr += str[i].toLowerCase()
+            newStr += if(count%2 == 0){
+                str[i].toLowerCase()
             }else{
-                newStr += str[i]
+                str[i]
             }
             count++
         }
 
-        return newStr;
+        return newStr
 
     }
 

@@ -144,13 +144,25 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
 
     fun insert(list: List<T?>, token:Int = 0){
         if(isMemoryAvailable() && token == mToken) {
+            if(list.isNotEmpty()) {
                 val posStart = items.size
                 items.addAll(list)
                 notifyItemRangeInserted(posStart, list.size)
+            }
         }else{
             if(!mIsAddedError) addError()
         }
     }
+
+    fun insert(obj: T, token:Int = 0){
+        if(isMemoryAvailable() && token == mToken) {
+            items.add(obj)
+            notifyItemInserted(items.size)
+        }else{
+            if(!mIsAddedError) addError()
+        }
+    }
+
 
     fun insertToIndex(index: Int, obj: T, token : Int = 0){
         if(isMemoryAvailable() && token == mToken) {
@@ -174,8 +186,8 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     }
 
     //u need override equals for a better search
-    fun findUpdateRemovedAsync(context: Activity, obj: T, token: Int = 0){
-        if(isMemoryAvailable() && mToken == token) {
+    fun findRemovedAsync(context: Activity, obj: T, token: Int = 0){
+        if(mToken == token) {
             val tr = Thread {
                 try {
                     var foundIndex = -1
@@ -192,18 +204,18 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                         context.runOnUiThread {
                             notifyItemRemoved(foundIndex)
                         }
+                    }else{
+                        Log.e("JJKit", "JJRecyclerAdapter:findRemovedAsync item not found")
                     }
                 } catch (e: InterruptedException) {
-                    Log.e("JJKit", "JJRecyclerAdapter:findUpdateRemovedAsync $e")
+                    Log.e("JJKit", "JJRecyclerAdapter:findRemovedAsync $e")
                 } finally {
                     Thread.currentThread().interrupt()
                 }
             }
             tr.priority = 4
             tr.start()
-        }else{
-            if(!mIsAddedError) addError()
-        }
+        }else Log.e("JJKit", "JJRecyclerAdapter:findRemovedAsync token invalid")
     }
 
     //u need override equals for a better search or wrong item can be eliminated sample: id == id
