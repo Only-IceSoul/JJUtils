@@ -81,14 +81,14 @@ fun Activity.showKeyboard(focus:View){
 }
 
 
-fun Activity.statusBarBlack(context: Activity) {
+fun Activity.statusBarBlack() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        context.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 }
 
-fun Activity.statusBarWhite(context: Activity) {
-    context.window.decorView.systemUiVisibility = 0
+fun Activity.statusBarWhite() {
+    window.decorView.systemUiVisibility = 0
 }
 
 fun Activity.statusBarBackgroundColor(bgColor: Int) {
