@@ -308,3 +308,13 @@ fun Bitmap.RGB565toARGB888() : Bitmap {
     result.setPixels(pixels, 0, result.width, 0, 0, result.width, result.height)
     return result
 }
+
+fun Bitmap.toByteArrayJPEG(quality:Int) : ByteArray?{
+    val baos = ByteArrayOutputStream()
+    return if( compress(Bitmap.CompressFormat.JPEG, quality, baos)) baos.toByteArray() else null
+}
+
+fun Bitmap.toByteArrayPNG() : ByteArray?{
+    val baos = ByteArrayOutputStream()
+    return if(compress(Bitmap.CompressFormat.PNG, 100, baos)) baos.toByteArray() else null
+}

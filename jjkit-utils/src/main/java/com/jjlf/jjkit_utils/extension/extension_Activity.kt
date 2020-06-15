@@ -9,7 +9,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -26,6 +28,7 @@ import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 
@@ -96,12 +99,6 @@ fun Activity.statusBarBackgroundColor(bgColor: Int) {
         window.statusBarColor = bgColor
     }
 }
-fun Activity.statusBarBackgroundColorRes(colorRes: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val bgColor = ContextCompat.getColor(this,colorRes)
-        window.statusBarColor = bgColor
-    }
-}
 
 fun Activity.statusBarBackgroundColor(belowM: Int,aboveM: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -111,16 +108,6 @@ fun Activity.statusBarBackgroundColor(belowM: Int,aboveM: Int) {
     }
 }
 
-
-fun Activity.statusBarBackgroundColorRes(resBelowM: Int, resAboveM: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val aboveM = ContextCompat.getColor(this,resAboveM)
-        window.statusBarColor = aboveM
-    }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-        val belowM = ContextCompat.getColor(this,resBelowM)
-        window.statusBarColor = belowM
-    }
-}
 
 @Suppress("DEPRECATION")
 fun Activity.getOverlayTypeCompact() : Int {
@@ -212,4 +199,15 @@ fun Activity.alert(res:Int,onClick: () -> Unit){
             onClick.invoke()
         }.create()
         .show()
+}
+
+
+fun Activity.getColorCompat(resId:Int): Int {
+    return ContextCompat.getColor(this, resId)
+}
+fun Activity.getDrawableCompat(resId:Int): Drawable? {
+    return ContextCompat.getDrawable(this, resId)
+}
+fun Activity.getFontCompat(resId:Int): Typeface? {
+    return ResourcesCompat.getFont(this,resId)
 }
