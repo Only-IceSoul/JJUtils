@@ -41,11 +41,11 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
                 holder = ViewHolder(v)
             }
             1 -> {
-                val view = mProgressViewCreator!!.invoke(parent.context)
+                val view = mProgressViewCreator?.invoke(parent.context) ?: View(parent.context)
                 holder = ViewLoad(view)
             }
             2 -> {
-                val v = mErrorViewCreator!!.invoke(parent.context)
+                val v = mErrorViewCreator?.invoke(parent.context) ?: View(parent.context)
                 holder = ViewError(v)
             }
         }

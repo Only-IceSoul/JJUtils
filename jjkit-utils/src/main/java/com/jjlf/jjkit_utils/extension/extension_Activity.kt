@@ -20,8 +20,12 @@ import android.provider.Settings
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
@@ -99,6 +103,13 @@ fun Activity.statusBarBackgroundColor(bgColor: Int) {
         window.statusBarColor = bgColor
     }
 }
+
+fun Activity.statusBarBackgroundColorAboveM(bgColor: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        window.statusBarColor = bgColor
+    }
+}
+
 
 fun Activity.statusBarBackgroundColor(belowM: Int,aboveM: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -210,4 +221,34 @@ fun Activity.getDrawableCompat(resId:Int): Drawable? {
 }
 fun Activity.getFontCompat(resId:Int): Typeface? {
     return ResourcesCompat.getFont(this,resId)
+}
+
+
+
+fun Activity.getRawView(id:Int): View {
+    return findViewById<View>(id)
+}
+
+fun  Activity.getTextView(id:Int): TextView {
+    return findViewById<TextView>(id)
+}
+
+fun  Activity.getImageView(id:Int): ImageView {
+    return findViewById<ImageView>(id)
+}
+
+fun Activity.getButton(id:Int): Button {
+    return findViewById<Button>(id)
+}
+
+fun <T: View> Activity.getView(id:Int): T {
+    return findViewById(id)
+}
+
+fun <T: View> Activity.getView(parent:Int,child:Int): T {
+    return findViewById<ViewGroup>(parent).findViewById(child) as T
+}
+
+fun <T: View> Activity.getView(one:Int,two:Int,three:Int): T {
+    return findViewById<ViewGroup>(one).findViewById<ViewGroup>(two).findViewById(three) as T
 }

@@ -1,10 +1,23 @@
 package com.jjlf.jjkit_utils
 
 import android.view.View
+import java.security.SecureRandom
 import java.util.*
 import kotlin.random.Random
 
 object JJUtil {
+
+    private val rand =  SecureRandom()
+
+    fun autoId() : String {
+        val builder =  StringBuilder()
+        val maxRandom = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".length
+        for(i in 0 until 20) {
+            builder.append("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"[rand.nextInt(maxRandom)])
+        }
+        return builder.toString()
+    }
+
 
     fun generateUID(extraSize: Int):String{
         val   ds = Date().time.toString()

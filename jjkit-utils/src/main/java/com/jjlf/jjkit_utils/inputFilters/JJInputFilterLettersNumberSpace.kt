@@ -9,7 +9,7 @@ class JJInputFilterLettersNumberSpace : InputFilter {
         if (cs == "") { // for backspace
             return null
         }
-        return if (cs.toString().matches("[^a-zA-Z0-9 ]".toRegex())) {
+        return if (cs.toString().matches("[^a-zA-Z0-9\\u00f1\\u00d1 ]".toRegex())) {
             ""
         } else null
     }
