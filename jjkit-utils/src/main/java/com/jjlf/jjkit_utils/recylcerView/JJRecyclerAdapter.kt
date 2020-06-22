@@ -254,12 +254,13 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     fun removeLastIfNull(token:Int = 0){
         if(token == mToken){
             val position = items.size - 1
-            if(items[position] == null){
-                items.removeAt(position)
-                mShowErrorView = false
-                mIsAddedError = false
-                notifyItemRemoved(position)
-
+            if(position >= 0) {
+                if (items[position] == null) {
+                    items.removeAt(position)
+                    mShowErrorView = false
+                    mIsAddedError = false
+                    notifyItemRemoved(position)
+                }
             }
         }
     }

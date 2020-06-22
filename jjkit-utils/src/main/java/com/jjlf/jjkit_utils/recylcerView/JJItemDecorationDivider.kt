@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.graphics.drawable.InsetDrawable
 import android.view.View
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.jjlf.jjkit_layoututils.JJPadding
@@ -13,6 +14,11 @@ class JJItemDecorationDivider(context: Context,orientation:Int) : DividerItemDec
 
     private val mOri = orientation
     private var mOffset = 0
+
+    companion object {
+        const val VERTICAL = LinearLayout.VERTICAL
+        const val HORIZONTAL = LinearLayout.HORIZONTAL
+    }
 
     init {
         if(mOri == VERTICAL) mOffset = drawable?.intrinsicHeight ?: 0
