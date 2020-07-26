@@ -37,6 +37,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 
 
+var Activity.MATCH_PARENT: Int
+    get() = -1
+    set(value) { }
+
+var Activity.WRAP_CONTENT: Int
+    get() = -2
+    set(value) { }
+
 fun Activity.addViewToWindow(view: View, params: WindowManager.LayoutParams){
     val wm = this.getSystemService(AppCompatActivity.WINDOW_SERVICE) as WindowManager
     wm.addView(view, params)
@@ -80,6 +88,11 @@ fun Activity.removeKeyboard(){
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     val cf = this.currentFocus ?:  View(this)
     imm.hideSoftInputFromWindow(cf.windowToken, 0)
+}
+
+fun Activity.removeKeyboard(focus:View){
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(focus.windowToken, 0)
 }
 
 fun Activity.showKeyboard(focus:View){
