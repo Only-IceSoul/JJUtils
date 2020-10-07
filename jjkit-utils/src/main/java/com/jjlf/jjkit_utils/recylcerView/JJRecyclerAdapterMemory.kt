@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mToken = 0
 
@@ -19,8 +19,10 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     private var mBindProgressCallback: (()->Unit)? = null
     private var mBindErrorCallback: (()->Unit)? = null
 
+    private var mMemoryPercentLimit = 75
     private var mShowErrorView = false
     private var mIsAddedError = false
+    private var mIsErrorEnabled = false
     private var mIsFetchMoreEnabled = false
 
     //if last is null calling fetch more if enabled, default false
@@ -69,7 +71,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         }
     }
 
-    fun setIsFetchMoreEnabled(boolean: Boolean): JJRecyclerAdapter<T>{
+    fun setIsFetchMoreEnabled(boolean: Boolean): JJRecyclerAdapterMemory<T>{
         mIsFetchMoreEnabled = boolean
         return this
     }
@@ -78,7 +80,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         return mIsFetchMoreEnabled
     }
 
-    fun setToken(num:Int) : JJRecyclerAdapter<T> {
+    fun setToken(num:Int) : JJRecyclerAdapterMemory<T> {
          mToken = num
         return this
     }
@@ -87,43 +89,47 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         return mToken
     }
 
-    fun setViewCreator(creator:(Context)->View): JJRecyclerAdapter<T> {
+    fun setViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
          mViewCreator = creator
          return this
     }
-    fun setProgressViewCreator(creator:(Context)->View): JJRecyclerAdapter<T> {
+    fun setProgressViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
         mProgressViewCreator = creator
         return this
     }
 
-    fun setOnBindProgressCallback(bind: ()->Unit): JJRecyclerAdapter<T> {
+    fun setOnBindProgressCallback(bind: ()->Unit): JJRecyclerAdapterMemory<T> {
         mBindProgressCallback =  bind
         return this
     }
-    fun setOnBindErrorCallback(bind: ()->Unit): JJRecyclerAdapter<T> {
+    fun setOnBindErrorCallback(bind: ()->Unit): JJRecyclerAdapterMemory<T> {
         mBindErrorCallback =  bind
         return this
     }
-    fun setErrorViewCreator(creator:(Context)->View): JJRecyclerAdapter<T> {
+    fun setErrorViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
         mErrorViewCreator = creator
         return this
     }
 
-    fun setOnBindCallback(bind: (item:T?,View,position:Int)->Unit): JJRecyclerAdapter<T> {
+    fun setOnBindCallback(bind: (item:T?,View,position:Int)->Unit): JJRecyclerAdapterMemory<T> {
         mBindCallback = bind
         return this
     }
 
-    fun setFetchMoreCallback(callback: ()->Unit) : JJRecyclerAdapter<T> {
+    fun setFetchMoreCallback(callback: ()->Unit) : JJRecyclerAdapterMemory<T> {
         mFetchMoreCallback = callback
         return this
     }
 
 
     fun newData(list: List<T?>, token:Int = 0){
-        items.clear()
-        items.addAll(list)
-        notifyDataSetChanged()
+        if(isMemoryAvailable() && token == mToken){
+                items.clear()
+                items.addAll(list)
+                notifyDataSetChanged()
+        }else{
+            if(!mIsAddedError) addError()
+        }
     }
 
     fun getListFilteredNotRepeatAsync(list: List<T?>, result: (MutableList<T?>)->Unit){
@@ -137,27 +143,39 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
     }
 
     fun insert(list: List<T?>, token:Int = 0){
+        if(isMemoryAvailable() && token == mToken) {
             if(list.isNotEmpty()) {
                 val posStart = items.size
                 items.addAll(list)
                 notifyItemRangeInserted(posStart, list.size)
             }
-
+        }else{
+            if(!mIsAddedError) addError()
+        }
     }
 
     fun insert(obj: T, token:Int = 0){
+        if(isMemoryAvailable() && token == mToken) {
             items.add(obj)
             notifyItemInserted(items.size)
+        }else{
+            if(!mIsAddedError) addError()
+        }
     }
 
+
     fun insertToIndex(index: Int, obj: T, token : Int = 0){
+        if(isMemoryAvailable() && token == mToken) {
             items.add(index,obj)
             notifyItemInserted(index)
+        }
     }
 
     fun updateToIndex(index:Int,obj: T,token: Int=0){
+        if(isMemoryAvailable() && token == mToken) {
             items[index] = obj
             notifyItemChanged(index)
+        }
     }
 
     fun removeAt(index: Int,token: Int = 0){
@@ -202,6 +220,7 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
 
     //u need override equals for a better search or wrong item can be eliminated sample: id == id
     fun findUpdateModifiedAsync(context: Activity, obj: T, token: Int = 0){
+        if(isMemoryAvailable() && mToken == token){
            val  tr = Thread{
                 try {
                     var foundIndex = -1
@@ -227,6 +246,9 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
             }
             tr.priority = 4
             tr.start()
+        }else{
+            if(!mIsAddedError) addError()
+        }
     }
 
     fun removeLastIfNull(token:Int = 0){
@@ -243,22 +265,32 @@ class JJRecyclerAdapter<T>(private val items: MutableList<T?> = mutableListOf())
         }
     }
 
-
+    fun isErrorEnabled(boolean: Boolean) : JJRecyclerAdapterMemory<T>{
+        mIsErrorEnabled = boolean
+        return this
+    }
 
     //error when out memory, but can be used for fetch error
     fun addError(){
-        removeLastIfNull()
-        items.add(null)
-        mShowErrorView = true
-        mIsAddedError = true
-        notifyItemInserted(items.size - 1)
-
+        if(mIsErrorEnabled){
+            removeLastIfNull()
+            items.add(null)
+            mShowErrorView = true
+            mIsAddedError = true
+            notifyItemInserted(items.size - 1)
+        }
     }
 
+    private fun isMemoryAvailable(): Boolean{
+        val runtime = Runtime.getRuntime()
+        val currentPercent = ((runtime.totalMemory() - runtime.freeMemory()) * 100) / runtime.maxMemory()
+        return currentPercent < mMemoryPercentLimit
+    }
 
     fun getList(): MutableList<T?>{
         return items
     }
+
 
 
     class ViewLoad(val view: View) : RecyclerView.ViewHolder(view)
