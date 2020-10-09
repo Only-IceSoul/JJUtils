@@ -6,7 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jjlf.jjkit_layoututils.JJMargin
 
 
-class JJItemDecorationMargin(private val offSet: JJMargin) : RecyclerView.ItemDecoration() {
+class JJItemDecorationMargin(private var offSet: JJMargin) : RecyclerView.ItemDecoration() {
+
+    fun setMargin(margin:JJMargin): JJItemDecorationMargin{
+        offSet = margin
+        return this
+    }
 
     override fun getItemOffsets(
         outRect: Rect, view: View, parent: RecyclerView,
