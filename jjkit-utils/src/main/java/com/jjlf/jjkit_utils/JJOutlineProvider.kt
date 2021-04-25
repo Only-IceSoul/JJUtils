@@ -177,7 +177,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
             mOffsetX = if(mOffsetX < 0f) 0f else if (mOffsetX > 1f) 1f else mOffsetX
             mOffsetY = if(mOffsetY < 0f) 0f else if (mOffsetY > 1f) 1f else mOffsetY
             val ox = mOffsetX * mRect.width()
-            val oy = mOffsetX * mRect.height()
+            val oy = mOffsetY * mRect.height()
             mRect.offset(ox + mOffsetPlusX, oy + mOffsetPlusY)
         }else{
             mRect.offset(mOffsetX, mOffsetY)

@@ -269,7 +269,7 @@ class JJColorDrawable : Drawable() {
             mOffsetX = if(mOffsetX < 0f) 0f else if (mOffsetX > 1f) 1f else mOffsetX
             mOffsetY = if(mOffsetY < 0f) 0f else if (mOffsetY > 1f) 1f else mOffsetY
             val ox = mOffsetX * mBaseRect.width()
-            val oy = mOffsetX * mBaseRect.height()
+            val oy = mOffsetY * mBaseRect.height()
             mRect.offset(ox + mOffsetPlusX, oy + mOffsetPlusY)
         }else{
             mRect.offset(mOffsetX, mOffsetY)
