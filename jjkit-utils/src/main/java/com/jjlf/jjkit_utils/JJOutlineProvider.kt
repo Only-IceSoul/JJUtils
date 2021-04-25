@@ -24,6 +24,8 @@ class JJOutlineProvider : ViewOutlineProvider() {
     private var mScaleY = -1f
     private var mOffsetY = 0f
     private var mOffsetX = 0f
+    private var mOffsetPlusY = 0f
+    private var mOffsetPlusX = 0f
     private var mAlpha = 0.99f
     private var mPath = Path()
     private val mRect = RectF()
@@ -32,7 +34,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
     private var mSetupPath: ((RectF,Path)-> Unit)? = null
     private var mIsNewPath = false
     private var mPadding = JJPadding()
-
+    private var mIsOffsetPercent = false
 
     companion object{
         const val ROUND_CIRCLE = 1
@@ -56,11 +58,22 @@ class JJOutlineProvider : ViewOutlineProvider() {
         return this
     }
 
-    fun setOffset(x: Float,y: Float):JJOutlineProvider{
+    fun setOffset(x: Float,y: Float,percent:Boolean = false):JJOutlineProvider{
         mOffsetX = x
         mOffsetY = y
+        mIsOffsetPercent = percent
         return this
     }
+
+    fun setOffset(percentX: Float,percentY: Float,plusX:Float,plusY:Float):JJOutlineProvider{
+        mOffsetX = percentX
+        mOffsetY = percentY
+        mIsOffsetPercent = true
+        mOffsetPlusX  = plusX
+        mOffsetPlusY = plusY
+        return this
+    }
+
 
 
     fun setAlpha(@FloatRange(from = 0.0, to = 1.0)alpha: Float): JJOutlineProvider{
@@ -158,10 +171,19 @@ class JJOutlineProvider : ViewOutlineProvider() {
 
   private var mMatrix = Matrix()
     private fun setupRect(){
+        mMatrix.reset()
 
+        if(mIsOffsetPercent){
+            mOffsetX = if(mOffsetX < 0f) 0f else if (mOffsetX > 1f) 1f else mOffsetX
+            mOffsetY = if(mOffsetY < 0f) 0f else if (mOffsetY > 1f) 1f else mOffsetY
+            val ox = mOffsetX * mRect.width()
+            val oy = mOffsetX * mRect.height()
+            mRect.offset(ox + mOffsetPlusX, oy + mOffsetPlusY)
+        }else{
+            mRect.offset(mOffsetX, mOffsetY)
+        }
         mRect.padding(mPadding)
         mRect.scale(mScaleX, mScaleY,mMatrix)
-        mRect.offset(mOffsetX, mOffsetY)
     }
 
     private fun setupRadiusForShape(){

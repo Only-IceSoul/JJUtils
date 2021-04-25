@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.annotation.FloatRange
 import com.jjlf.jjkit_layoututils.JJPadding
+import com.jjlf.jjkit_utils.JJOutlineProvider
 import com.jjlf.jjkit_utils.extension.padding
 import com.jjlf.jjkit_utils.extension.scale
 import kotlin.math.min
@@ -27,7 +28,10 @@ class JJColorDrawable : Drawable() {
     private var mScaleY = -1f
     private var mOffsetY = 0f
     private var mOffsetX = 0f
+    private var mOffsetPlusY = 0f
+    private var mOffsetPlusX = 0f
     private var mIsPathClosure = false
+    private var mIsOffsetPercent = false
 
     private val mPaintStrokeShadow = Paint(Paint.ANTI_ALIAS_FLAG)
     private var mStrokeShadowRadius = 4f
@@ -148,12 +152,21 @@ class JJColorDrawable : Drawable() {
         return this
     }
 
-    fun setOffset(x: Float,y: Float): JJColorDrawable {
+    fun setOffset(x: Float,y: Float,percent:Boolean = false): JJColorDrawable {
         mOffsetX = x
         mOffsetY = y
+        mIsOffsetPercent = percent
         return this
     }
 
+    fun setOffset(percentX: Float,percentY: Float,plusX:Float,plusY:Float): JJColorDrawable {
+        mOffsetX = percentX
+        mOffsetY = percentY
+        mIsOffsetPercent = true
+        mOffsetPlusX  = plusX
+        mOffsetPlusY = plusY
+        return this
+    }
 
     fun setPath(path:Path): JJColorDrawable {
         mIsNewPath = true
@@ -190,11 +203,6 @@ class JJColorDrawable : Drawable() {
     override fun onBoundsChange(bounds: Rect?) {
         if(bounds != null){
             mBaseRect.set(bounds)
-
-            if(mIsStroke) {
-                val inset = mPaintStroke.strokeWidth / 2
-                mBaseRect.inset(inset,inset)
-            }
         }
     }
 
@@ -250,9 +258,23 @@ class JJColorDrawable : Drawable() {
 
     private var mMatrix = Matrix()
     private fun setupRect(){
+        mMatrix.reset()
+        if(mIsStroke) {
+            val inset = mPaintStroke.strokeWidth / 2
+            mRect.inset(inset,inset)
+        }
         mRect.padding(mPadding)
         mRect.scale(mScaleX, mScaleY,mMatrix)
-        mRect.offset(mOffsetX, mOffsetY)
+        if(mIsOffsetPercent){
+            mOffsetX = if(mOffsetX < 0f) 0f else if (mOffsetX > 1f) 1f else mOffsetX
+            mOffsetY = if(mOffsetY < 0f) 0f else if (mOffsetY > 1f) 1f else mOffsetY
+            val ox = mOffsetX * mBaseRect.width()
+            val oy = mOffsetX * mBaseRect.height()
+            mRect.offset(ox + mOffsetPlusX, oy + mOffsetPlusY)
+        }else{
+            mRect.offset(mOffsetX, mOffsetY)
+        }
+
     }
 
     private fun setupRadiusForShape(){
