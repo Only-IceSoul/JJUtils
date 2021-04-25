@@ -81,7 +81,7 @@ class JJColorDrawable : Drawable() {
     }
      //normal stroke this is a new layer
     fun setStroke(width: Float, color: Int) : JJColorDrawable {
-        mIsStroke = true
+        mIsStroke = width >= 1f
         mPaintStroke.strokeWidth = width
         mPaintStroke.color = color
         mIsStrokeShadow = false
@@ -96,7 +96,7 @@ class JJColorDrawable : Drawable() {
 
     //new layer stroke plus shadow layer
     fun setStrokeAndShadowLayer(width: Float, color: Int,shadowRadius: Float,shadowOffsetX:Float,shadowOffsetY:Float,shadowColor:Int) : JJColorDrawable {
-        mIsStroke = true
+        mIsStroke = width >= 1f
         mPaintStroke.strokeWidth = width
         mPaintStroke.color = color
         mPaintStroke.setShadowLayer(shadowRadius,shadowOffsetX,shadowOffsetY,shadowColor)
