@@ -13,6 +13,7 @@ class JJColorDrawable : Drawable() {
 
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPaintStroke = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val mBaseRect = RectF()
     private val mRect = RectF()
     private var mIsStroke = false
     private var mIsFill = true
@@ -188,19 +189,19 @@ class JJColorDrawable : Drawable() {
 
     override fun onBoundsChange(bounds: Rect?) {
         if(bounds != null){
-            mRect.set(bounds)
-            setupRect()
+            mBaseRect.set(bounds)
+
             if(mIsStroke) {
                 val inset = mPaintStroke.strokeWidth / 2
-                mRect.inset(inset,inset)
+                mBaseRect.inset(inset,inset)
             }
         }
     }
 
     override fun draw(canvas: Canvas) {
-
+        mRect.set(mBaseRect)
         if(mRect.width() > 0f && mRect.height() >0f) {
-
+            setupRect()
             if(mIsStrokeShadow) {
                 mPathStrokeShadow.reset()
                 mRectStrokeShadow.set(mRect)

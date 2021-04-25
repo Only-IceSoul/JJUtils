@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class JJRecyclerAdapterMemoryOld<T>(private val items: MutableList<T?> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var mToken = 0
 
@@ -71,7 +71,7 @@ class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableLis
         }
     }
 
-    fun setIsFetchMoreEnabled(boolean: Boolean): JJRecyclerAdapterMemory<T>{
+    fun setIsFetchMoreEnabled(boolean: Boolean): JJRecyclerAdapterMemoryOld<T>{
         mIsFetchMoreEnabled = boolean
         return this
     }
@@ -80,7 +80,7 @@ class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableLis
         return mIsFetchMoreEnabled
     }
 
-    fun setToken(num:Int) : JJRecyclerAdapterMemory<T> {
+    fun setToken(num:Int) : JJRecyclerAdapterMemoryOld<T> {
          mToken = num
         return this
     }
@@ -89,34 +89,34 @@ class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableLis
         return mToken
     }
 
-    fun setViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
+    fun setViewCreator(creator:(Context)->View): JJRecyclerAdapterMemoryOld<T> {
          mViewCreator = creator
          return this
     }
-    fun setProgressViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
+    fun setProgressViewCreator(creator:(Context)->View): JJRecyclerAdapterMemoryOld<T> {
         mProgressViewCreator = creator
         return this
     }
 
-    fun setOnBindProgressCallback(bind: ()->Unit): JJRecyclerAdapterMemory<T> {
+    fun setOnBindProgressCallback(bind: ()->Unit): JJRecyclerAdapterMemoryOld<T> {
         mBindProgressCallback =  bind
         return this
     }
-    fun setOnBindErrorCallback(bind: ()->Unit): JJRecyclerAdapterMemory<T> {
+    fun setOnBindErrorCallback(bind: ()->Unit): JJRecyclerAdapterMemoryOld<T> {
         mBindErrorCallback =  bind
         return this
     }
-    fun setErrorViewCreator(creator:(Context)->View): JJRecyclerAdapterMemory<T> {
+    fun setErrorViewCreator(creator:(Context)->View): JJRecyclerAdapterMemoryOld<T> {
         mErrorViewCreator = creator
         return this
     }
 
-    fun setOnBindCallback(bind: (item:T?,View,position:Int)->Unit): JJRecyclerAdapterMemory<T> {
+    fun setOnBindCallback(bind: (item:T?,View,position:Int)->Unit): JJRecyclerAdapterMemoryOld<T> {
         mBindCallback = bind
         return this
     }
 
-    fun setFetchMoreCallback(callback: ()->Unit) : JJRecyclerAdapterMemory<T> {
+    fun setFetchMoreCallback(callback: ()->Unit) : JJRecyclerAdapterMemoryOld<T> {
         mFetchMoreCallback = callback
         return this
     }
@@ -265,7 +265,7 @@ class JJRecyclerAdapterMemory<T>(private val items: MutableList<T?> = mutableLis
         }
     }
 
-    fun isErrorEnabled(boolean: Boolean) : JJRecyclerAdapterMemory<T>{
+    fun isErrorEnabled(boolean: Boolean) : JJRecyclerAdapterMemoryOld<T>{
         mIsErrorEnabled = boolean
         return this
     }
