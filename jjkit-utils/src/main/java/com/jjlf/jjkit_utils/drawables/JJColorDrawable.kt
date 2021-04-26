@@ -191,7 +191,7 @@ class JJColorDrawable : Drawable() {
         mIsPathClosure = false
         mIsSvgPath = true
         mSvgPathD = d
-        mVbRect.set(vbBox[0],vbBox[1],vbBox[2],vbBox[3])
+        mVbRect.set(vbBox[0] * density ,vbBox[1] * density,(vbBox[0] + vbBox[2]) * density ,(vbBox[1] + vbBox[3]) * density)
         mAlign = align
         mMeetOrSlice = meetOrSlice
         mDensity = density
