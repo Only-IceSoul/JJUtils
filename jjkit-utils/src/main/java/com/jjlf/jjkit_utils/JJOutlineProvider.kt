@@ -12,8 +12,11 @@ import androidx.annotation.FloatRange
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.toRect
 import com.jjlf.jjkit_layoututils.JJPadding
+import com.jjlf.jjkit_utils.drawables.JJColorDrawable
 import com.jjlf.jjkit_utils.extension.padding
 import com.jjlf.jjkit_utils.extension.scale
+import com.jjlf.jjkit_utils.utils.PathParser
+import com.jjlf.jjkit_utils.utils.ViewBox
 
 import kotlin.math.min
 
@@ -32,7 +35,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
     private var mShape = 0
     private var mIsPathClosure = false
     private var mSetupPath: ((RectF,Path)-> Unit)? = null
-    private var mIsNewPath = false
+    private var mIsPath = false
     private var mPadding = JJPadding()
     private var mIsOffsetPercent = false
 
@@ -52,7 +55,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
     }
 
     fun setShape(type: Int):JJOutlineProvider{
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = type
         return this
@@ -83,7 +86,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
 
     fun setRadius(radius: Float): JJOutlineProvider{
         mRadius = floatArrayOf(radius,radius,radius,radius,radius,radius,radius,radius)
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
@@ -91,7 +94,7 @@ class JJOutlineProvider : ViewOutlineProvider() {
 
     fun setRadius(radius: FloatArray) : JJOutlineProvider{
         mRadius = radius
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
@@ -99,32 +102,55 @@ class JJOutlineProvider : ViewOutlineProvider() {
 
     fun setRadius(topLeft: Float,topRight:Float, bottomRight:Float,bottomLeft:Float) : JJOutlineProvider{
         mRadius = floatArrayOf(topLeft,topLeft,topRight,topRight,bottomRight,bottomRight,bottomLeft,bottomLeft)
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
     }
 
-    fun setConvexPath(path:Path):JJOutlineProvider{
-        mIsNewPath = true
+    fun setPath(path:Path):JJOutlineProvider{
+        mIsPath = true
         mIsPathClosure = false
         mShape = 0
         mPath = path
         return this
     }
 
-    fun setConvexPath(closure:(RectF,Path)->Unit):JJOutlineProvider{
-        mIsNewPath = true
+    fun setPath(closure:(RectF,Path)->Unit):JJOutlineProvider{
+        mIsPath = true
         mIsPathClosure = true
         mSetupPath = closure
         mShape = 0
         return this
     }
 
+    private val mVbRect = RectF()
+    private var mIsSvgPath = false
+    private var mMeetOrSlice = 0
+    private var mAlign = "xMidYMid"
+    private val mVbMatrix = Matrix()
+    private var mSvgPathD = ""
+    private var mDensity = 1f
+    fun setSvgPath(d:String,vbBox:FloatArray,meetOrSlice:Int,align:String,density:Float): JJOutlineProvider {
+        if(vbBox.size < 4) return this
+        mIsPath = true
+        mIsPathClosure = false
+        mIsSvgPath = true
+        mSvgPathD = d
+        mVbRect.set(vbBox[0],vbBox[1],vbBox[2],vbBox[3])
+        mAlign = align
+        mMeetOrSlice = meetOrSlice
+        mDensity = density
+        mShape = 0
+        return this
+    }
+
+
     fun diposePath():JJOutlineProvider{
-        mIsNewPath = false
+        mIsPath = false
         mSetupPath = null
         mIsPathClosure = false
+        mIsSvgPath = false
         mPath.reset()
         return this
     }
@@ -153,11 +179,21 @@ class JJOutlineProvider : ViewOutlineProvider() {
             }else {
                 //just elevation
 
-                if(mIsPathClosure  && mIsNewPath){
+                if(mIsPathClosure  && mIsPath){
                     mPath.reset()
                     mSetupPath?.invoke(mRect, mPath)
                 }
-                if (!mIsNewPath){
+
+                if(mIsSvgPath  && mIsPath){
+                    mPath.reset()
+                    ViewBox.transform(mVbRect,mRect,mAlign,mMeetOrSlice,mVbMatrix)
+                    PathParser.mScale = mDensity
+                    val p = PathParser.parse(mSvgPathD)
+                    mPath.set(p)
+                    mPath.transform(mVbMatrix)
+                }
+
+                if (!mIsPath){
                     mPath.reset()
                     setupRadiusForShape()
                     mPath.addRoundRect(mRect, mRadius, Path.Direction.CW)

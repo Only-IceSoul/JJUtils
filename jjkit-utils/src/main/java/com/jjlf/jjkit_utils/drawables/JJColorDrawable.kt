@@ -5,9 +5,10 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.annotation.FloatRange
 import com.jjlf.jjkit_layoututils.JJPadding
-import com.jjlf.jjkit_utils.JJOutlineProvider
 import com.jjlf.jjkit_utils.extension.padding
 import com.jjlf.jjkit_utils.extension.scale
+import com.jjlf.jjkit_utils.utils.PathParser
+import com.jjlf.jjkit_utils.utils.ViewBox
 import kotlin.math.min
 
 class JJColorDrawable : Drawable() {
@@ -22,7 +23,7 @@ class JJColorDrawable : Drawable() {
     private var mShape = 0
     private var mRadius = floatArrayOf(0f,0f,0f,0f,0f,0f,0f,0f)
     private var mPath = Path()
-    private var mIsNewPath = false
+    private var mIsPath = false
     private var mSetupPath: ((RectF,Path)-> Unit)? = null
     private var mScaleX = -1f
     private var mScaleY = -1f
@@ -53,6 +54,7 @@ class JJColorDrawable : Drawable() {
         mPaint.style = Paint.Style.FILL
         mPaint.color = Color.WHITE
         mPaintStroke.style = Paint.Style.STROKE
+
     }
 
     //effect where fill can be transparent with a stroke shadow
@@ -74,7 +76,7 @@ class JJColorDrawable : Drawable() {
     }
 
     fun setShape(type:Int): JJColorDrawable {
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = type
         return this
@@ -106,7 +108,7 @@ class JJColorDrawable : Drawable() {
 
     fun setRadius(radius: Float) : JJColorDrawable {
         mRadius = floatArrayOf(radius,radius,radius,radius,radius,radius,radius,radius)
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
@@ -114,7 +116,7 @@ class JJColorDrawable : Drawable() {
 
     fun setRadius(radius: FloatArray) : JJColorDrawable {
         mRadius = radius
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
@@ -122,7 +124,7 @@ class JJColorDrawable : Drawable() {
 
     fun setRadius(topLeft: Float,topRight:Float,bottomRight:Float,bottomLeft:Float) : JJColorDrawable {
         mRadius = floatArrayOf(topLeft,topLeft,topRight,topRight,bottomRight,bottomRight,bottomLeft,bottomLeft)
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
         mShape = 0
         return this
@@ -169,23 +171,45 @@ class JJColorDrawable : Drawable() {
     }
 
     fun setPath(path:Path): JJColorDrawable {
-        mIsNewPath = true
+        mIsPath = true
         mIsPathClosure = false
         mPath = path
         mShape = 0
         return this
     }
 
+    private val mVbRect = RectF()
+    private var mIsSvgPath = false
+    private var mMeetOrSlice = 0
+    private var mAlign = "xMidYMid"
+    private val mVbMatrix = Matrix()
+    private var mSvgPathD = ""
+    private var mDensity = 1f
+    fun setSvgPath(d:String,vbBox:FloatArray,meetOrSlice:Int,align:String,density:Float): JJColorDrawable {
+        if(vbBox.size < 4) return this
+        mIsPath = true
+        mIsPathClosure = false
+        mIsSvgPath = true
+        mSvgPathD = d
+        mVbRect.set(vbBox[0],vbBox[1],vbBox[2],vbBox[3])
+        mAlign = align
+        mMeetOrSlice = meetOrSlice
+        mDensity = density
+        mShape = 0
+        return this
+    }
+
     fun setPath(closure:(RectF, Path)->Unit): JJColorDrawable {
-        mIsNewPath = true
+        mIsPath = true
         mIsPathClosure = true
         mSetupPath = closure
         mShape = 0
         return this
     }
     fun diposePath(): JJColorDrawable {
-        mIsNewPath = false
+        mIsPath = false
         mIsPathClosure = false
+        mIsSvgPath = false
         mPath.reset()
         mSetupPath = null
         return this
@@ -220,12 +244,22 @@ class JJColorDrawable : Drawable() {
             }
 
 
-            if(mIsPathClosure  && mIsNewPath){
+            if(mIsPathClosure  && mIsPath){
                 mPath.reset()
                 mSetupPath?.invoke(mRect, mPath)
             }
 
-            if (!mIsNewPath) {
+            if(mIsSvgPath  && mIsPath){
+                mPath.reset()
+                ViewBox.transform(mVbRect,mRect,mAlign,mMeetOrSlice,mVbMatrix)
+                PathParser.mScale = mDensity
+                val p = PathParser.parse(mSvgPathD)
+                mPath.set(p)
+                mPath.transform(mVbMatrix)
+            }
+
+
+            if (!mIsPath) {
                 mPath.reset()
                 mPathStrokeShadow.reset()
                 setupRadiusForShape()
