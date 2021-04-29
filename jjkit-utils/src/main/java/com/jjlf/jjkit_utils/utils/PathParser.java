@@ -3,6 +3,7 @@ package com.jjlf.jjkit_utils.utils;
 
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -374,6 +375,7 @@ public class PathParser {
                     (cy - rx) * mScale,
                     (cx + rx) * mScale,
                     (cy + rx) * mScale);
+
 
             mPath.arcTo(oval, start, sweep);
             elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(x, y)}));

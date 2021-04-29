@@ -1,6 +1,6 @@
 package com.jjlf.jjkit_utils.utils;
 
-enum ElementType {
+public enum ElementType {
     kCGPathElementAddCurveToPoint,
     kCGPathElementAddQuadCurveToPoint,
     kCGPathElementMoveToPoint,

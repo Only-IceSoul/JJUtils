@@ -256,6 +256,7 @@ class JJColorDrawable : Drawable() {
                 val p = PathParser.parse(mSvgPathD)
                 mPath.set(p)
                 mPath.transform(mVbMatrix)
+
             }
 
 
@@ -294,11 +295,12 @@ class JJColorDrawable : Drawable() {
     private fun setupRect(){
         mMatrix.reset()
         if(mIsStroke) {
-            val inset = mPaintStroke.strokeWidth / 2
+            val inset = mPaintStroke.strokeWidth / 2f
             mRect.inset(inset,inset)
         }
         mRect.padding(mPadding)
         mRect.scale(mScaleX, mScaleY,mMatrix)
+
         if(mIsOffsetPercent){
             mOffsetX = if(mOffsetX < 0f) 0f else if (mOffsetX > 1f) 1f else mOffsetX
             mOffsetY = if(mOffsetY < 0f) 0f else if (mOffsetY > 1f) 1f else mOffsetY
