@@ -398,6 +398,7 @@ class JJDrawable : Drawable() {
         }
         mPathBounds.set(0f,0f,0f,0f)
         mPath.computeBounds(mPathBounds,true)
+        mPathMatrix.reset()
         mPathMatrix.postRotate(mPathRotation,mPathBounds.centerX(),mPathBounds.centerY())
         mPathMatrix.postScale(mPathScaleX,mPathScaleY,mPathBounds.centerX(),mPathBounds.centerY())
         mPathMatrix.postTranslate(mPathTranslationX,mPathTranslationY)
