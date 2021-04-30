@@ -313,6 +313,8 @@ class JJDrawable : Drawable() {
                         val blue = Color.blue(mShadowColor)
                         val c = Color.argb((mShadowOpacity * alpha).toInt(),red,green,blue)
                         mPaint.setShadowLayer(mShadowRadius,mShadowOffsetX,mShadowOffsetY,c)
+                    }else{
+                        mPaint.clearShadowLayer()
                     }
 
                     drawPath(mPath, mPaint)
