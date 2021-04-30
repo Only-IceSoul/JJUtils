@@ -26,6 +26,7 @@ class ViewTest : ConstraintLayout {
 
         mPaint.style = Paint.Style.FILL
         mPaint.color = Color.RED
+        clipChildren = false
 //        mPaint.setShadowLayer(30f,0f,0f,Color.parseColor("#8000FF00"))
 
     }

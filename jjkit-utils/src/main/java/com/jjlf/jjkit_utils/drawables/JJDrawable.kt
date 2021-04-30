@@ -191,7 +191,7 @@ class JJDrawable : Drawable() {
     }
 
     //MARK: layer set transform
-   
+
     fun setScale(sx:Float,sy:Float): JJDrawable{
         mScaleX = sx
         mScaleY = sy
@@ -218,6 +218,7 @@ class JJDrawable : Drawable() {
     }
    
     fun setTranslation(dx:Float,dy:Float): JJDrawable {
+        mIsTranslationPercent = false
         mTranslationX = dx
         mTranslationY = dy
         return this
