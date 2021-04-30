@@ -99,6 +99,7 @@ class JJDrawable : Drawable() {
     }
   
     fun setPathTranslation(dx:Float,dy:Float): JJDrawable {
+        mIsPathTranslationPercent = false
         mPathTranslationX = dx
         mPathTranslationY = dy
         return this
