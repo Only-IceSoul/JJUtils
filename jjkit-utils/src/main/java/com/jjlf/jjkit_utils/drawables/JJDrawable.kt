@@ -81,7 +81,7 @@ class JJDrawable : Drawable() {
         mPaintBg.color = Color.TRANSPARENT
         mPaintStroke.style = Paint.Style.STROKE
         mPaintStroke.strokeWidth = 0f
-        mPaintStroke.color = Color.TRANSPARENT
+        mPaintStroke.color = Color.BLACK
 
     }
 
@@ -316,7 +316,7 @@ class JJDrawable : Drawable() {
 
                     drawPath(mPath, mPaint)
                 }
-                if (mPaintStroke.color != Color.TRANSPARENT) drawPath(mPath, mPaintStroke)
+                if (mPaintStroke.color != Color.TRANSPARENT && mPaintStroke.strokeWidth > 0f) drawPath(mPath, mPaintStroke)
             }
         }
     }
