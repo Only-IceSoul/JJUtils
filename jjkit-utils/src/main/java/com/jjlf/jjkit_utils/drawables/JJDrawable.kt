@@ -4,8 +4,8 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.core.graphics.withMatrix
-import com.jjlf.jjkit_utils.extension.normalized
-import com.jjlf.jjkit_utils.extension.normalizedNotNegative
+import com.jjlf.jjkit_utils.extension.clamp
+import com.jjlf.jjkit_utils.extension.clampNotNegative
 import com.jjlf.jjkit_utils.utils.PathParser
 import com.jjlf.jjkit_utils.utils.ViewBox
 import kotlin.math.min
@@ -51,7 +51,12 @@ class JJDrawable : Drawable() {
     private var mVbRect = RectF()
     private val mVbMatrix = Matrix()
     private var mDensity = 1f
+    private val mPathMeasure = PathMeasure()
 
+    //MAR: STROKE start and end
+
+    private var mStrokeStart = 0f
+    private var mStrokeEnd = 1f
 
     //MARK : SHADOW PROPS
     private var mShadowOffsetX = 0f
@@ -62,6 +67,7 @@ class JJDrawable : Drawable() {
 
     //MARK: Path PROPS
     private var mPath  = Path()
+    private var mPathStroke = Path()
     private var mPathScaleX = 1f
     private var mPathScaleY = 1f
     private var mPathTranslationX = 0f
@@ -128,7 +134,7 @@ class JJDrawable : Drawable() {
     }
     
     fun setShadowOpacity(o:Float) : JJDrawable {
-        mShadowOpacity = o.normalized()
+        mShadowOpacity = o.clamp()
         return this
     }
     
@@ -148,6 +154,17 @@ class JJDrawable : Drawable() {
         mPaintStroke.color = color
         return this
     }
+    fun setStrokeStart(s:Float) : JJDrawable {
+       mStrokeStart = s.clamp()
+        return this
+    }
+
+    fun setStrokeEnd(e:Float) : JJDrawable {
+        mStrokeEnd = e.clamp()
+        return this
+    }
+
+
 
     //MARK: LAYER SET
 
@@ -186,8 +203,8 @@ class JJDrawable : Drawable() {
     }
     
     fun setInset(dx:Float,dy:Float) : JJDrawable {
-        mInsetY = dy.normalizedNotNegative()
-        mInsetX = dx.normalizedNotNegative()
+        mInsetY = dy.clampNotNegative()
+        mInsetX = dx.clampNotNegative()
         return this
     }
 
@@ -316,10 +333,24 @@ class JJDrawable : Drawable() {
                     }else{
                         mPaint.clearShadowLayer()
                     }
-
+                    //BLUR
+//                    val v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10f,Resources.getSystem().displayMetrics)
+//                    mPaint.maskFilter = BlurMaskFilter(v,BlurMaskFilter.Blur.NORMAL)
+////                    mPaint.colorFilter = PorterDuffColorFilter(Color.parseColor("#1AFFFFFF"),PorterDuff.Mode.LIGHTEN)
                     drawPath(mPath, mPaint)
                 }
-                if (mPaintStroke.color != Color.TRANSPARENT && mPaintStroke.strokeWidth > 0f) drawPath(mPath, mPaintStroke)
+                if (mPaintStroke.color != Color.TRANSPARENT && mPaintStroke.strokeWidth > 0f && mStrokeStart < mStrokeEnd) {
+                    if(mStrokeStart != 0f || mStrokeEnd != 1f){
+                        mPathStroke.reset()
+                        mPathMeasure.setPath(mPath,false)
+                        mPathMeasure.getSegment((mPathMeasure.length * mStrokeStart),(mPathMeasure.length * mStrokeEnd),mPathStroke,true)
+                        mPathStroke.rLineTo(0f,0f)
+                        drawPath(mPathStroke, mPaintStroke)
+                    }else{
+                        drawPath(mPath, mPaintStroke)
+                    }
+
+                }
             }
         }
     }
@@ -360,10 +391,10 @@ class JJDrawable : Drawable() {
                 mPath.addRoundRect(mRect,mRadius,Path.Direction.CW)
             }
             RADIUS_RELATIVE_HEIGHT, RADIUS_RELATIVE_WIDTH -> {
-                val tl = mRadius[0].normalized()
-                val tr = mRadius[2].normalized()
-                val br = mRadius[4].normalized()
-                val bl = mRadius[6].normalized()
+                val tl = mRadius[0].clamp()
+                val tr = mRadius[2].clamp()
+                val br = mRadius[4].clamp()
+                val bl = mRadius[6].clamp()
                 val size = if(mShape == RADIUS_RELATIVE_WIDTH ) mRect.width() else mRect.height()
                 mRadius[0] = tl * size
                 mRadius[1] = tl * size

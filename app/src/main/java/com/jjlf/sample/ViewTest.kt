@@ -37,6 +37,7 @@ class ViewTest : ConstraintLayout {
 
         mPaint.setShadowLayer(30f,0f,0f,Color.RED)
 
+
     }
 
 
@@ -48,15 +49,15 @@ class ViewTest : ConstraintLayout {
     }
 
     override fun dispatchDraw(canvas: Canvas) {
-        if(mCanvas == null ||  mBitmap == null){
-            mBitmap = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888)
-            mCanvas = Canvas(mBitmap!!)
-        }
-
-        mRect.set(0f,0f,width.toFloat(),height.toFloat())
-        mVbRect.set(0f * mDensity,0f * mDensity,100f * mDensity,125f * mDensity)
-        mPath.reset()
-        mPath.addRect(mRect,Path.Direction.CW)
+//        if(mCanvas == null ||  mBitmap == null){
+//            mBitmap = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888)
+//            mCanvas = Canvas(mBitmap!!)
+//        }
+//
+//        mRect.set(0f,0f,width.toFloat(),height.toFloat())
+//        mVbRect.set(0f * mDensity,0f * mDensity,100f * mDensity,125f * mDensity)
+//        mPath.reset()
+//        mPath.addRect(mRect,Path.Direction.CW)
 //        ViewBox.transform(mVbRect,mRect,"xMidYMid",0,mVbMatrix)
 //        PathParser.mScale = mDensity
 ////        val p = PathParser.parse(mSvgPathD)
@@ -64,8 +65,8 @@ class ViewTest : ConstraintLayout {
 ////        mPath.transform(mVbMatrix)
 //        mPath.addArc(mRect,-90f,180f)
 
-        canvas.drawPath(mPath, mPaint)
-
+//        canvas.drawPath(mPath, mPaint)
+        Log.e("ICESOUL","accelerated $isHardwareAccelerated")
         super.dispatchDraw(canvas)
 
 
