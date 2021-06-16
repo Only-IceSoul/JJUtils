@@ -2,10 +2,10 @@ package com.jjlf.jjkit_utils.drawables
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.renderscript.Matrix4f
 import android.util.Log
 import androidx.core.graphics.withMatrix
 import com.jjlf.jjkit_utils.extension.clamp
-import com.jjlf.jjkit_utils.extension.clampNotNegative
 import com.jjlf.jjkit_utils.utils.PathParser
 import com.jjlf.jjkit_utils.utils.ViewBox
 import kotlin.math.min
@@ -21,6 +21,9 @@ class JJDrawable : Drawable() {
         const val VIEW_BOX_MEET = 0
         const val VIEW_BOX_SLICE = 1
         const val VIEW_BOX_NONE = 2
+        const val AXIS_X = 1
+        const val AXIS_Y = 2
+        const val AXIS_Z = 3
     }
     
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -29,9 +32,7 @@ class JJDrawable : Drawable() {
     private var mRotationX  = 0f
     private var mRotationY  = 0f
     private var mRotationZ  = 0f
-    private var mIsRotationX  = false
-    private var mIsRotationY  = false
-    private var mIsRotationZ  = false
+    private var mRotationOrder = intArrayOf(AXIS_Z, AXIS_X, AXIS_Y)
     private var mTranslationX  = 0f
     private var mTranslationY  = 0f
     private var mTranslationPlusX  = 0f
@@ -39,17 +40,16 @@ class JJDrawable : Drawable() {
     private var mIsTranslationPercent  = false
     private var mScaleX   = 1f
     private var mScaleY   = 1f
-    private var mInsetX  = 0f
-    private var mInsetY  = 0f
     private var mBaseRect = RectF()
     private var mRect = RectF()
     private var mRadius  = floatArrayOf(0f,0f,0f,0f,0f,0f,0f,0f)
     private var mShape = NONE
     private var mSvgPath = ""
-    private var mSvgAlign = "xMidYMid"
-    private var mSvgAspect = VIEW_BOX_MEET
+    private var mSvgAlign = "none"
+    private var mSvgAspect = VIEW_BOX_NONE
     private var mVbRect = RectF()
     private val mVbMatrix = Matrix()
+    private val mCanvasMatrix = Matrix()
     private var mDensity = 1f
     private val mPathMeasure = PathMeasure()
 
@@ -79,8 +79,12 @@ class JJDrawable : Drawable() {
     private var mPathMatrix = Matrix()
     private var mPathBounds = RectF()
 
+    private var mBlurRadius = 0f
+    private var mBorderBlurRadius = 0f
+    private var mBgBlurRadius = 0f
+
     init {
-        mPaint.style = Paint.Style.FILL_AND_STROKE
+        mPaint.style = Paint.Style.FILL
         mPaint.color = Color.TRANSPARENT
         mPaint.strokeWidth = 0f
         mPaintBg.style = Paint.Style.FILL
@@ -91,6 +95,24 @@ class JJDrawable : Drawable() {
 
     }
 
+    fun setBlur(radius:Float): JJDrawable {
+        mBlurRadius = radius
+        mBorderBlurRadius = radius
+        mBgBlurRadius = radius
+        return this
+    }
+    fun setBackgroundBlur(radius:Float): JJDrawable {
+        mBgBlurRadius = radius
+        return this
+    }
+    fun setFillBlur(radius:Float): JJDrawable {
+        mBlurRadius = radius
+        return this
+    }
+    fun setBorderBlur(radius:Float): JJDrawable {
+        mBorderBlurRadius = radius
+        return this
+    }
 
     //MARK: Path set and get
     fun setPathScale(sx:Float,sy:Float): JJDrawable {
@@ -103,7 +125,7 @@ class JJDrawable : Drawable() {
         mPathRotation = degrees
         return this
     }
-  
+    //pixels
     fun setPathTranslation(dx:Float,dy:Float): JJDrawable {
         mIsPathTranslationPercent = false
         mPathTranslationX = dx
@@ -168,7 +190,7 @@ class JJDrawable : Drawable() {
 
     //MARK: LAYER SET
 
-    fun setSvgPath(d:String,density:Float,viewBox:FloatArray = floatArrayOf(0f,0f,0f,0f),align:String = "xMidYMid",aspect:Int = 0) : JJDrawable {
+    fun setSvgPath(d:String,density:Float,viewBox:FloatArray = floatArrayOf(0f,0f,0f,0f),align:String = "none",aspect:Int = 2) : JJDrawable {
         mSvgPath = d
         mSvgAlign = align
         mSvgAspect = aspect
@@ -201,12 +223,7 @@ class JJDrawable : Drawable() {
         mPaintBg.color = c
         return this
     }
-    
-    fun setInset(dx:Float,dy:Float) : JJDrawable {
-        mInsetY = dy.clampNotNegative()
-        mInsetX = dx.clampNotNegative()
-        return this
-    }
+
 
     //MARK: layer set transform
 
@@ -218,23 +235,26 @@ class JJDrawable : Drawable() {
    
     fun setRotationZ(degrees: Float) : JJDrawable{
         mRotationZ = degrees
-        mIsRotationZ = true
+
         return this
     }
-
-   
     fun setRotationX(degrees: Float) : JJDrawable{
         mRotationX = degrees
-        mIsRotationX = true
         return this
     }
-   
     fun setRotationY(degrees: Float) : JJDrawable{
         mRotationY = degrees
-        mIsRotationY = true
         return this
     }
-   
+    fun setRotationOrder(f: Int,s:Int,t:Int) : JJDrawable{
+        if(f !in 1..3){ return this }
+        if(t !in 1..3){ return this }
+        if(s !in 1..3){ return this }
+        if((f == s || f == t) || (s == t)){ return this }
+        mRotationOrder = intArrayOf(f,s,t)
+        return this
+    }
+    //pixels
     fun setTranslation(dx:Float,dy:Float): JJDrawable {
         mIsTranslationPercent = false
         mTranslationX = dx
@@ -270,7 +290,7 @@ class JJDrawable : Drawable() {
          return this
     }
 
-
+    private var mBlurRect = RectF()
     //MARK: DRAWABLE METHODS
     override fun onBoundsChange(bounds: Rect?) {
         bounds?.let{
@@ -292,36 +312,27 @@ class JJDrawable : Drawable() {
         }
     }
 
-    private val mCanvasMatrix = Matrix()
-    private val mCamera = Camera()
+
+
     override fun draw(canvas: Canvas) {
         if(bounds.width() > 0f && bounds.height() >0f) {
 
             setupRect()
             setupPath()
 
-            if(mIsTranslationPercent){
-                mTranslationX = (mTranslationX * bounds.width()) + mTranslationPlusX
-                mTranslationY = (mTranslationY * bounds.height()) + mTranslationPlusY
-            }
-
-            mCanvasMatrix.reset()
-            mCamera.save()
-
-            //cw
-
-            mCamera.rotate(-mRotationX,-mRotationY, 0f)
-            mCamera.getMatrix(mCanvasMatrix)
-            mCamera.restore()
-            mCanvasMatrix.postRotate(mRotationZ)
-            mCanvasMatrix.postScale(mScaleX,mScaleY)
-            mCanvasMatrix.preTranslate(-mBaseRect.centerX(),-mBaseRect.centerY())
-            mCanvasMatrix.postTranslate(mBaseRect.centerX(),mBaseRect.centerY())
-            mCanvasMatrix.postTranslate(mTranslationX,mTranslationY)
-
+            setupCanvasMatrix()
 
             canvas.withMatrix(mCanvasMatrix){
-                if(mPaintBg.color != Color.TRANSPARENT) drawRect(mBaseRect,mPaintBg)
+
+                if(mPaintBg.color != Color.TRANSPARENT) {
+                    mBlurRect.set(mBaseRect)
+                    mPaintBg.maskFilter =  if(mBgBlurRadius > 0f) BlurMaskFilter(mBgBlurRadius,BlurMaskFilter.Blur.NORMAL) else null
+                    if(mBlurRadius > 0f ){
+                        mBlurRect.inset(mBgBlurRadius,mBgBlurRadius)
+                    }
+                    drawRect(mBlurRect,mPaintBg)
+                }
+
                 if (mPaint.color != Color.TRANSPARENT || mShadowOpacity > 0f) {
                     if(mShadowOpacity > 0f){
                         val alpha = Color.alpha(mShadowColor)
@@ -333,13 +344,11 @@ class JJDrawable : Drawable() {
                     }else{
                         mPaint.clearShadowLayer()
                     }
-                    //BLUR
-//                    val v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10f,Resources.getSystem().displayMetrics)
-//                    mPaint.maskFilter = BlurMaskFilter(v,BlurMaskFilter.Blur.NORMAL)
-////                    mPaint.colorFilter = PorterDuffColorFilter(Color.parseColor("#1AFFFFFF"),PorterDuff.Mode.LIGHTEN)
+                    mPaint.maskFilter =  if(mBlurRadius > 0f) BlurMaskFilter(mBlurRadius,BlurMaskFilter.Blur.NORMAL) else null
                     drawPath(mPath, mPaint)
                 }
                 if (mPaintStroke.color != Color.TRANSPARENT && mPaintStroke.strokeWidth > 0f && mStrokeStart < mStrokeEnd) {
+                    mPaintStroke.maskFilter =  if(mBorderBlurRadius > 0f) BlurMaskFilter(mBorderBlurRadius,BlurMaskFilter.Blur.NORMAL) else null
                     if(mStrokeStart != 0f || mStrokeEnd != 1f){
                         mPathStroke.reset()
                         mPathMeasure.setPath(mPath,false)
@@ -351,8 +360,44 @@ class JJDrawable : Drawable() {
                     }
 
                 }
+
+
             }
         }
+    }
+    private val mCamera = Camera()
+    private fun setupCanvasMatrix(){
+        var transX = mTranslationX
+        var transY = mTranslationY
+        if(mIsTranslationPercent){
+            transX = (mTranslationX * bounds.width()) + mTranslationPlusX
+            transY = (mTranslationY * bounds.height()) + mTranslationPlusY
+        }
+
+        mCanvasMatrix.reset()
+        mCamera.save()
+
+        for(e in mRotationOrder){
+            if(e == AXIS_Z){
+                mCamera.rotate(0f,0f, -mRotationZ)
+            }
+            if(e == AXIS_X){
+                mCamera.rotate(-mRotationX,0f, 0f)
+            }
+            if(e == AXIS_Y){
+                mCamera.rotate(0f,-mRotationY, 0f)
+            }
+        }
+
+        mCamera.getMatrix(mCanvasMatrix)
+        mCamera.restore()
+
+        mCanvasMatrix.postScale(mScaleX,mScaleY)
+        mCanvasMatrix.preTranslate(-mBaseRect.centerX(),-mBaseRect.centerY())
+        mCanvasMatrix.postTranslate(mBaseRect.centerX(),mBaseRect.centerY())
+        mCanvasMatrix.postTranslate(transX,transY)
+
+
     }
 
     override fun setAlpha(alpha: Int) {
@@ -374,7 +419,6 @@ class JJDrawable : Drawable() {
 
     private fun setupRect(){
         mRect.set(mBaseRect)
-        mRect.inset( mInsetX,  mInsetY)
         val strokeInset = mPaintStroke.strokeWidth / 2f
         mRect.inset( strokeInset, strokeInset)
 
@@ -423,16 +467,18 @@ class JJDrawable : Drawable() {
 
 
         //path transform
+        var transX = mPathTranslationX
+        var transY = mPathTranslationY
         if(mIsPathTranslationPercent){
-            mPathTranslationX = (mPathTranslationX * mBaseRect.width()) + mPathTranslationPlusX
-            mPathTranslationY = (mPathTranslationY * mBaseRect.height()) + mPathTranslationPlusY
+            transX = (mPathTranslationX * mBaseRect.width()) + mPathTranslationPlusX
+            transY = (mPathTranslationY * mBaseRect.height()) + mPathTranslationPlusY
         }
         mPathBounds.set(0f,0f,0f,0f)
         mPath.computeBounds(mPathBounds,true)
         mPathMatrix.reset()
         mPathMatrix.postRotate(mPathRotation,mPathBounds.centerX(),mPathBounds.centerY())
         mPathMatrix.postScale(mPathScaleX,mPathScaleY,mPathBounds.centerX(),mPathBounds.centerY())
-        mPathMatrix.postTranslate(mPathTranslationX,mPathTranslationY)
+        mPathMatrix.postTranslate(transX,transY)
         mPath.transform(mPathMatrix)
     }
 

@@ -15,7 +15,7 @@ public class PathParser {
     private static int l;
     private static String s;
     private static final Path mPath = new Path();
-    static ArrayList<PathElement> elements;
+//    static ArrayList<PathElement> elements;
 
     private static float mPenX;
     private static float mPenY;
@@ -26,7 +26,7 @@ public class PathParser {
     private static boolean mPenDown;
 
     public static Path parse(String d) {
-        elements = new ArrayList<>();
+//        elements = new ArrayList<>();
         mPath.reset();
         if(d == null){
             return mPath;
@@ -199,7 +199,7 @@ public class PathParser {
         mPenDownX = mPivotX = mPenX = x;
         mPenDownY = mPivotY = mPenY = y;
         mPath.moveTo(x * mScale, y * mScale);
-        elements.add(new PathElement(ElementType.kCGPathElementMoveToPoint, new Point[]{new Point(x,y)}));
+//        elements.add(new PathElement(ElementType.kCGPathElementMoveToPoint, new Point[]{new Point(x,y)}));
     }
 
     private static void line(float x, float y) {
@@ -212,7 +212,7 @@ public class PathParser {
         mPivotX = mPenX = x;
         mPivotY = mPenY = y;
         mPath.lineTo(x * mScale, y * mScale);
-        elements.add(new PathElement(ElementType.kCGPathElementAddLineToPoint, new Point[]{new Point(x,y)}));
+//        elements.add(new PathElement(ElementType.kCGPathElementAddLineToPoint, new Point[]{new Point(x,y)}));
     }
 
     private static void curve(float c1x, float c1y, float c2x, float c2y, float ex, float ey) {
@@ -231,7 +231,7 @@ public class PathParser {
         mPenX = ex;
         mPenY = ey;
         mPath.cubicTo(c1x * mScale, c1y * mScale, c2x * mScale, c2y * mScale, ex * mScale, ey * mScale);
-        elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(c1x, c1y), new Point(c2x, c2y), new Point(ex, ey)}));
+//        elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(c1x, c1y), new Point(c2x, c2y), new Point(ex, ey)}));
     }
 
     private static void smoothCurve(float c1x, float c1y, float ex, float ey) {
@@ -378,7 +378,7 @@ public class PathParser {
 
 
             mPath.arcTo(oval, start, sweep);
-            elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(x, y)}));
+//            elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(x, y)}));
         }
     }
 
@@ -388,7 +388,7 @@ public class PathParser {
             mPenY = mPenDownY;
             mPenDown = false;
             mPath.close();
-            elements.add(new PathElement(ElementType.kCGPathElementCloseSubpath, new Point[]{new Point(mPenX, mPenY)}));
+//            elements.add(new PathElement(ElementType.kCGPathElementCloseSubpath, new Point[]{new Point(mPenX, mPenY)}));
         }
     }
 
@@ -436,7 +436,7 @@ public class PathParser {
             float ey = (cy + xy * x + yy * y);
 
             mPath.cubicTo(c1x * mScale, c1y * mScale, c2x * mScale, c2y * mScale, ex * mScale, ey * mScale);
-            elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(c1x, c1y), new Point(c2x, c2y), new Point(ex, ey)}));
+//            elements.add(new PathElement(ElementType.kCGPathElementAddCurveToPoint, new Point[]{new Point(c1x, c1y), new Point(c2x, c2y), new Point(ex, ey)}));
         }
     }
 

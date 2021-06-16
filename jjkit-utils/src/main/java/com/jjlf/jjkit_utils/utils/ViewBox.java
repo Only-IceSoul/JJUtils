@@ -9,7 +9,7 @@ public class ViewBox {
     private static final int MOS_SLICE = 1;
     private static final int MOS_NONE = 2;
 
-    public static void transform(RectF vbRect, RectF eRect, String align, int meetOrSlice,Matrix dst) {
+    public static void transform(RectF vbRect,RectF eRect, String align, int meetOrSlice, Matrix dst) {
         // based on https://svgwg.org/svg2-draft/coords.html#ComputingAViewportsTransform
 
         // Let vb-x, vb-y, vb-width, vb-height be the min-x, min-y, width and height values of the viewBox attribute respectively.
