@@ -467,13 +467,18 @@ class JJDrawable : Drawable() {
                 mPath.addRoundRect(mRect,mRadius,Path.Direction.CW)
             }
             SVG_PATH -> {
-                PathParser.mScale = mDensity
-                val p = PathParser.parse(mSvgPath)
-                mPath.set(p)
-                if (mVbRect.width() > 0f && mVbRect.height() > 0f){
-                    ViewBox.transform(mVbRect,mRect,mSvgAlign,mSvgAspect,mVbMatrix)
-                    mPath.transform(mVbMatrix)
+                try{
+                    PathParser.mScale = mDensity
+                    val p = PathParser.parse(mSvgPath)
+                    mPath.set(p)
+                    if (mVbRect.width() > 0f && mVbRect.height() > 0f){
+                        ViewBox.transform(mVbRect,mRect,mSvgAlign,mSvgAspect,mVbMatrix)
+                        mPath.transform(mVbMatrix)
+                    }
+                }catch(e:Error) {
+
                 }
+
             }
             else -> {
                 mPath.addRoundRect(mRect,mRadius,Path.Direction.CW)
