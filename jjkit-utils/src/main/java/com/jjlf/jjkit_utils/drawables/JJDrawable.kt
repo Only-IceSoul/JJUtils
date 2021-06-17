@@ -40,6 +40,8 @@ class JJDrawable : Drawable() {
     private var mIsTranslationPercent  = false
     private var mScaleX   = 1f
     private var mScaleY   = 1f
+    private var mInsetX = 0f
+    private var mInsetY = 0f
     private var mBaseRect = RectF()
     private var mRect = RectF()
     private var mRadius  = floatArrayOf(0f,0f,0f,0f,0f,0f,0f,0f)
@@ -185,8 +187,18 @@ class JJDrawable : Drawable() {
         mStrokeEnd = e.clamp()
         return this
     }
-
-
+    fun setStrokeCap(cap:Paint.Cap) : JJDrawable {
+        mPaintStroke.strokeCap =  cap
+        return this
+    }
+    fun setStrokeMiter(miter:Float) : JJDrawable {
+        mPaintStroke.strokeMiter = miter
+        return this
+    }
+    fun setStrokeJoin(join:Paint.Join) : JJDrawable {
+        mPaintStroke.strokeJoin = join
+        return this
+    }
 
     //MARK: LAYER SET
 
@@ -223,7 +235,11 @@ class JJDrawable : Drawable() {
         mPaintBg.color = c
         return this
     }
-
+    fun setInset(dx:Float,dy:Float):JJDrawable{
+        mInsetX = dx
+        mInsetY = dy
+        return this
+    }
 
     //MARK: layer set transform
 
@@ -308,6 +324,7 @@ class JJDrawable : Drawable() {
             }else{
                 mBaseRect.set(it)
             }
+
 
         }
     }
@@ -419,8 +436,7 @@ class JJDrawable : Drawable() {
 
     private fun setupRect(){
         mRect.set(mBaseRect)
-        val strokeInset = mPaintStroke.strokeWidth / 2f
-        mRect.inset( strokeInset, strokeInset)
+        mRect.inset( mInsetX, mInsetY)
 
     }
 

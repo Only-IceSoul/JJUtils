@@ -36,27 +36,28 @@ class MainActivity : AppCompatActivity() {
         mbg
 //            .setRadius(tl,tr,bl,br)
 //            .setFillColor(Color.RED)
-            .setBoundsDynamically(0.25f,0.25f,0.5f,0.5f, percentPos = true, percentSize = true)
+//            .setBoundsDynamically(0.25f,0.25f,0.5f,0.5f, percentPos = true, percentSize = true)
 //            .setRotationZ(45f)
 //            .setRotationX(45f)
 //            .setRotationY(45f)
 //            .setRotationOrder(JJDrawable.AXIS_Y,JJDrawable.AXIS_Z,JJDrawable.AXIS_X)
 
-            .setPathRotation(45f)
-            .setPathScale(1.2f,1.2f)
-            .setPathTranslation(t,t)
+//            .setPathRotation(45f)
+//            .setPathScale(1.2f,1.2f)
+//            .setPathTranslation(t,t)
 //            .setTranslation(0.5f,0.5f,0f,0f)
 //            .setScale(1.2f,1.2f)
             .setShape(JJDrawable.SVG_PATH)
             .setSvgPath(db, resources.displayMetrics.density,floatArrayOf(0f,0f,20f,20f))
+
             .setFillColor(Color.RED)
             .setBackgroundColor(Color.parseColor("#800080"))
 //            .setFillBlur(12f * 1.8f)
 //            .setBorderBlur(12f )
 //            .setStrokeWidth(10f)
-//            .setStrokeColor(Color.GREEN)
+//            .setStrokeColor(Color.RED)
 //            .setStrokeStart(0.5f)
-//            .setStrokeEnd(0.8f)
+//            .setStrokeEnd(0.5f)
 //            .setShadowOpacity(0.3f)
 //            .setShadowRadius(15f)
 //            .setShadowColor(Color.RED)
@@ -65,17 +66,15 @@ class MainActivity : AppCompatActivity() {
 
         b.setBackgroundColor(Color.MAGENTA)
         val l = LayerDrawable(arrayOf(b,mbg))
-        v.background = l
-
-
+        v.background = mbg
+//
+//
 //        val a = ValueAnimator.ofFloat(0f,1f)
-//        a.duration = 3000L
+//        a.duration = 5000L
 //        a.addUpdateListener {
 //            val value = it.animatedValue as Float
-//            Log.e("ICESOUL","value $value")
 //            mbg.setStrokeEnd(value)
 //            mbg.invalidateSelf()
-//
 //        }
 //        a.repeatCount = 100
 ////        a.startDelay = 1000
