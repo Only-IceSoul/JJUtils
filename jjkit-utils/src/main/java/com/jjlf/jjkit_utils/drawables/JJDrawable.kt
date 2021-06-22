@@ -413,8 +413,6 @@ class JJDrawable : Drawable() {
         mCanvasMatrix.preTranslate(-mBaseRect.centerX(),-mBaseRect.centerY())
         mCanvasMatrix.postTranslate(mBaseRect.centerX(),mBaseRect.centerY())
         mCanvasMatrix.postTranslate(transX,transY)
-
-
     }
 
     override fun setAlpha(alpha: Int) {

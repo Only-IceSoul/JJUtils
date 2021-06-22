@@ -15,13 +15,9 @@ allprojects {
 2.- Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.Only-IceSoul:JJUtils:1.6.4'
+	        implementation 'com.github.Only-IceSoul:JJUtils:1.8.9'
 	}
 ```
-
-## progress
-
-[ProgressView list](./progress.md)
 
 # LICENSE 
 

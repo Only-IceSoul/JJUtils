@@ -11,17 +11,19 @@ import android.util.TypedValue
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.jjlf.jjkit_utils.drawables.JJDrawable
+import com.jjlf.jjkit_utils.drawables.JJGradientDrawable
 import com.jjlf.jjkit_utils.extension.weak
 
 class MainActivity : AppCompatActivity() {
 
 
     private val mbg = JJDrawable()
+    private val mGd = JJGradientDrawable()
     private val b = JJDrawable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        
         val v = findViewById<View>(R.id.viewTest)
         v.cameraDistance
         //shadow need layer type software
@@ -34,39 +36,23 @@ class MainActivity : AppCompatActivity() {
 
         val t = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,20f,resources.displayMetrics)
         mbg
-//            .setRadius(tl,tr,bl,br)
-//            .setFillColor(Color.RED)
-//            .setBoundsDynamically(0.25f,0.25f,0.5f,0.5f, percentPos = true, percentSize = true)
-//            .setRotationZ(45f)
-//            .setRotationX(45f)
-//            .setRotationY(45f)
-//            .setRotationOrder(JJDrawable.AXIS_Y,JJDrawable.AXIS_Z,JJDrawable.AXIS_X)
-
-//            .setPathRotation(45f)
-//            .setPathScale(1.2f,1.2f)
-//            .setPathTranslation(t,t)
-//            .setTranslation(0.5f,0.5f,0f,0f)
-//            .setScale(1.2f,1.2f)
             .setShape(JJDrawable.SVG_PATH)
             .setSvgPath(db, resources.displayMetrics.density,floatArrayOf(0f,0f,20f,20f))
 
             .setFillColor(Color.RED)
             .setBackgroundColor(Color.parseColor("#800080"))
-//            .setFillBlur(12f * 1.8f)
-//            .setBorderBlur(12f )
-//            .setStrokeWidth(10f)
-//            .setStrokeColor(Color.RED)
-//            .setStrokeStart(0.5f)
-//            .setStrokeEnd(0.5f)
-//            .setShadowOpacity(0.3f)
-//            .setShadowRadius(15f)
-//            .setShadowColor(Color.RED)
+
+        mGd.setType(JJGradientDrawable.RADIAL)
+            .setRadial(0.5f,0.5f,0.3f)
+
+            .setColors(intArrayOf(Color.RED,Color.GREEN,Color.BLUE))
+            .setPositions(floatArrayOf(0f,0.3f,1f))
 
 
 
         b.setBackgroundColor(Color.MAGENTA)
         val l = LayerDrawable(arrayOf(b,mbg))
-        v.background = mbg
+        v.background = mGd
 //
 //
 //        val a = ValueAnimator.ofFloat(0f,1f)
