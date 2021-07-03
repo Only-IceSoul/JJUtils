@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
     <View
@@ -15,9 +15,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" >
-
-
     </View>
+
+    <com.jjlf.sample.ViewTest
+        android:id="@+id/viewTest2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" >
+    </com.jjlf.sample.ViewTest>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

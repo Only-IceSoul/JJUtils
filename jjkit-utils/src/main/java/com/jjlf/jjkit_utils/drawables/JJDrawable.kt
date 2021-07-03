@@ -2,6 +2,7 @@ package com.jjlf.jjkit_utils.drawables
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.os.SystemClock
 import android.renderscript.Matrix4f
 import android.util.Log
 import androidx.core.graphics.withMatrix
@@ -467,7 +468,10 @@ class JJDrawable : Drawable() {
             SVG_PATH -> {
                 try{
                     PathParser.mScale = mDensity
+                    val start = SystemClock.elapsedRealtime()
                     val p = PathParser.parse(mSvgPath)
+                    val end = SystemClock.elapsedRealtime()
+                    Log.e("ICESOUL","result time ${end - start}")
                     mPath.set(p)
                     if (mVbRect.width() > 0f && mVbRect.height() > 0f){
                         ViewBox.transform(mVbRect,mRect,mSvgAlign,mSvgAspect,mVbMatrix)

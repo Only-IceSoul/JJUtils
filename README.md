@@ -15,7 +15,7 @@ allprojects {
 2.- Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.Only-IceSoul:JJUtils:1.8.9'
+	        implementation 'com.github.Only-IceSoul:JJUtils:1.9.0'
 	}
 ```
 

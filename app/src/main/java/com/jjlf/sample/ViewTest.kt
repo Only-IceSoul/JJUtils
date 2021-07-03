@@ -4,12 +4,14 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.jjlf.jjkit_utils.extension.scale
 import com.jjlf.jjkit_utils.utils.PathParser
 import com.jjlf.jjkit_utils.utils.ViewBox
 
-class ViewTest : ConstraintLayout {
+class ViewTest : View {
 
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPaintBmp = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -26,26 +28,41 @@ class ViewTest : ConstraintLayout {
 
         mPaint.style = Paint.Style.FILL
         mPaint.color = Color.RED
-        clipChildren = false
+//        clipChildren = false
 //        mPaint.setShadowLayer(30f,0f,0f,Color.parseColor("#8000FF00"))
 
     }
     constructor(context: Context,attrs: AttributeSet):super(context,attrs){
         mDensity = context.resources.displayMetrics.density
-        mPaint.style = Paint.Style.FILL_AND_STROKE
-        mPaint.color = Color.parseColor("#0DFFFFFF")
+        mPaint.style = Paint.Style.FILL
+        mPaint.color = Color.RED
 
-        mPaint.setShadowLayer(30f,0f,0f,Color.RED)
+//        mPaint.setShadowLayer(30f,0f,0f,Color.RED)
 
 
     }
 
 
-
+    val ma = Matrix()
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        Log.e("ICESOUL","onDraw")
+        mRect.set(0f,0f,width.toFloat(),height.toFloat())
+        mPaintBmp.style = Paint.Style.FILL
+        mPaintBmp.color = Color.WHITE
+        canvas.drawRect(mRect,mPaintBmp)
+        mPath.reset()
+        mPath.moveTo(150f,100f)
 
+        mRect.scale(0.5f,0.5f,ma)
+//        mPath.addRoundRect(mRect,width * 0.25f,width * 0.25f,Path.Direction.CW)
+        mPath.lineTo(150f,150f)
+        mPath.lineTo(130f,180f)
+        mPath.lineTo(20f,20f)
+        mPath.moveTo(200f,200f)
+        mPath.rLineTo(40f,0f)
+        mPath.rLineTo(0f,40f)
+        mPath.close()
+        canvas.drawPath(mPath,mPaint)
     }
 
     override fun dispatchDraw(canvas: Canvas) {
@@ -66,8 +83,12 @@ class ViewTest : ConstraintLayout {
 //        mPath.addArc(mRect,-90f,180f)
 
 //        canvas.drawPath(mPath, mPaint)
-        Log.e("ICESOUL","accelerated $isHardwareAccelerated")
+
+
+//        canvas.drawPath(mPath,mPaint)
+
         super.dispatchDraw(canvas)
+
 
 
 

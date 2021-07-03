@@ -4,6 +4,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import androidx.core.graphics.withMatrix
 import com.jjlf.jjkit_utils.extension.clampNotNegative
+import kotlin.math.max
 import kotlin.math.min
 
 class JJGradientDrawable : Drawable(){
@@ -15,6 +16,11 @@ class JJGradientDrawable : Drawable(){
         const val AXIS_X = 1
         const val AXIS_Y = 2
         const val AXIS_Z = 3
+        const val TO_WIDTH = "width"
+        const val TO_HEIGHT = "height"
+        const val TO_MIN = "min"
+        const val TO_MAX = "max"
+        const val TO_NONE = "none"
     }
 
     private val mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -47,7 +53,7 @@ class JJGradientDrawable : Drawable(){
     private var mCenterX = 0.5f
     private var mCenterY = 0.5f
     private var mSweepRotation = 0f
-    private var mRadialPercentageValue = true
+    private var mRadiusTarget = TO_MIN
     private val mSweepMatrix = Matrix()
     private var mTileMode = Shader.TileMode.CLAMP
 
@@ -58,17 +64,19 @@ class JJGradientDrawable : Drawable(){
         mTileMode = mode
         return this
     }
-    fun setSweep(centerX:Float, centerY:Float, rotation:Float):JJGradientDrawable{
+    fun setSweep(centerX:Float, centerY:Float, rotation:Float = 0f):JJGradientDrawable{
         mCenterX = centerX
         mCenterY = centerY
         mSweepRotation = rotation
+        mType = SWEEP
         return this
     }
-    fun setRadial(centerX:Float, centerY:Float, radius:Float, per:Boolean = true):JJGradientDrawable{
+    fun setRadial(centerX:Float, centerY:Float, radius:Float, radiusTarget:String = TO_MIN):JJGradientDrawable{
         mCenterX = centerX
         mCenterY = centerY
         mRadius = radius.clampNotNegative()
-        mRadialPercentageValue = per
+        mRadiusTarget = radiusTarget
+        mType = RADIAL
         return this
     }
     fun setLinear(startX:Float,startY:Float,endX:Float,endY:Float):JJGradientDrawable{
@@ -76,6 +84,7 @@ class JJGradientDrawable : Drawable(){
         mStartY = startY
         mEndX = endX
         mEndY = endY
+        mType = LINEAR
         return this
     }
     fun setColors(c:IntArray):JJGradientDrawable{
@@ -86,10 +95,7 @@ class JJGradientDrawable : Drawable(){
         mPositions = p
         return this
     }
-    fun setType(t:Int):JJGradientDrawable{
-        mType = t
-        return this
-    }
+
     fun setInset(dx:Float,dy:Float):JJGradientDrawable{
         mInsetX = dx
         mInsetY = dy
@@ -202,7 +208,13 @@ class JJGradientDrawable : Drawable(){
             RADIAL ->{
                 val cx = mCenterX * mRect.width()
                 val cy = mCenterY * mRect.height()
-                val r = if(mRadialPercentageValue) mRadius * min(mRect.width(),mRect.height()) else mRadius
+                val r = when(mRadiusTarget){
+                    TO_MIN -> mRadius * min(mRect.width(),mRect.height())
+                    TO_MAX -> mRadius * max(mRect.width(),mRect.height())
+                    TO_WIDTH -> mRadius * mRect.width()
+                    TO_HEIGHT -> mRadius * mRect.height()
+                    else -> mRadius
+                }
                 mPaint.shader = RadialGradient(cx,cy,r,mColors,mPositions,mTileMode)
             }
             SWEEP ->{
@@ -218,7 +230,7 @@ class JJGradientDrawable : Drawable(){
                 val y1 = mStartY * mRect.height()
                 val x2 = mEndX * mRect.width()
                 val y2 = mEndY * mRect.height()
-                mPaint.shader = LinearGradient(x1,y1,x2,y2,mColors,null,mTileMode)
+                mPaint.shader = LinearGradient(x1,y1,x2,y2,mColors,mPositions,mTileMode)
             }
         }
     }

@@ -42,9 +42,8 @@ class MainActivity : AppCompatActivity() {
             .setFillColor(Color.RED)
             .setBackgroundColor(Color.parseColor("#800080"))
 
-        mGd.setType(JJGradientDrawable.RADIAL)
+        mGd
             .setRadial(0.5f,0.5f,0.3f)
-
             .setColors(intArrayOf(Color.RED,Color.GREEN,Color.BLUE))
             .setPositions(floatArrayOf(0f,0.3f,1f))
 
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         b.setBackgroundColor(Color.MAGENTA)
         val l = LayerDrawable(arrayOf(b,mbg))
-        v.background = mGd
+        v.background = l
 //
 //
 //        val a = ValueAnimator.ofFloat(0f,1f)
