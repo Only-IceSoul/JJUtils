@@ -64,27 +64,47 @@ class JJGradientDrawable : Drawable(){
         mTileMode = mode
         return this
     }
-    fun setSweep(centerX:Float, centerY:Float, rotation:Float = 0f):JJGradientDrawable{
-        mCenterX = centerX
-        mCenterY = centerY
-        mSweepRotation = rotation
-        mType = SWEEP
+
+    //MARK: Radial ,Sweep
+
+    fun setRadius(v:Float,target:String = TO_MIN):JJGradientDrawable{
+        mRadius = v.clampNotNegative()
+        mRadiusTarget = target
         return this
     }
-    fun setRadial(centerX:Float, centerY:Float, radius:Float, radiusTarget:String = TO_MIN):JJGradientDrawable{
-        mCenterX = centerX
-        mCenterY = centerY
-        mRadius = radius.clampNotNegative()
-        mRadiusTarget = radiusTarget
-        mType = RADIAL
+    fun setCenterX(v:Float):JJGradientDrawable{
+        mCenterX = v
         return this
     }
-    fun setLinear(startX:Float,startY:Float,endX:Float,endY:Float):JJGradientDrawable{
-        mStartX = startX
-        mStartY = startY
-        mEndX = endX
-        mEndY = endY
-        mType = LINEAR
+    fun setCenterY(v:Float):JJGradientDrawable{
+        mCenterY = v
+        return this
+    }
+    fun setSweepRotation(v:Float):JJGradientDrawable{
+        mSweepRotation = v
+        return this
+    }
+
+    //MARK: Linear
+    fun setStartX(v:Float):JJGradientDrawable{
+        mStartX = v
+        return this
+    }
+    fun setStartY(v:Float):JJGradientDrawable{
+        mStartY = v
+        return this
+    }
+    fun setEndX(v:Float):JJGradientDrawable{
+        mEndX = v
+        return this
+    }
+    fun setEndY(v:Float):JJGradientDrawable{
+        mEndY = v
+        return this
+    }
+
+    fun setType(t:Int):JJGradientDrawable{
+        mType = t
         return this
     }
     fun setColors(c:IntArray):JJGradientDrawable{
