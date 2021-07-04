@@ -111,7 +111,7 @@ class JJGradientDrawable : Drawable(){
         mColors = c
         return this
     }
-    fun setPositions(p:FloatArray):JJGradientDrawable{
+    fun setPositions(p:FloatArray?):JJGradientDrawable{
         mPositions = p
         return this
     }
