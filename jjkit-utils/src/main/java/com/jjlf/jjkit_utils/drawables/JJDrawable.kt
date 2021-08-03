@@ -64,6 +64,7 @@ class JJDrawable : Drawable() {
     //MARK : SHADOW PROPS
     private var mShadowOffsetX = 0f
     private var mShadowOffsetY = 0f
+    private var mIsShadowOffsetPercent = false
     private var mShadowRadius = 2f
     private var mShadowOpacity = 0f
     private var mShadowColor = Color.BLACK
@@ -147,12 +148,13 @@ class JJDrawable : Drawable() {
 
     //MARK: SHADOW SET
 
-    fun setShadowOffset(x:Float,y:Float) : JJDrawable {
+    fun setShadowOffset(x:Float,y:Float , percent:Boolean = false) : JJDrawable {
         mShadowOffsetX = x
         mShadowOffsetY = y
+        mIsShadowOffsetPercent = percent
         return this
     }
-    
+
     fun setShadowRadius(r:Float) : JJDrawable {
         mShadowRadius = r
         return this
@@ -358,7 +360,14 @@ class JJDrawable : Drawable() {
                         val green = Color.green(mShadowColor)
                         val blue = Color.blue(mShadowColor)
                         val c = Color.argb((mShadowOpacity * alpha).toInt(),red,green,blue)
-                        mPaint.setShadowLayer(mShadowRadius,mShadowOffsetX,mShadowOffsetY,c)
+
+                        var ox = mShadowOffsetX
+                        var oy = mShadowOffsetY
+                        if(mIsShadowOffsetPercent){
+                            ox = mShadowOffsetX * mBaseRect.width()
+                            oy = mShadowOffsetY * mBaseRect.height()
+                        }
+                        mPaint.setShadowLayer(mShadowRadius,ox,oy,c)
                     }else{
                         mPaint.clearShadowLayer()
                     }
